@@ -3,385 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Suscripción | Avanch Technology</title>
+  <title>Suscripcion | Avanch Technology</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue:    #003399;
-      --blue2:   #0044cc;
-      --blue3:   #e8eeff;
-      --blue4:   #f0f4ff;
-      --bg:      #f2f3f7;
-      --card:    #ffffff;
-      --txt:     #1a1a2e;
-      --muted:   #8a8fa8;
-      --border:  #e4e6ef;
-      --green:   #00c853;
-      --orange:  #ff6d00;
-      --red:     #ff3b30;
-      --gold:    #ffd600;
+      --blue:#003399; --blue2:#0044cc; --blue3:#e8eeff; --blue4:#f0f4ff;
+      --bg:#f2f3f7; --card:#ffffff; --txt:#1a1a2e; --muted:#8a8fa8;
+      --border:#e4e6ef; --green:#00c853; --orange:#ff6d00;
+      --red:#ff3b30; --gold:#ffd600;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg); color: var(--txt);
-      min-height: 100vh; overflow-x: hidden;
-    }
-
-    /* Fondo con textura de puntos corporativa */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image: radial-gradient(circle, rgba(0,51,153,.06) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
-    body::after {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse 70% 45% at 10% 0%,   rgba(0,51,153,.09) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 40% at 90% 100%,  rgba(0,68,204,.07) 0%, transparent 55%);
-    }
-
-    .page { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 40px 20px 90px; }
-
-    /* ── HERO ───────────────────────────────────────────── */
-    .hero {
-      background: linear-gradient(145deg, #001f6b 0%, var(--blue) 45%, #0055cc 100%);
-      border-radius: 28px; padding: 50px 48px 46px;
-      margin-bottom: 24px; position: relative; overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0,31,107,.28);
-      animation: up .6s cubic-bezier(.22,1,.36,1) both;
-    }
-    /* Líneas decorativas corporativas */
-    .hero::before {
-      content: '';
-      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
-      background:
-        linear-gradient(135deg, transparent 40%, rgba(255,255,255,.03) 40%, rgba(255,255,255,.03) 60%, transparent 60%),
-        linear-gradient(225deg, transparent 30%, rgba(255,255,255,.02) 30%, rgba(255,255,255,.02) 70%, transparent 70%);
-    }
-    .hero-orb { position: absolute; border-radius: 50%; }
-    .hero-orb1 { top: -60px; right: -60px; width: 280px; height: 280px; background: rgba(255,255,255,.06); }
-    .hero-orb2 { bottom: -80px; left: -40px; width: 220px; height: 220px; background: rgba(255,255,255,.04); }
-    .hero-orb3 { top: 40%; right: 20%; width: 120px; height: 120px; background: rgba(255,255,255,.03); }
-    .hero-inner { position: relative; z-index: 1; }
-    .hero img   { height: 48px; filter: brightness(0) invert(1); display: block; margin-bottom: 28px; }
-    .hero-eyebrow {
-      font-size: 10px; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: rgba(255,255,255,.5);
-      margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
-    }
-    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: rgba(255,255,255,.4); }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4.5vw, 2.8rem);
-      font-weight: 400; color: #fff; line-height: 1.18; margin-bottom: 16px;
-    }
-    .hero h1 em { font-style: normal; color: rgba(255,255,255,.65); }
-    .hero-desc { color: rgba(255,255,255,.68); font-size: 15px; line-height: 1.7; max-width: 520px; margin-bottom: 32px; }
-    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 34px; }
-    .chip {
-      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
-      color: rgba(255,255,255,.9); font-size: 11px; font-weight: 600;
-      padding: 6px 14px; border-radius: 20px; backdrop-filter: blur(4px);
-    }
-    .btn-wa {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: #25d366; color: #fff;
-      font-weight: 800; font-size: 13px; letter-spacing: .4px;
-      padding: 14px 28px; border-radius: 50px; text-decoration: none;
-      box-shadow: 0 6px 24px rgba(37,211,102,.4); transition: all .22s;
-    }
-    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,211,102,.5); }
-    .btn-wa svg { width: 18px; height: 18px; flex-shrink: 0; }
-
-    /* ── DIVISOR DE SECCIÓN ─────────────────────────────── */
-    .sec-label {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 18px; margin-top: 8px;
-    }
-    .sec-num {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: var(--blue); color: #fff;
-      font-size: 14px; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .sec-text h3 { font-size: 17px; font-weight: 800; color: var(--txt); }
-    .sec-text p  { font-size: 12px; color: var(--muted); margin-top: 1px; }
-
-    /* ── PLANES — CARDS CORPORATIVAS ────────────────────── */
-    .planes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 4px; }
-
-    .plan-card {
-      border-radius: 22px; overflow: hidden;
-      cursor: pointer; transition: all .25s;
-      border: 2px solid transparent;
-      box-shadow: 0 4px 20px rgba(0,0,0,.06);
-      position: relative;
-    }
-    .plan-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,51,153,.14); }
-    .plan-card.selected { border-color: var(--blue); box-shadow: 0 16px 44px rgba(0,51,153,.2); }
-
-    /* Card cabecera con gradiente */
-    .plan-head {
-      padding: 26px 22px 22px;
-      position: relative; overflow: hidden;
-    }
-    .plan-card:nth-child(1) .plan-head { background: linear-gradient(145deg, #001a5c, #003399); }
-    .plan-card:nth-child(2) .plan-head { background: linear-gradient(145deg, #003399, #0055e0); }
-    .plan-card:nth-child(3) .plan-head { background: linear-gradient(145deg, #0044bb, #0066ff); }
-
-    .plan-head::after {
-      content: ''; position: absolute;
-      top: -30px; right: -30px; width: 130px; height: 130px;
-      border-radius: 50%; background: rgba(255,255,255,.07);
-    }
-
-    /* Badge popular */
-    .plan-popular {
-      position: absolute; top: 14px; right: -1px;
-      background: var(--gold); color: #1a1a2e;
-      font-size: 9px; font-weight: 900; letter-spacing: 1px;
-      text-transform: uppercase; padding: 4px 14px 4px 10px;
-      border-radius: 0 0 0 12px;
-    }
-
-    .plan-icon-wrap {
-      width: 48px; height: 48px; border-radius: 14px;
-      background: rgba(255,255,255,.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 14px;
-    }
-    .plan-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,.65); margin-bottom: 6px; }
-    .plan-price-wrap { display: flex; align-items: baseline; gap: 4px; }
-    .plan-currency { font-size: 16px; font-weight: 700; color: rgba(255,255,255,.8); margin-bottom: 4px; align-self: flex-start; margin-top: 6px; }
-    .plan-price { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; }
-    .plan-period { font-size: 12px; color: rgba(255,255,255,.55); font-weight: 500; }
-    .plan-users {
-      margin-top: 10px;
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,.12); border-radius: 20px;
-      padding: 5px 12px; font-size: 12px; color: rgba(255,255,255,.85); font-weight: 600;
-    }
-
-    /* Card cuerpo */
-    .plan-body { background: #fff; padding: 18px 22px 22px; }
-    .plan-feat { list-style: none; margin-bottom: 18px; }
-    .plan-feat li {
-      font-size: 13px; color: #444;
-      padding: 7px 0; border-bottom: 1px solid #f5f5f7;
-      display: flex; gap: 10px; align-items: center;
-    }
-    .plan-feat li:last-child { border-bottom: none; }
-    .feat-check {
-      width: 20px; height: 20px; border-radius: 6px;
-      background: var(--blue3); color: var(--blue);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900; flex-shrink: 0;
-    }
-    .plan-card:nth-child(2) .feat-check { background: #e0edff; color: #0044cc; }
-    .plan-card:nth-child(3) .feat-check { background: #dde8ff; color: #0055e0; }
-
-    .plan-sel-btn {
-      width: 100%; padding: 12px; border-radius: 12px; border: 2px solid var(--blue);
-      background: transparent; color: var(--blue);
-      font-size: 13px; font-weight: 800; letter-spacing: .3px;
-      cursor: pointer; font-family: inherit; transition: all .2s;
-    }
-    .plan-sel-btn:hover { background: var(--blue); color: #fff; }
-    .plan-card.selected .plan-sel-btn { background: var(--blue); color: #fff; }
-
-    /* Tasa info */
-    .tasa-pill {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--blue4); border: 1px solid #c3d4ff;
-      border-radius: 12px; padding: 10px 16px;
-      font-size: 12px; color: var(--blue); font-weight: 600;
-      margin-top: 14px;
-    }
-    .tasa-pill span { color: var(--muted); font-weight: 400; margin-left: auto; font-size: 11px; }
-
-    /* ── CALCULADORA ────────────────────────────────────── */
-    .card-section {
-      background: var(--card); border-radius: 22px;
-      box-shadow: 0 4px 24px rgba(0,0,0,.05);
-      border: 1px solid var(--border);
-      padding: 28px 30px 30px;
-      margin-bottom: 20px;
-      animation: up .55s ease both;
-    }
-
-    .calc-inner {
-      background: linear-gradient(135deg, #f0f4ff 0%, #e8f5e9 100%);
-      border: 1.5px solid #c3d4ff; border-radius: 16px; padding: 22px;
-    }
-    .calc-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--blue); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
-
-    .inp-group { display: flex; flex-direction: column; gap: 6px; }
-    .inp-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
-    .inp {
-      background: #fff; border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 13px 16px; width: 100%;
-      font-size: 15px; font-family: inherit; outline: none;
-      transition: border-color .2s; color: var(--txt);
-    }
-    .inp:focus { border-color: var(--blue); }
-
-    .ciclos-row { display: flex; gap: 8px; flex-wrap: wrap; }
-    .ciclo-btn {
-      border: 2px solid var(--border); border-radius: 10px;
-      padding: 9px 16px; font-size: 14px; font-weight: 800;
-      cursor: pointer; background: #fff; transition: all .15s;
-      font-family: inherit; color: var(--txt);
-    }
-    .ciclo-btn.activo { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 4px 12px rgba(0,51,153,.2); }
-
-    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-
-    /* Resultado prorrateo */
-    .resultado-box {
-      background: #fff; border-radius: 14px; padding: 20px;
-      border: 1px solid var(--border); margin-top: 16px;
-      animation: up .3s ease;
-    }
-    .res-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 0; font-size: 14px; border-bottom: 1px solid #f0f2f8;
-    }
-    .res-row:last-child { border-bottom: none; }
-    .res-label { color: var(--muted); font-size: 13px; }
-    .res-val   { font-weight: 700; color: var(--txt); }
-    .res-val.blue   { color: var(--blue); font-size: 16px; }
-    .res-val.green  { color: #00a040; }
-    .res-val.orange { color: var(--orange); }
-
-    /* Concepto prorrateo */
-    .prorrateado-concept {
-      background: #fff8f0; border: 1.5px solid #ffd8a8;
-      border-radius: 16px; padding: 18px 20px; margin-top: 16px;
-      display: flex; gap: 14px;
-    }
-    .concept-icon { font-size: 26px; flex-shrink: 0; }
-    .concept-title { font-size: 14px; font-weight: 800; color: #b84800; margin-bottom: 6px; }
-    .concept-desc  { font-size: 13px; color: #7c4a03; line-height: 1.6; }
-    .concept-formula {
-      background: rgba(0,0,0,.04); border-radius: 8px;
-      padding: 8px 12px; font-size: 12px; font-weight: 600;
-      color: #5a3000; margin-top: 8px; font-family: monospace;
-    }
-
-    /* ── FORMULARIO ─────────────────────────────────────── */
-    .form-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-field { display: flex; flex-direction: column; gap: 6px; }
-    .form-field.full { grid-column: 1/-1; }
-    .field-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
-    .field-req   { color: var(--red); margin-left: 2px; }
-
-    /* Resumen de cobro */
-    .resumen-card {
-      background: linear-gradient(145deg, #001f6b, var(--blue));
-      border-radius: 18px; padding: 22px 24px; margin-top: 20px;
-      box-shadow: 0 8px 28px rgba(0,31,107,.18);
-    }
-    .resumen-head { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.5); margin-bottom: 14px; }
-    .resumen-row  { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .resumen-row:last-child { border-bottom: none; }
-    .resumen-label { color: rgba(255,255,255,.65); }
-    .resumen-val   { font-weight: 700; color: #fff; }
-    .resumen-main  { padding-top: 14px; margin-top: 6px; border-top: 1px solid rgba(255,255,255,.15); }
-    .resumen-main .resumen-label { color: rgba(255,255,255,.75); font-size: 14px; }
-    .resumen-main .resumen-val   { font-size: 24px; font-weight: 900; color: #fff; }
-    .resumen-empty { color: rgba(255,255,255,.45); text-align: center; padding: 18px 0; font-size: 13px; }
-
-    /* ── BANCOS ─────────────────────────────────────────── */
-    .bank-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-    .bank-card {
-      border: 1.5px solid var(--border); border-radius: 16px;
-      padding: 18px 14px; text-align: center; background: #fff;
-      transition: all .2s;
-    }
-    .bank-card:hover { border-color: var(--blue); box-shadow: 0 6px 20px rgba(0,51,153,.1); transform: translateY(-2px); }
-    .bank-ico { width: 46px; height: 46px; border-radius: 13px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin: 0 auto 10px; }
-    .bank-card strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-    .bank-card p { font-size: 11px; color: var(--muted); line-height: 1.4; }
-
-    /* ── BOTÓN ENVIAR ───────────────────────────────────── */
-    .btn-submit {
-      width: 100%; padding: 18px; border-radius: 16px; border: none;
-      background: linear-gradient(135deg, #001f6b, var(--blue));
-      color: #fff; font-size: 15px; font-weight: 800; letter-spacing: .4px;
-      cursor: pointer; transition: all .22s; margin-top: 20px;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      font-family: inherit; box-shadow: 0 6px 24px rgba(0,51,153,.25);
-    }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,51,153,.35); }
-    .btn-submit:disabled { background: #c7c7cc; cursor: not-allowed; transform: none; box-shadow: none; }
-    .btn-legal { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
-
-    /* ── FOOTER ─────────────────────────────────────────── */
-    .footer-band {
-      background: linear-gradient(145deg, #001a5c, #003399);
-      border-radius: 24px; padding: 38px 36px;
-      text-align: center; margin-top: 8px;
-      box-shadow: 0 20px 56px rgba(0,26,92,.22);
-      position: relative; overflow: hidden;
-      animation: up .55s .4s ease both;
-    }
-    .footer-band::before { content: ''; position: absolute; top: -50px; right: -50px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.05); }
-    .footer-band::after  { content: ''; position: absolute; bottom: -60px; left: -30px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.04); }
-    .footer-band h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-weight: 400; color: #fff; margin-bottom: 10px; position: relative; z-index: 1; }
-    .footer-band p  { color: rgba(255,255,255,.62); font-size: 14px; margin-bottom: 26px; position: relative; z-index: 1; }
-    .footer-brand   { margin-top: 22px; font-size: 11px; color: rgba(255,255,255,.35); letter-spacing: 1.5px; text-transform: uppercase; position: relative; z-index: 1; }
-
-    /* ── WA FLOTANTE ────────────────────────────────────── */
-    .wa-float {
-      position: fixed; bottom: 28px; right: 24px;
-      background: #25d366; color: #fff;
-      width: 60px; height: 60px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 26px rgba(37,211,102,.42);
-      text-decoration: none; z-index: 999; transition: all .2s;
-    }
-    .wa-float:hover { transform: scale(1.1); box-shadow: 0 12px 36px rgba(37,211,102,.52); }
-    .wa-float svg { width: 30px; height: 30px; }
-
-    /* ── TOAST ──────────────────────────────────────────── */
-    #toast {
-      position: fixed; bottom: 28px; left: 50%;
-      transform: translateX(-50%) translateY(16px);
-      background: #1a1a2e; color: #fff;
-      padding: 13px 24px; border-radius: 50px;
-      font-size: 13px; font-weight: 600;
-      opacity: 0; transition: all .3s; z-index: 9999;
-      white-space: nowrap; pointer-events: none;
-    }
-    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    #toast.ok   { background: var(--green); }
-    #toast.er   { background: var(--red); }
-
-    /* ── ANIMACIONES ──────────────────────────────────────── */
-    @keyframes up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .hero         { animation: up .6s .0s cubic-bezier(.22,1,.36,1) both; }
-    .sec-block-1  { animation: up .5s .1s ease both; }
-    .sec-block-2  { animation: up .5s .2s ease both; }
-    .sec-block-3  { animation: up .5s .3s ease both; }
-
-    /* ── RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .page { padding: 18px 14px 70px; }
-      .hero { padding: 30px 24px; }
-      .planes-grid { grid-template-columns: 1fr; }
-      .bank-grid   { grid-template-columns: 1fr; }
-      .form-grid   { grid-template-columns: 1fr; }
-      .calc-grid   { grid-template-columns: 1fr; }
-      .card-section { padding: 22px 20px; }
-    }
-    @media (max-width: 420px) {
-      .ciclo-btn { padding: 8px 12px; font-size: 13px; }
-      .plan-price { font-size: 30px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(circle,rgba(0,51,153,.06) 1px,transparent 1px);background-size:32px 32px}
+    .page{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:40px 20px 90px}
+    .hero{background:linear-gradient(145deg,#001f6b 0%,var(--blue) 45%,#0055cc 100%);border-radius:28px;padding:50px 48px 46px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(0,31,107,.28)}
+    .hero-orb{position:absolute;border-radius:50%}
+    .hero-orb1{top:-60px;right:-60px;width:280px;height:280px;background:rgba(255,255,255,.06)}
+    .hero-orb2{bottom:-80px;left:-40px;width:220px;height:220px;background:rgba(255,255,255,.04)}
+    .hero-inner{position:relative;z-index:1}
+    .hero img{height:48px;filter:brightness(0) invert(1);display:block;margin-bottom:28px}
+    .hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,2.8rem);font-weight:400;color:#fff;line-height:1.18;margin-bottom:16px}
+    .hero-desc{color:rgba(255,255,255,.68);font-size:15px;line-height:1.7;max-width:520px;margin-bottom:32px}
+    .hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+    .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;padding:6px 14px;border-radius:20px}
+    .btn-wa{display:inline-flex;align-items:center;gap:9px;background:#25d366;color:#fff;font-weight:800;font-size:13px;padding:14px 28px;border-radius:50px;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);transition:all .22s}
+    .btn-wa svg{width:18px;height:18px;flex-shrink:0}
+    .sec-label{display:flex;align-items:center;gap:14px;margin-bottom:18px;margin-top:8px}
+    .sec-num{width:36px;height:36px;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .sec-text h3{font-size:17px;font-weight:800;color:var(--txt)}
+    .sec-text p{font-size:12px;color:var(--muted);margin-top:1px}
+    .planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:4px}
+    .plan-card{border-radius:22px;overflow:hidden;cursor:pointer;transition:all .25s;border:2px solid transparent;box-shadow:0 4px 20px rgba(0,0,0,.06);position:relative}
+    .plan-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,51,153,.14)}
+    .plan-card.selected{border-color:var(--blue);box-shadow:0 16px 44px rgba(0,51,153,.2)}
+    .plan-head{padding:26px 22px 22px;position:relative;overflow:hidden}
+    .plan-card:nth-child(1) .plan-head{background:linear-gradient(145deg,#001a5c,#003399)}
+    .plan-card:nth-child(2) .plan-head{background:linear-gradient(145deg,#003399,#0055e0)}
+    .plan-card:nth-child(3) .plan-head{background:linear-gradient(145deg,#0044bb,#0066ff)}
+    .plan-popular{position:absolute;top:14px;right:-1px;background:var(--gold);color:#1a1a2e;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:4px 14px 4px 10px;border-radius:0 0 0 12px}
+    .plan-icon-wrap{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+    .plan-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);margin-bottom:6px}
+    .plan-price-wrap{display:flex;align-items:baseline;gap:4px}
+    .plan-currency{font-size:16px;font-weight:700;color:rgba(255,255,255,.8);align-self:flex-start;margin-top:6px}
+    .plan-price{font-size:36px;font-weight:900;color:#fff;line-height:1}
+    .plan-period{font-size:12px;color:rgba(255,255,255,.55);font-weight:500}
+    .plan-users{margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border-radius:20px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
+    .plan-body{background:#fff;padding:18px 22px 22px}
+    .plan-feat{list-style:none;margin-bottom:18px}
+    .plan-feat li{font-size:13px;color:#444;padding:7px 0;border-bottom:1px solid #f5f5f7;display:flex;gap:10px;align-items:center}
+    .plan-feat li:last-child{border-bottom:none}
+    .feat-check{width:20px;height:20px;border-radius:6px;background:var(--blue3);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0}
+    .plan-sel-btn{width:100%;padding:12px;border-radius:12px;border:2px solid var(--blue);background:transparent;color:var(--blue);font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
+    .plan-sel-btn:hover{background:var(--blue);color:#fff}
+    .plan-card.selected .plan-sel-btn{background:var(--blue);color:#fff}
+    .card-section{background:var(--card);border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,.05);border:1px solid var(--border);padding:28px 30px 30px;margin-bottom:20px}
+    .calc-inner{background:linear-gradient(135deg,#f0f4ff 0%,#e8f5e9 100%);border:1.5px solid #c3d4ff;border-radius:16px;padding:22px}
+    .calc-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+    .inp-group{display:flex;flex-direction:column;gap:6px}
+    .inp-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+    .inp{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;width:100%;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:var(--txt)}
+    .inp:focus{border-color:var(--blue)}
+    .ciclos-row{display:flex;gap:8px;flex-wrap:wrap}
+    .ciclo-btn{border:2px solid var(--border);border-radius:10px;padding:9px 16px;font-size:14px;font-weight:800;cursor:pointer;background:#fff;transition:all .15s;font-family:inherit;color:var(--txt)}
+    .ciclo-btn.activo{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 12px rgba(0,51,153,.2)}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+    .resultado-box{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--border);margin-top:16px}
+    .res-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-size:14px;border-bottom:1px solid #f0f2f8}
+    .res-row:last-child{border-bottom:none}
+    .res-label{color:var(--muted);font-size:13px}
+    .res-val{font-weight:700;color:var(--txt)}
+    .res-val.blue{color:var(--blue);font-size:16px}
+    .res-val.green{color:#00a040}
+    .res-val.orange{color:var(--orange)}
+    .prorrateado-concept{background:#fff8f0;border:1.5px solid #ffd8a8;border-radius:16px;padding:18px 20px;margin-top:16px;display:flex;gap:14px}
+    .concept-icon{font-size:26px;flex-shrink:0}
+    .concept-title{font-size:14px;font-weight:800;color:#b84800;margin-bottom:6px}
+    .concept-desc{font-size:13px;color:#7c4a03;line-height:1.6}
+    .concept-formula{background:rgba(0,0,0,.04);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:600;color:#5a3000;margin-top:8px;font-family:monospace}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-field{display:flex;flex-direction:column;gap:6px}
+    .form-field.full{grid-column:1/-1}
+    .field-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+    .field-req{color:var(--red);margin-left:2px}
+    .resumen-card{background:linear-gradient(145deg,#001f6b,var(--blue));border-radius:18px;padding:22px 24px;margin-top:20px;box-shadow:0 8px 28px rgba(0,31,107,.18)}
+    .resumen-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);margin-bottom:14px}
+    .resumen-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .resumen-row:last-child{border-bottom:none}
+    .resumen-label{color:rgba(255,255,255,.65)}
+    .resumen-val{font-weight:700;color:#fff}
+    .resumen-main{padding-top:14px;margin-top:6px;border-top:1px solid rgba(255,255,255,.15)}
+    .resumen-main .resumen-val{font-size:22px;font-weight:900}
+    .resumen-empty{color:rgba(255,255,255,.45);text-align:center;padding:18px 0;font-size:13px}
+    .bank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .bank-card{border:1.5px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;background:#fff;transition:all .2s}
+    .bank-card:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(0,51,153,.1);transform:translateY(-2px)}
+    .bank-ico{width:46px;height:46px;border-radius:13px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px}
+    .bank-card strong{display:block;font-size:13px;font-weight:700;margin-bottom:4px}
+    .bank-card p{font-size:11px;color:var(--muted);line-height:1.4}
+    .btn-submit{width:100%;padding:18px;border-radius:16px;border:none;background:linear-gradient(135deg,#001f6b,var(--blue));color:#fff;font-size:15px;font-weight:800;cursor:pointer;transition:all .22s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;box-shadow:0 6px 24px rgba(0,51,153,.25)}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,51,153,.35)}
+    .btn-submit:disabled{background:#c7c7cc;cursor:not-allowed;transform:none;box-shadow:none}
+    .btn-legal{font-size:11px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6}
+    .footer-band{background:linear-gradient(145deg,#001a5c,#003399);border-radius:24px;padding:38px 36px;text-align:center;margin-top:8px;box-shadow:0 20px 56px rgba(0,26,92,.22);position:relative;overflow:hidden}
+    .footer-band h3{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:#fff;margin-bottom:10px;position:relative;z-index:1}
+    .footer-band p{color:rgba(255,255,255,.62);font-size:14px;margin-bottom:26px;position:relative;z-index:1}
+    .footer-brand{margin-top:22px;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:1}
+    .wa-float{position:fixed;bottom:28px;right:24px;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 26px rgba(37,211,102,.42);text-decoration:none;z-index:999;transition:all .2s}
+    .wa-float svg{width:30px;height:30px}
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:#1a1a2e;color:#fff;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:9999;white-space:nowrap;pointer-events:none}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    #toast.ok{background:var(--green)}
+    #toast.er{background:var(--red)}
+    @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .hero{animation:up .6s cubic-bezier(.22,1,.36,1) both}
+    .sec-block-1{animation:up .5s .1s ease both}
+    .sec-block-2{animation:up .5s .2s ease both}
+    .sec-block-3{animation:up .5s .3s ease both}
+    .footer-band{animation:up .55s .4s ease both}
+    @media(max-width:640px){
+      .page{padding:18px 14px 70px}
+      .hero{padding:30px 24px}
+      .planes-grid{grid-template-columns:1fr}
+      .bank-grid{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+      .calc-grid{grid-template-columns:1fr}
+      .card-section{padding:22px 20px}
     }
   </style>
 </head>
@@ -390,23 +137,19 @@
 <div id="toast"></div>
 <div class="page">
 
-<!-- ══════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════ -->
 <div class="hero">
   <div class="hero-orb hero-orb1"></div>
   <div class="hero-orb hero-orb2"></div>
-  <div class="hero-orb hero-orb3"></div>
   <div class="hero-inner">
     <img src="https://i.ibb.co/rR9HZ8x8/nuevo-Logo-avanch2.png" alt="Avanch Technology">
-    <div class="hero-eyebrow">Formulario de Suscripción Digital</div>
-    <h1>Activa tu sistema<br><em>hoy mismo</em></h1>
-    <p class="hero-desc">Elige tu plan, visualiza tu primer cobro con el cálculo de prorrateo en tiempo real y envía tu solicitud en minutos. Tu ciclo inicia el día que tú decides.</p>
+    <div class="hero-eyebrow">Formulario de Suscripcion Digital</div>
+    <h1>Activa tu sistema hoy mismo</h1>
+    <p class="hero-desc">Elige tu plan, visualiza tu primer cobro con el calculo de prorrateo en tiempo real y envia tu solicitud en minutos.</p>
     <div class="hero-chips">
-      <span class="chip">💱 Precios en RD$</span>
-      <span class="chip">📅 5 ciclos de cobro disponibles</span>
-      <span class="chip">🧮 Prorrateo automático</span>
-      <span class="chip">🇩🇴 Santo Domingo, R.D.</span>
+      <span class="chip">Precios en RD$</span>
+      <span class="chip">5 ciclos disponibles</span>
+      <span class="chip">Prorrateo automatico</span>
+      <span class="chip">Santo Domingo, R.D.</span>
     </div>
     <a href="https://wa.me/18294092121?text=Hola%20Avanch%20Technology%2C%20deseo%20suscribirme" target="_blank" class="btn-wa">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -415,21 +158,16 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     PASO 1 — PLANES
-══════════════════════════════════════════════ -->
+<!-- PASO 1 — PLANES -->
 <div class="sec-block-1">
   <div class="sec-label">
     <div class="sec-num">1</div>
     <div class="sec-text">
       <h3>Seleccione su Plan</h3>
-      <p>Precios en pesos dominicanos · Cobro mensual por ciclo</p>
+      <p>Precios en pesos dominicanos - Cobro mensual por ciclo</p>
     </div>
   </div>
-
   <div class="planes-grid">
-
-    <!-- Plan Pyme Iniciado -->
     <div class="plan-card" id="plan-0" onclick="selPlan(0)">
       <div class="plan-head">
         <div class="plan-icon-wrap">🚀</div>
@@ -438,12 +176,12 @@
           <span class="plan-currency">RD$</span>
           <span class="plan-price">1,500</span>
         </div>
-        <div class="plan-period">/mes · por ciclo</div>
-        <div class="plan-users">👥 3 usuarios</div>
+        <div class="plan-period">/mes por ciclo</div>
+        <div class="plan-users">3 usuarios</div>
       </div>
       <div class="plan-body">
         <ul class="plan-feat">
-          <li><span class="feat-check">✓</span>Facturación e-CF DGII</li>
+          <li><span class="feat-check">✓</span>Facturacion e-CF DGII</li>
           <li><span class="feat-check">✓</span>Hasta 100 facturas/mes</li>
           <li><span class="feat-check">✓</span>Panel de control</li>
           <li><span class="feat-check">✓</span>Soporte WhatsApp</li>
@@ -451,32 +189,28 @@
         <button class="plan-sel-btn" id="psb-0">Seleccionar plan</button>
       </div>
     </div>
-
-    <!-- Plan Pyme Experto -->
     <div class="plan-card" id="plan-1" onclick="selPlan(1)">
       <div class="plan-head">
-        <div class="plan-popular">★ Popular</div>
+        <div class="plan-popular">Popular</div>
         <div class="plan-icon-wrap">⭐</div>
         <div class="plan-name">Pyme Experto</div>
         <div class="plan-price-wrap">
           <span class="plan-currency">RD$</span>
           <span class="plan-price">2,500</span>
         </div>
-        <div class="plan-period">/mes · por ciclo</div>
-        <div class="plan-users">👥 5 usuarios</div>
+        <div class="plan-period">/mes por ciclo</div>
+        <div class="plan-users">5 usuarios</div>
       </div>
       <div class="plan-body">
         <ul class="plan-feat">
-          <li><span class="feat-check">✓</span>Facturación e-CF ilimitada</li>
-          <li><span class="feat-check">✓</span>Reportes y analítica</li>
-          <li><span class="feat-check">✓</span>CRM básico integrado</li>
+          <li><span class="feat-check">✓</span>Facturacion e-CF ilimitada</li>
+          <li><span class="feat-check">✓</span>Reportes y analitica</li>
+          <li><span class="feat-check">✓</span>CRM basico integrado</li>
           <li><span class="feat-check">✓</span>Soporte prioritario</li>
         </ul>
         <button class="plan-sel-btn" id="psb-1">Seleccionar plan</button>
       </div>
     </div>
-
-    <!-- Plan Grande Pyme -->
     <div class="plan-card" id="plan-2" onclick="selPlan(2)">
       <div class="plan-head">
         <div class="plan-icon-wrap">🏢</div>
@@ -485,8 +219,8 @@
           <span class="plan-currency">RD$</span>
           <span class="plan-price">3,500</span>
         </div>
-        <div class="plan-period">/mes · por ciclo</div>
-        <div class="plan-users">👥 8 usuarios</div>
+        <div class="plan-period">/mes por ciclo</div>
+        <div class="plan-users">8 usuarios</div>
       </div>
       <div class="plan-body">
         <ul class="plan-feat">
@@ -498,86 +232,70 @@
         <button class="plan-sel-btn" id="psb-2">Seleccionar plan</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     PASO 2 — CALCULADORA DE PRORRATEO
-══════════════════════════════════════════════ -->
+<!-- PASO 2 — CALCULADORA -->
 <div class="sec-block-2" style="margin-top:28px">
   <div class="sec-label">
     <div class="sec-num">2</div>
     <div class="sec-text">
       <h3>Calcule su Primer Cobro</h3>
-      <p>El sistema asigna el ciclo más cercano y calcula el prorrateo en tiempo real</p>
+      <p>El sistema asigna el ciclo mas cercano y calcula el prorrateo</p>
     </div>
   </div>
-
   <div class="card-section">
     <div class="calc-inner">
-      <div class="calc-title">🧮 Calculadora de Prorrateo</div>
+      <div class="calc-title">Calculadora de Prorrateo</div>
       <div class="calc-grid">
         <div class="inp-group">
-          <div class="inp-label">Día que inicia el servicio</div>
+          <div class="inp-label">Dia que inicia el servicio</div>
           <input type="number" id="f-dia" class="inp" placeholder="Ej: 7" min="1" max="31" oninput="calcular()">
         </div>
         <div class="inp-group">
-          <div class="inp-label">Ciclo asignado automáticamente</div>
+          <div class="inp-label">Ciclo asignado automaticamente</div>
           <div class="ciclos-row">
-            <button class="ciclo-btn" id="cv3"  onclick="false">3</button>
-            <button class="ciclo-btn" id="cv5"  onclick="false">5</button>
-            <button class="ciclo-btn" id="cv10" onclick="false">10</button>
-            <button class="ciclo-btn" id="cv20" onclick="false">20</button>
-            <button class="ciclo-btn" id="cv25" onclick="false">25</button>
+            <button class="ciclo-btn" id="cv3">3</button>
+            <button class="ciclo-btn" id="cv5">5</button>
+            <button class="ciclo-btn" id="cv10">10</button>
+            <button class="ciclo-btn" id="cv20">20</button>
+            <button class="ciclo-btn" id="cv25">25</button>
           </div>
         </div>
       </div>
-
       <div class="resultado-box" id="resultado" style="display:none">
-        <div class="res-row"><span class="res-label">Día de ingreso</span><span class="res-val" id="res-dia">—</span></div>
-        <div class="res-row"><span class="res-label">Ciclo asignado</span><span class="res-val blue" id="res-ciclo">—</span></div>
-        <div class="res-row"><span class="res-label">Días a prorratear</span><span class="res-val orange" id="res-dias">—</span></div>
-        <div class="res-row"><span class="res-label">💰 Primer cobro (prorrateo)</span><span class="res-val orange" id="res-pro">—</span></div>
-        <div class="res-row"><span class="res-label">📅 Fecha primer ciclo completo</span><span class="res-val green" id="res-fecha">—</span></div>
-        <div class="res-row"><span class="res-label">📆 Mensualidad desde entonces</span><span class="res-val blue" id="res-men">—</span></div>
+        <div class="res-row"><span class="res-label">Dia de ingreso</span><span class="res-val" id="res-dia">-</span></div>
+        <div class="res-row"><span class="res-label">Ciclo asignado</span><span class="res-val blue" id="res-ciclo">-</span></div>
+        <div class="res-row"><span class="res-label">Dias a prorratear</span><span class="res-val orange" id="res-dias">-</span></div>
+        <div class="res-row"><span class="res-label">Primer cobro (prorrateo)</span><span class="res-val orange" id="res-pro">-</span></div>
+        <div class="res-row"><span class="res-label">Fecha primer ciclo completo</span><span class="res-val green" id="res-fecha">-</span></div>
+        <div class="res-row"><span class="res-label">Mensualidad desde entonces</span><span class="res-val blue" id="res-men">-</span></div>
       </div>
     </div>
-
-    <!-- Concepto de prorrateo -->
     <div class="prorrateado-concept">
       <div class="concept-icon">📐</div>
       <div>
-        <div class="concept-title">¿Qué es el Prorrateo?</div>
-        <div class="concept-desc">
-          El prorrateo es el cobro proporcional por los días transcurridos entre la fecha de activación de su servicio y la fecha de su próximo ciclo de facturación. Garantiza que usted pague exactamente por los días que usa el sistema, sin cobros completos por períodos incompletos.
-        </div>
-        <div class="concept-formula">
-          Primer cobro = (Mensualidad ÷ 30 días) × Días hasta el próximo ciclo
-        </div>
+        <div class="concept-title">Que es el Prorrateo?</div>
+        <div class="concept-desc">El prorrateo es el cobro proporcional por los dias entre la activacion del servicio y el proximo ciclo. Paga exactamente por los dias que usa el sistema.</div>
+        <div class="concept-formula">Primer cobro = (Mensualidad / 30 dias) x Dias hasta el proximo ciclo</div>
       </div>
     </div>
-
     <div style="background:var(--blue4);border-left:4px solid var(--blue);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px;color:var(--txt);line-height:1.6;margin-top:14px">
-      <strong style="color:var(--blue)">Ciclos disponibles:</strong> 3, 5, 10, 20 y 25 de cada mes. Al ingresar su día de inicio, el sistema selecciona automáticamente el ciclo más próximo hacia adelante. A partir de ese ciclo, su cobro mensual será por el monto completo del plan.
+      <strong style="color:var(--blue)">Ciclos disponibles:</strong> 3, 5, 10, 20 y 25 de cada mes.
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     PASO 3 — DATOS + RESUMEN + BANCOS
-══════════════════════════════════════════════ -->
+<!-- PASO 3 — DATOS -->
 <div class="sec-block-3" style="margin-top:4px">
   <div class="sec-label">
     <div class="sec-num">3</div>
     <div class="sec-text">
       <h3>Complete su Registro</h3>
-      <p>Datos requeridos para configurar su cuenta en el sistema</p>
+      <p>Datos requeridos para configurar su cuenta</p>
     </div>
   </div>
-
   <div class="card-section">
-
     <div class="form-grid">
       <div class="form-field">
         <label class="field-label">RNC <span class="field-req">*</span></label>
@@ -596,8 +314,8 @@
         <input type="text" id="f-rep" class="inp" placeholder="Persona responsable">
       </div>
       <div class="form-field full">
-        <label class="field-label">Dirección <span class="field-req">*</span></label>
-        <input type="text" id="f-dir" class="inp" placeholder="Calle, número, sector, ciudad">
+        <label class="field-label">Direccion <span class="field-req">*</span></label>
+        <input type="text" id="f-dir" class="inp" placeholder="Calle, numero, sector, ciudad">
       </div>
       <div class="form-field">
         <label class="field-label">WhatsApp <span class="field-req">*</span></label>
@@ -605,114 +323,89 @@
       </div>
       <div class="form-field">
         <label class="field-label">Plan seleccionado</label>
-        <input type="text" id="f-plan" class="inp" placeholder="Elija un plan en el Paso 1" readonly style="background:#f9f9fb;cursor:not-allowed;color:var(--muted)">
+        <input type="text" id="f-plan" class="inp" placeholder="Elija un plan arriba" readonly style="background:#f9f9fb;cursor:not-allowed;color:var(--muted)">
       </div>
     </div>
-
-    <!-- Resumen -->
     <div class="resumen-card" id="resumen">
-      <div class="resumen-empty">Complete los pasos 1 y 2 para ver el resumen de su suscripción</div>
+      <div class="resumen-empty">Complete los pasos 1 y 2 para ver el resumen</div>
     </div>
-
-    <!-- Métodos de pago -->
     <div style="margin-top:26px">
-      <div class="inp-label" style="margin-bottom:12px">Métodos de pago aceptados</div>
+      <div class="inp-label" style="margin-bottom:12px">Metodos de pago aceptados</div>
       <div class="bank-grid">
-        <div class="bank-card">
-          <div class="bank-ico">🏦</div>
-          <strong>Banreservas</strong>
-          <p>Depósito o transferencia corporativa</p>
-        </div>
-        <div class="bank-card">
-          <div class="bank-ico">🏦</div>
-          <strong>BHD</strong>
-          <p>Transferencia y comprobante digital</p>
-        </div>
-        <div class="bank-card">
-          <div class="bank-ico">🏦</div>
-          <strong>Banco Popular</strong>
-          <p>Referencia de pago en portal</p>
-        </div>
+        <div class="bank-card"><div class="bank-ico">🏦</div><strong>Banreservas</strong><p>Deposito o transferencia corporativa</p></div>
+        <div class="bank-card"><div class="bank-ico">🏦</div><strong>BHD</strong><p>Transferencia y comprobante digital</p></div>
+        <div class="bank-card"><div class="bank-ico">🏦</div><strong>Banco Popular</strong><p>Referencia de pago en portal</p></div>
       </div>
     </div>
-
-    <button class="btn-submit" onclick="enviar()" id="btn-enviar">
-      📩 Enviar Solicitud de Suscripción
-    </button>
-    <p class="btn-legal">Al enviar acepta los Términos del Servicio · Avanch Technology SRL · RNC: 1-30-12345-6 · Santo Domingo Este, R.D.</p>
-
+    <button class="btn-submit" onclick="enviar()" id="btn-enviar">Enviar Solicitud de Suscripcion</button>
+    <p class="btn-legal">Al enviar acepta los Terminos del Servicio - Avanch Technology SRL - Santo Domingo Este, R.D.</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════ -->
 <div class="footer-band">
-  <h3>¿Tiene alguna consulta?</h3>
-  <p>Nuestro equipo está disponible para orientarle en el proceso de suscripción y activación de su cuenta.</p>
-  <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20necesito%20ayuda%20con%20mi%20suscripci%C3%B3n" target="_blank" class="btn-wa" style="display:inline-flex">
+  <h3>Tiene alguna consulta?</h3>
+  <p>Nuestro equipo esta disponible para orientarle en el proceso.</p>
+  <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20necesito%20ayuda%20con%20mi%20suscripcion" target="_blank" class="btn-wa" style="display:inline-flex">
     <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Contactar por WhatsApp
   </a>
-  <div class="footer-brand">Avanch Technology SRL · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f565159507f5e495e515c574b5a5c57115c5052">[email&#160;protected]</a> · 829-409-2121</div>
+  <div class="footer-brand">Avanch Technology SRL - 829-409-2121</div>
 </div>
 
-</div><!-- /page -->
+</div>
 
-<!-- WA flotante -->
-<a href="https://wa.me/18294092121" target="_blank" class="wa-float" title="Soporte WhatsApp">
+<a href="https://wa.me/18294092121" target="_blank" class="wa-float">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ── CONFIGURACIÓN DE PLANES ────────────────────────────────── */
+<script>
 var PLANES = [
-  { nombre: 'Plan Pyme Iniciado', monto: 1500, usuarios: 3  },
-  { nombre: 'Plan Pyme Experto',  monto: 2500, usuarios: 5  },
-  { nombre: 'Plan Grande Pyme',   monto: 3500, usuarios: 8  }
+  { nombre: 'Plan Pyme Iniciado', monto: 1500, usuarios: 3 },
+  { nombre: 'Plan Pyme Experto',  monto: 2500, usuarios: 5 },
+  { nombre: 'Plan Grande Pyme',   monto: 3500, usuarios: 8 }
 ];
-var CICLOS     = [3, 5, 10, 20, 25];
+var CICLOS = [3, 5, 10, 20, 25];
 var planSelIdx = -1;
-var proData    = null;
+var proData = null;
 
-/* ── SELECCIÓN DE PLAN ─────────────────────────────────────── */
+/* IMPORTANTE: Pega aqui tu URL del Web App de Google Apps Script */
+var GAS_URL = 'TU_URL_EXEC_AQUI';
+
 function selPlan(idx) {
   planSelIdx = idx;
-  PLANES.forEach(function(_, i) {
-    document.getElementById('plan-'+i).classList.toggle('selected', i === idx);
-    document.getElementById('psb-'+i).innerText = i === idx ? '✓ Plan seleccionado' : 'Seleccionar plan';
+  PLANES.forEach(function(p, i) {
+    document.getElementById('plan-' + i).classList.toggle('selected', i === idx);
+    document.getElementById('psb-' + i).innerText = i === idx ? 'Plan seleccionado' : 'Seleccionar plan';
   });
-  document.getElementById('f-plan').value = PLANES[idx].nombre + ' — RD$ ' + PLANES[idx].monto.toLocaleString('es-DO') + '/mes';
-  // Recalcular siempre que se cambie el plan
+  document.getElementById('f-plan').value = PLANES[idx].nombre + ' - RD$ ' + PLANES[idx].monto.toLocaleString('es-DO') + '/mes';
   calcular();
   actualizarResumen();
-  // Solo hacer scroll si no hay día ingresado aún
-  var dia = document.getElementById('f-dia').value;
-  if (!dia) {
-    setTimeout(function(){ document.getElementById('f-dia').scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
-  }
 }
 
-/* ── CALCULADORA PRORRATEO ─────────────────────────────────── */
 function calcular() {
   var dia = parseInt(document.getElementById('f-dia').value);
-  CICLOS.forEach(function(c){ document.getElementById('cv'+c).classList.remove('activo'); });
+  CICLOS.forEach(function(c) {
+    var el = document.getElementById('cv' + c);
+    if (el) el.classList.remove('activo');
+  });
   proData = null;
   document.getElementById('resultado').style.display = 'none';
+  if (!dia || dia < 1 || dia > 31 || planSelIdx < 0) { actualizarResumen(); return; }
 
-  if (!dia || dia < 1 || dia > 31) { actualizarResumen(); return; }
-  if (planSelIdx < 0) { actualizarResumen(); return; }
-
-  var monto  = PLANES[planSelIdx].monto;
-  var DM     = 30;
-  var ca     = null, cruzaMes = false;
-  for (var i = 0; i < CICLOS.length; i++) { if (CICLOS[i] >= dia) { ca = CICLOS[i]; break; } }
+  var monto = PLANES[planSelIdx].monto;
+  var DM = 30;
+  var ca = null, cruzaMes = false;
+  for (var i = 0; i < CICLOS.length; i++) {
+    if (CICLOS[i] >= dia) { ca = CICLOS[i]; break; }
+  }
   if (!ca) { ca = CICLOS[0]; cruzaMes = true; }
 
   var dias = cruzaMes ? (DM - dia) + ca : ca - dia;
-  var pro  = dias === 0 ? 0 : Math.round((monto / DM) * dias * 100) / 100;
+  var pro = dias === 0 ? 0 : Math.round((monto / DM) * dias * 100) / 100;
 
-  var hoy = new Date(), a = hoy.getFullYear(), m = hoy.getMonth();
+  var hoy = new Date();
+  var a = hoy.getFullYear();
+  var m = hoy.getMonth();
   if (cruzaMes) m++;
   if (m > 11) { m = 0; a++; }
   var mNom = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -720,48 +413,36 @@ function calcular() {
 
   proData = { ciclo: ca, dias: dias, pro: pro, monto: monto, fechaProx: fechaProx };
 
-  document.getElementById('cv' + ca).classList.add('activo');
-  document.getElementById('res-dia').innerText   = 'Día ' + dia + ' del mes';
-  document.getElementById('res-ciclo').innerText = 'Día ' + ca + ' de cada mes';
-  document.getElementById('res-dias').innerText  = dias + (dias === 1 ? ' día' : ' días');
-  document.getElementById('res-pro').innerText   = dias === 0
-    ? 'RD$ 0.00 — entra directo al ciclo'
-    : 'RD$ ' + pro.toLocaleString('es-DO', {minimumFractionDigits:2});
+  var elC = document.getElementById('cv' + ca);
+  if (elC) elC.classList.add('activo');
+  document.getElementById('res-dia').innerText = 'Dia ' + dia;
+  document.getElementById('res-ciclo').innerText = 'Dia ' + ca + ' de cada mes';
+  document.getElementById('res-dias').innerText = dias + ' dias';
+  document.getElementById('res-pro').innerText = dias === 0 ? 'RD$ 0.00 - entra directo' : 'RD$ ' + pro.toLocaleString('es-DO', {minimumFractionDigits:2});
   document.getElementById('res-fecha').innerText = fechaProx;
-  document.getElementById('res-men').innerText   = 'RD$ ' + monto.toLocaleString('es-DO', {minimumFractionDigits:2});
+  document.getElementById('res-men').innerText = 'RD$ ' + monto.toLocaleString('es-DO', {minimumFractionDigits:2});
   document.getElementById('resultado').style.display = 'block';
   actualizarResumen();
 }
 
-/* ── RESUMEN FINAL ─────────────────────────────────────────── */
 function actualizarResumen() {
   var box = document.getElementById('resumen');
+  if (!box) return;
   if (planSelIdx < 0 || !proData) {
-    box.innerHTML = '<div class="resumen-empty">Complete los pasos 1 y 2 para ver el resumen de su suscripción</div>';
+    box.innerHTML = '<div class="resumen-empty">Complete los pasos 1 y 2 para ver el resumen</div>';
     return;
   }
   var p = PLANES[planSelIdx];
   box.innerHTML =
-    '<div class="resumen-head">Resumen de su Suscripción</div>' +
+    '<div class="resumen-head">Resumen de su Suscripcion</div>' +
     '<div class="resumen-row"><span class="resumen-label">Plan</span><span class="resumen-val">' + p.nombre + '</span></div>' +
-    '<div class="resumen-row"><span class="resumen-label">Usuarios incluidos</span><span class="resumen-val">' + p.usuarios + ' usuarios</span></div>' +
-    '<div class="resumen-row"><span class="resumen-label">Ciclo de cobro</span><span class="resumen-val">Día ' + proData.ciclo + ' de cada mes</span></div>' +
-    '<div class="resumen-row"><span class="resumen-label">Días prorrateados</span><span class="resumen-val">' + proData.dias + ' días</span></div>' +
+    '<div class="resumen-row"><span class="resumen-label">Usuarios</span><span class="resumen-val">' + p.usuarios + ' usuarios</span></div>' +
+    '<div class="resumen-row"><span class="resumen-label">Ciclo de cobro</span><span class="resumen-val">Dia ' + proData.ciclo + ' de cada mes</span></div>' +
+    '<div class="resumen-row"><span class="resumen-label">Dias prorrateados</span><span class="resumen-val">' + proData.dias + ' dias</span></div>' +
     '<div class="resumen-row"><span class="resumen-label">Primer ciclo completo</span><span class="resumen-val">' + proData.fechaProx + '</span></div>' +
     '<div class="resumen-row"><span class="resumen-label">Mensualidad recurrente</span><span class="resumen-val">RD$ ' + p.monto.toLocaleString('es-DO',{minimumFractionDigits:2}) + '</span></div>' +
-    '<div class="resumen-row resumen-main"><span class="resumen-label">💰 Primer cobro (prorrateo)</span><span class="resumen-val">RD$ ' + (proData.pro > 0 ? proData.pro.toLocaleString('es-DO',{minimumFractionDigits:2}) : '0.00') + '</span></div>';
+    '<div class="resumen-row resumen-main"><span class="resumen-label">Primer cobro (prorrateo)</span><span class="resumen-val">RD$ ' + (proData.pro > 0 ? proData.pro.toLocaleString('es-DO',{minimumFractionDigits:2}) : '0.00') + '</span></div>';
 }
-
-/* ── ENVIAR SOLICITUD ──────────────────────────────────────────────
-   Flujo doble:
-   1. POST al GAS → guarda en hoja Leads automáticamente
-   2. Abre WhatsApp con el resumen (en el mismo contexto del clic)
-   El WhatsApp se abre primero (contexto del clic del usuario),
-   luego el POST ocurre en paralelo sin bloquear.
-─────────────────────────────────────────────────────────────────── */
-
-/* URL del Web App de Google Apps Script — actualizar con tu URL */
-var GAS_URL = 'TU_URL_EXEC_AQUI'; // ← pegar tu URL /exec aquí
 
 function enviar() {
   var rnc    = document.getElementById('f-rnc').value.trim();
@@ -772,112 +453,80 @@ function enviar() {
   var tel    = document.getElementById('f-tel').value.trim();
   var dia    = document.getElementById('f-dia').value || '';
 
-  if (!nombre || !tel || !rnc || !legal || !rep || !dir) {
-    toast('Complete todos los campos requeridos *.','er'); return;
-  }
-  if (planSelIdx < 0) {
-    toast('Seleccione un plan en el Paso 1.','er'); return;
-  }
-  if (!proData) {
-    toast('Ingrese el día de inicio en el Paso 2.','er'); return;
-  }
+  if (!nombre || !tel || !rnc || !legal || !rep || !dir) { toast('Complete todos los campos requeridos.', 'er'); return; }
+  if (planSelIdx < 0) { toast('Seleccione un plan en el Paso 1.', 'er'); return; }
+  if (!proData) { toast('Ingrese el dia de inicio en el Paso 2.', 'er'); return; }
 
-  var p      = PLANES[planSelIdx];
-  var proMsg = proData.pro > 0
-    ? 'RD$ ' + proData.pro.toLocaleString('es-DO',{minimumFractionDigits:2})
-    : 'RD$ 0.00 (entra directo al ciclo)';
+  var p = PLANES[planSelIdx];
+  var proMsg = proData.pro > 0 ? 'RD$ ' + proData.pro.toLocaleString('es-DO',{minimumFractionDigits:2}) : 'RD$ 0.00';
 
-  // ── 1. Abrir WhatsApp INMEDIATAMENTE (contexto del clic) ──────────────
   var msg =
-    '*SOLICITUD DE SUSCRIPCIÓN*%0A' +
-    '*AVANCH TECHNOLOGY* 🚀%0A' +
-    '━━━━━━━━━━━━━━━━━━━━━━%0A' +
+    '*SOLICITUD DE SUSCRIPCION*%0A' +
+    '*AVANCH TECHNOLOGY*%0A' +
+    '------------------------%0A' +
     '*Plan:* ' + encodeURIComponent(p.nombre) + '%0A' +
-    '*Usuarios:* ' + p.usuarios + ' usuarios%0A' +
+    '*Usuarios:* ' + p.usuarios + '%0A' +
     '*Mensualidad:* RD$ ' + p.monto.toLocaleString('es-DO') + '%0A' +
-    '*Ciclo asignado:* Día ' + proData.ciclo + ' de cada mes%0A' +
-    '*Días prorrateados:* ' + proData.dias + ' días%0A' +
+    '*Ciclo:* Dia ' + proData.ciclo + ' de cada mes%0A' +
+    '*Dias prorrateados:* ' + proData.dias + '%0A' +
     '*Primer cobro:* ' + encodeURIComponent(proMsg) + '%0A' +
     '*Primer ciclo completo:* ' + encodeURIComponent(proData.fechaProx) + '%0A' +
-    '━━━━━━━━━━━━━━━━━━━━━━%0A' +
+    '------------------------%0A' +
     '*RNC:* ' + encodeURIComponent(rnc) + '%0A' +
     '*Nombre Legal:* ' + encodeURIComponent(legal) + '%0A' +
     '*Nombre Comercial:* ' + encodeURIComponent(nombre) + '%0A' +
     '*Representante:* ' + encodeURIComponent(rep) + '%0A' +
-    '*Dirección:* ' + encodeURIComponent(dir) + '%0A' +
+    '*Direccion:* ' + encodeURIComponent(dir) + '%0A' +
     '*WhatsApp:* ' + encodeURIComponent(tel) + '%0A' +
-    '*Día inicio:* ' + dia + '%0A' +
-    '━━━━━━━━━━━━━━━━━━━━━━%0A' +
-    '_Formulario de suscripción · Avanch Technology_';
+    '*Dia inicio:* ' + dia;
 
   window.open('https://wa.me/18294092121?text=' + msg, '_blank');
 
-  // ── 2. Deshabilitar botón ─────────────────────────────────────────────
   var btn = document.getElementById('btn-enviar');
   btn.disabled = true;
-  btn.innerText = '⏳ Registrando solicitud...';
+  btn.innerText = 'Solicitud Enviada';
+  btn.style.background = '#00c853';
+  toast('Solicitud enviada correctamente.', 'ok');
 
-  // ── 3. POST al GAS en paralelo (no bloquea el UI) ──────────────────────
-  var payload = {
-    nombre     : nombre,
-    legal      : legal,
-    rnc        : rnc,
-    rep        : rep,
-    dir        : dir,
-    tel        : tel,
-    plan       : p.nombre + ' (' + p.usuarios + ' usuarios)',
-    monto      : p.monto,
-    dia        : dia,
-    ciclo      : proData.ciclo,
-    dias       : proData.dias,
-    primerCobro: proData.pro,
-    mensualidad: p.monto,
-    fechaProx  : proData.fechaProx
-  };
-
-  // Enviar al GAS usando formulario oculto — técnica que evita CORS con GAS
   if (GAS_URL && GAS_URL !== 'TU_URL_EXEC_AQUI') {
-    try {
-      // Crear iframe oculto para recibir la respuesta sin error CORS
-      var iframeName = 'gas-iframe-' + Date.now();
-      var iframe = document.createElement('iframe');
+    var payload = {
+      nombre: nombre, legal: legal, rnc: rnc, rep: rep, dir: dir, tel: tel,
+      plan: p.nombre, monto: p.monto, dia: dia, ciclo: proData.ciclo,
+      dias: proData.dias, primerCobro: proData.pro, mensualidad: p.monto,
+      fechaProx: proData.fechaProx
+    };
+    var iframeName = 'gas-frame';
+    var iframe = document.getElementById(iframeName);
+    if (!iframe) {
+      iframe = document.createElement('iframe');
       iframe.name = iframeName;
+      iframe.id = iframeName;
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-
-      // Crear formulario oculto que envía al GAS
-      var form = document.createElement('form');
-      form.method = 'POST';
-      form.action = GAS_URL;
-      form.target = iframeName;
-      form.style.display = 'none';
-
-      // Enviar los datos como campo JSON único
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'data';
-      input.value = JSON.stringify(payload);
-      form.appendChild(input);
-
-      document.body.appendChild(form);
-      form.submit();
-
-      // Limpiar después de 3 segundos
-      setTimeout(function() {
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-      }, 3000);
-
-    } catch(ex) {
-      console.log('GAS send error:', ex);
     }
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GAS_URL;
+    form.target = iframeName;
+    form.style.display = 'none';
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(function() { if (form.parentNode) form.parentNode.removeChild(form); }, 5000);
   }
-
-  // Confirmar al usuario
-  btn.disabled = false;
-  btn.innerText = '✓ Solicitud Enviada';
-  btn.style.background = '#00c853';
-  toast('¡Solicitud enviada! Le contactaremos pronto.', 'ok');
 }
 
-/* ── UTILIDADES ───────────────────────────────────────────
+function toast(msg, tipo) {
+  var el = document.getElementById('toast');
+  el.innerText = msg;
+  el.className = 'show ' + (tipo || '');
+  setTimeout(function() { el.className = ''; }, 3500);
+}
+</script>
+
+</body>
+</html>
