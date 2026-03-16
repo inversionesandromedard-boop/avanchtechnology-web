@@ -369,7 +369,7 @@ var planSelIdx = -1;
 var proData = null;
 
 /* IMPORTANTE: Pega aqui tu URL del Web App de Google Apps Script */
-var GAS_URL = 'TU_URL_EXEC_AQUI';
+var GAS_URL = 'https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec';
 
 function selPlan(idx) {
   planSelIdx = idx;
@@ -488,7 +488,7 @@ function enviar() {
   btn.style.background = '#00c853';
   toast('Solicitud enviada correctamente.', 'ok');
 
-  if (GAS_URL && GAS_URL !== 'TU_URL_EXEC_AQUI') {
+  if (GAS_URL && GAS_URL.indexOf('TU_URL_EXEC_AQUI') === -1) {
     var payload = {
       nombre: nombre, legal: legal, rnc: rnc, rep: rep, dir: dir, tel: tel,
       plan: p.nombre, monto: p.monto, dia: dia, ciclo: proData.ciclo,
