@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Avanch Technology — Sistema de Facturación Electrónica e-CF para PYMES en República Dominicana. Cumple con la Ley 51-23 de la DGII.">
+    <meta name="keywords" content="Facturación Electrónica, e-CF, DGII, Avanch Technology, República Dominicana">
+    <meta name="author" content="Avanch Technology">
+    <title>Avanch Technology | Innovar, Desarrollar y Crear</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- CORRECCIÓN 1: Tipografía unificada con el panel y el formulario -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════
+           CORRECCIÓN 1 — Variables unificadas con el panel
+           #003399 / Outfit / DM Serif Display
+        ═══════════════════════════════════════════════════ */
+        :root {
+            --blue:         #003399;
+            --blue2:        #0044cc;
+            --blue3:        #e8eeff;
+            --blue4:        #f0f4ff;
+            --dark:         #020b24;
+            --text-main:    #1a1a2e;
+            --text-muted:   #6b7280;
+            --white:        #ffffff;
+            --bg-light:     #f4f5f9;
+            --green:        #00c853;
+            --green-dgii:   #78b833;
+            --orange:       #ff6d00;
+            --gold:         #ffc107;
+            --neon-cyan:    #00f2ff;
+            --dark-bg:      #050505;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        .text-center { text-align: center; }
+        .section-padding { padding: 80px 0; }
+
+        /* ── BOTONES ─────────────────────────────────────── */
+        .btn {
+            display: inline-block; padding: 15px 30px; border-radius: 12px;
+            font-weight: 700; text-decoration: none; font-family: 'Outfit', sans-serif;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none; cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--blue); color: white;
+            box-shadow: 0 4px 15px rgba(0,51,153,.2);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,51,153,.3); background: var(--blue2); }
+        .btn-ghost { background: #f0f4f8; color: var(--dark); }
+        .btn-ghost:hover { background: #e2e8f0; transform: translateY(-3px); }
+
+        /* ── TOP BAR ─────────────────────────────────────── */
+        .top-bar {
+            background: var(--dark); color: white; padding: 12px 5%;
+            font-size: 0.85rem; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 500;
+        }
+        .top-bar a { color: #25d366; text-decoration: none; font-weight: 700; }
+
+        /* ── HEADER ──────────────────────────────────────── */
+        .header {
+            background: rgba(255,255,255,.97);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            height: 90px; padding: 0 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+            box-shadow: 0 2px 20px rgba(0,51,153,.05);
+        }
+        .header-brand {
+            display: flex; align-items: center; gap: 14px; text-decoration: none;
+        }
+        .header-brand img { height: 36px; }
+        .header-brand-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800; font-size: 1.3rem; color: var(--blue);
+            letter-spacing: -.3px;
+        }
+        /* CORRECCIÓN 4: Nav pública limpia — sin herramientas internas */
+        .header-nav { display: flex; align-items: center; gap: 8px; }
+        .nav-link {
+            font-size: 13px; font-weight: 600; color: var(--text-muted);
+            text-decoration: none; padding: 8px 14px; border-radius: 8px;
+            transition: all .2s;
+        }
+        .nav-link:hover { color: var(--blue); background: var(--blue3); }
+        .btn-nav-cta {
+            padding: 10px 22px; border-radius: 50px;
+            background: var(--blue); color: white;
+            font-size: 13px; font-weight: 700; text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,51,153,.25);
+            transition: all .2s;
+        }
+        .btn-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,51,153,.35); }
+
+        /* ── CORRECCIÓN 2: Indicadores con tasa REAL ─────── */
+        .indicators-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; padding: 20px 5%;
+            background: var(--white); border-bottom: 1px solid #eee;
+        }
+        .ind-card {
+            padding: 18px; border-radius: 14px; background: #fff;
+            border: 1px solid #eef0f3; position: relative; overflow: hidden;
+            transition: all .3s cubic-bezier(.175,.885,.32,1.275);
+            box-shadow: 0 3px 10px rgba(0,0,0,.03);
+        }
+        .ind-card:hover { transform: translateY(-4px); border-color: var(--blue3); box-shadow: 0 8px 20px rgba(0,51,153,.08); }
+        .ind-card::before {
+            content: ""; position: absolute; left: 0; top: 0;
+            height: 100%; width: 4px; background: var(--blue); opacity: .25;
+        }
+        .ind-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
+        .ind-val { font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--dark); font-size: 1.15rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .ind-trend { display: flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; margin-left: auto; }
+        .ind-trend.up   { color: #00a040; }
+        .ind-trend.down { color: #e03030; }
+        .sparkline { display: block; }
+        .live-dot { width: 6px; height: 6px; background: var(--green-dgii); border-radius: 50%; display: inline-block; animation: pulseLive 2s infinite; flex-shrink: 0; }
+
+        /* ── HERO ────────────────────────────────────────── */
+        .hero {
+            background:
+                linear-gradient(145deg, rgba(2,11,36,.97) 0%, rgba(0,51,153,.90) 100%),
+                url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; padding: 130px 20px 110px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .hero-content { position: relative; z-index: 2; animation: fadeInUp 1s ease-out; }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: rgba(255,255,255,.5);
+            margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 12px;
+        }
+        .hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 32px; height: 1px; background: rgba(255,255,255,.3); }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.8rem, 7vw, 4.2rem);
+            font-weight: 400; line-height: 1.1; margin-bottom: 18px;
+            color: #fff;
+        }
+        .hero h1 em { font-style: italic; color: rgba(255,255,255,.65); }
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 300;
+            color: rgba(255,255,255,.8); max-width: 680px; margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .hero-tagline strong { font-weight: 700; color: #fff; }
+        .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .chip {
+            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+            color: rgba(255,255,255,.9); font-size: 12px; font-weight: 600;
+            padding: 7px 16px; border-radius: 20px; backdrop-filter: blur(4px);
+        }
+        .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-hero-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #fff; color: var(--blue);
+            font-weight: 800; font-size: 14px; letter-spacing: .3px;
+            padding: 16px 32px; border-radius: 50px; text-decoration: none;
+            box-shadow: 0 6px 24px rgba(0,0,0,.2); transition: all .22s;
+        }
+        .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.25); }
+        .btn-hero-wa {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #25d366; color: #fff;
+            font-weight: 700; font-size: 14px;
+            padding: 16px 32px; border-radius: 50px; text-decoration: none;
+            box-shadow: 0 6px 24px rgba(37,211,102,.35); transition: all .22s;
+        }
+        .btn-hero-wa:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(37,211,102,.45); }
+
+        /* ── CINTILLO ─────────────────────────────────────── */
+        .cintillo-section {
+            background: var(--dark); padding: 18px 0; overflow: hidden;
+            white-space: nowrap; border-top: 3px solid var(--blue);
+            border-bottom: 3px solid var(--blue); position: relative; z-index: 5;
+        }
+        .cintillo-track { display: inline-block; animation: scrollCintillo 35s linear infinite; }
+        .cintillo-item {
+            display: inline-flex; align-items: center; gap: 12px;
+            margin: 0 35px; color: var(--white); font-weight: 600;
+            text-decoration: none; font-size: .95rem;
+        }
+        .cintillo-item span {
+            color: var(--dark); background: var(--blue3); color: var(--blue);
+            font-size: .7rem; text-transform: uppercase; font-weight: 800;
+            padding: 4px 12px; border-radius: 20px;
+        }
+
+        /* ── PROMO BAR ────────────────────────────────────── */
+        #promo-bar {
+            background: linear-gradient(90deg, var(--dark) 0%, #0a1b33 50%, var(--dark) 100%);
+            color: white; padding: 12px 5%;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,.1); animation: slideDownPromo .6s cubic-bezier(.23,1,.32,1); z-index: 4;
+        }
+        .promo-content { display: flex; align-items: center; gap: 20px; }
+        .offer-badge {
+            background: var(--gold); color: #000;
+            font-weight: 900; font-size: .65rem; padding: 4px 10px;
+            border-radius: 4px; letter-spacing: 1px;
+            box-shadow: 0 0 12px rgba(255,204,0,.3);
+        }
+        .promo-text h3 { font-size: .95rem; font-weight: 800; margin-bottom: 2px; }
+        .promo-text h3 span { color: var(--blue3); }
+        .promo-text p { font-size: .7rem; color: rgba(255,255,255,.55); margin: 0; }
+        .promo-actions { display: flex; align-items: center; gap: 16px; }
+        .price-tag { font-weight: 900; color: var(--gold); font-size: 1.2rem; font-family: 'Outfit',sans-serif; }
+        .btn-solicitar {
+            background: var(--blue); color: white; text-decoration: none;
+            padding: 10px 22px; border-radius: 8px; font-size: .8rem; font-weight: 800;
+            transition: all .3s; box-shadow: 0 4px 12px rgba(0,51,153,.4);
+        }
+        .btn-solicitar:hover { background: var(--blue2); transform: translateY(-2px); }
+        .close-promo {
+            background: none; border: none; color: white; font-size: 1.4rem;
+            cursor: pointer; opacity: .4; transition: .3s; margin-left: 12px; line-height: 1;
+        }
+        .close-promo:hover { opacity: 1; color: var(--gold); }
+
+        /* ── STATS BAR ────────────────────────────────────── */
+        .stats-bar {
+            padding: 36px 5%; background: var(--blue4);
+            text-align: center; border-bottom: 1px solid #dde4f5;
+        }
+        .stats-number { font-size: clamp(1.4rem,4vw,2.2rem); font-weight: 800; color: var(--dark); display: inline-flex; align-items: center; gap: 12px; }
+        .stats-number span { color: var(--blue); }
+
+        /* ── PROPUESTA DE VALOR ───────────────────────────── */
+        .solutions-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px; margin-top: 50px;
+        }
+        .sol-card {
+            background: var(--bg-light); padding: 36px; border-radius: 20px;
+            border: 1px solid #e8e8f0; transition: all .3s;
+        }
+        .sol-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,51,153,.08); border-color: var(--blue3); }
+        .sol-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+        .sol-card h3 { color: var(--dark); font-weight: 800; margin-bottom: 12px; font-size: 1.15rem; }
+        .sol-card p { color: var(--text-muted); font-size: .95rem; line-height: 1.7; }
+
+        /* ── TESTIMONIOS ──────────────────────────────────── */
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px; margin-top: 48px;
+        }
+        .test-card {
+            background: #fff; padding: 28px; border-radius: 20px;
+            border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,.02);
+            transition: .3s;
+        }
+        .test-card:hover { transform: translateY(-5px); border-color: var(--blue3); box-shadow: 0 12px 28px rgba(0,51,153,.08); }
+        .test-stars { color: var(--gold); font-size: 13px; margin-bottom: 14px; letter-spacing: 2px; }
+        .test-avatar {
+            width: 52px; height: 52px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 800; color: #fff;
+            flex-shrink: 0; margin-bottom: 14px;
+            border: 2px solid rgba(255,255,255,.3);
+        }
+        .test-msg { font-size: .95rem; color: var(--text-main); font-style: italic; margin-bottom: 20px; line-height: 1.7; }
+        .test-author { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid #f0f0f5; padding-top: 14px; }
+        .test-author strong { color: var(--dark); font-size: .95rem; }
+        .test-link {
+            color: var(--blue); font-size: .8rem; font-weight: 700;
+            text-decoration: none; display: flex; align-items: center; gap: 5px;
+        }
+        .test-link:hover { color: var(--blue2); }
+
+        /* ── CORRECCIÓN 3: PLANES CON PRECIOS VISIBLES ────── */
+        .plans-section { padding: 100px 5%; background: var(--bg-light); text-align: center; }
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 400;
+            color: var(--dark); margin-bottom: 12px;
+        }
+        .section-sub { color: var(--text-muted); font-size: 1rem; margin-bottom: 56px; }
+
+        .plans-grid { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+        .plan-card {
+            background: #fff; width: 340px; border-radius: 22px;
+            border: 2px solid var(--blue3); overflow: hidden;
+            transition: all .3s; box-shadow: 0 6px 24px rgba(0,51,153,.06);
+            display: flex; flex-direction: column;
+        }
+        .plan-card:hover { transform: translateY(-8px); border-color: var(--blue); box-shadow: 0 20px 48px rgba(0,51,153,.14); }
+        .plan-card.popular { border-color: var(--blue); box-shadow: 0 8px 32px rgba(0,51,153,.16); }
+
+        .plan-head {
+            padding: 28px 28px 24px;
+            background: linear-gradient(145deg, #001a5c, var(--blue));
+            position: relative; overflow: hidden;
+        }
+        .plan-head::after {
+            content: ''; position: absolute; top: -30px; right: -30px;
+            width: 130px; height: 130px; border-radius: 50%;
+            background: rgba(255,255,255,.07);
+        }
+        .plan-popular-badge {
+            position: absolute; top: 14px; right: 0;
+            background: var(--gold); color: #1a1a00;
+            font-size: 9px; font-weight: 900; letter-spacing: 1px;
+            text-transform: uppercase; padding: 4px 16px 4px 12px;
+            border-radius: 0 0 0 12px;
+        }
+        .plan-icon { font-size: 26px; margin-bottom: 12px; position: relative; z-index: 1; }
+        .plan-name-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,.6); margin-bottom: 8px; position: relative; z-index: 1; }
+        .plan-price-wrap { display: flex; align-items: baseline; gap: 3px; position: relative; z-index: 1; }
+        .plan-currency { font-size: 16px; font-weight: 700; color: rgba(255,255,255,.75); margin-top: 6px; align-self: flex-start; }
+        .plan-price { font-size: 38px; font-weight: 900; color: #fff; line-height: 1; }
+        .plan-period { font-size: 12px; color: rgba(255,255,255,.5); font-weight: 500; }
+        .plan-users-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,.12); border-radius: 20px;
+            padding: 5px 12px; font-size: 12px; color: rgba(255,255,255,.85);
+            font-weight: 600; margin-top: 12px; position: relative; z-index: 1;
+        }
+
+        .plan-body { padding: 22px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+        .plan-features { list-style: none; margin-bottom: 24px; flex: 1; }
+        .plan-features li {
+            margin-bottom: 10px; font-size: .9rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .feat-check {
+            width: 20px; height: 20px; border-radius: 6px;
+            background: var(--blue3); color: var(--blue);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 900; flex-shrink: 0;
+        }
+        .plan-cta {
+            display: block; text-align: center; padding: 14px;
+            border-radius: 12px; font-weight: 800; font-size: 13px;
+            text-decoration: none; letter-spacing: .3px;
+            background: var(--blue); color: white;
+            transition: all .2s; box-shadow: 0 4px 16px rgba(0,51,153,.2);
+        }
+        .plan-cta:hover { background: var(--blue2); transform: scale(.99); box-shadow: 0 8px 24px rgba(0,51,153,.3); }
+
+        /* ── INCENTIVOS ───────────────────────────────────── */
+        .incentives-section { padding: 100px 5%; background: white; text-align: center; }
+        .incentives-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px; max-width: 1100px; margin: 40px auto 0;
+        }
+        .incentive-box {
+            background: var(--bg-light); border: 1px solid #eef0f3;
+            border-radius: 18px; padding: 36px 28px; transition: .3s;
+        }
+        .incentive-box:hover { border-color: var(--blue); transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,51,153,.08); }
+        .incentive-box.featured { border-color: var(--blue); background: var(--blue4); }
+        .incentive-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        .incentive-val { font-size: 2rem; font-weight: 900; color: var(--blue); margin: 14px 0 10px; display: block; }
+        .incentive-box p { font-size: .9rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* ── LEY 51-23 BANNER ─────────────────────────────── */
+        .ley-banner {
+            background: linear-gradient(135deg, var(--dark), var(--blue));
+            padding: 60px 5%; text-align: center; color: white; margin: 0;
+        }
+        .ley-banner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem,3.5vw,2.2rem); font-weight: 400; margin-bottom: 12px; }
+        .ley-banner p { color: rgba(255,255,255,.72); font-size: 1rem; max-width: 640px; margin: 0 auto 28px; }
+        .ley-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .ley-link {
+            display: inline-block; padding: 10px 22px; border-radius: 8px;
+            font-size: 13px; font-weight: 700; text-decoration: none;
+            background: rgba(255,255,255,.12); color: white; border: 1px solid rgba(255,255,255,.2);
+            transition: all .2s;
+        }
+        .ley-link:hover { background: rgba(255,255,255,.22); }
+
+        /* ── FOOTER ───────────────────────────────────────── */
+        .footer-elite { background: #fff; padding: 72px 5% 28px; border-top: 1px solid #eaeaea; }
+        .footer-grid-4 {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 36px; max-width: 1200px; margin: 0 auto;
+        }
+        .footer-col h4 {
+            color: var(--dark); margin-bottom: 24px; font-weight: 800;
+            font-size: .95rem; position: relative;
+        }
+        .footer-col h4::after {
+            content: ''; position: absolute; bottom: -8px; left: 0;
+            width: 36px; height: 3px; background: var(--blue); border-radius: 2px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a { text-decoration: none; color: var(--text-muted); font-size: .9rem; transition: .2s; }
+        .footer-col a:hover { color: var(--blue); }
+
+        /* Sello e-CF — conservado del original */
+        .avanch-seal-aggressive {
+            position: relative; background: var(--dark-bg);
+            padding: 12px 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin-top: 22px; cursor: pointer;
+            clip-path: polygon(15% 0%, 100% 0, 100% 85%, 85% 100%, 0 100%, 0% 15%);
+            border: 1.5px solid var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(0,242,255,.15);
+            transition: all .3s; overflow: hidden; width: 160px;
+        }
+        .avanch-seal-aggressive:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0,242,255,.4); }
+        .status-neon { position: absolute; top: 8px; right: 12px; width: 6px; height: 6px; background: var(--green-dgii); border-radius: 50%; box-shadow: 0 0 6px var(--green-dgii); }
+        .data-stream { font-size: 6px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px; font-family: 'Outfit', sans-serif; }
+        .main-ecf { font-size: 24px; font-weight: 900; color: var(--green-dgii); line-height: .8; margin: 0; text-shadow: 0 0 6px rgba(120,184,51,.3); }
+        .brand-avanch-seal {
+            font-size: 11px; font-weight: 900; color: #fff; margin-top: 6px;
+            letter-spacing: 3px; text-transform: uppercase;
+            background: linear-gradient(180deg, #fff 0%, #444 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        .brand-avanch-seal::after {
+            content: ""; position: absolute; bottom: -3px; left: 50%;
+            transform: translateX(-50%); width: 80%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--green-dgii), transparent);
+        }
+
+        /* ── WA FLOTANTE ──────────────────────────────────── */
+        .wa-float {
+            position: fixed; bottom: 28px; right: 24px;
+            background: #25d366; color: #fff;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 26px rgba(37,211,102,.42);
+            text-decoration: none; z-index: 999; transition: all .2s;
+        }
+        .wa-float:hover { transform: scale(1.1); box-shadow: 0 12px 36px rgba(37,211,102,.52); }
+
+        /* ── MODAL ────────────────────────────────────────── */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2,11,36,.82);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; visibility: hidden;
+            transition: opacity .35s ease, visibility .35s ease;
+            /* Sin efecto blur para no bloquear el hilo principal */
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 22px;
+            max-width: 420px; width: 90%; position: relative;
+            transform: translateY(40px);
+            transition: transform .35s cubic-bezier(.175,.885,.32,1.275);
+            box-shadow: 0 24px 60px rgba(0,0,0,.25); text-align: center;
+            border-top: 5px solid var(--blue);
+            /* will-change solo cuando está activo, se aplica por JS */
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 14px; right: 18px; font-size: 26px; background: none; border: none; color: #999; cursor: pointer; transition: .2s; line-height: 1; }
+        .close-btn:hover { color: var(--dark); }
+
+        /* ── ANIMACIONES ──────────────────────────────────── */
+        @keyframes scrollCintillo { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseLive { 0% { opacity: 1; } 50% { opacity: .3; } 100% { opacity: 1; } }
+        @keyframes slideDownPromo { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+
+        /* ── RESPONSIVE ───────────────────────────────────── */
+        @media (max-width: 768px) {
+            .plan-card { width: 100%; }
+            .header-nav .nav-link { display: none; }
+            #promo-bar { flex-direction: column; padding: 16px; gap: 12px; }
+            .promo-content { flex-direction: column; gap: 6px; }
+            .promo-actions { width: 100%; justify-content: center; }
+            .avanch-seal-aggressive { margin: 22px auto; }
+            .section-padding { padding: 50px 0; }
+            .hero-ctas { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MODAL DGII -->
+<div id="avanchModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <h3 style="color:var(--dark);font-weight:800;font-size:1.7rem;margin-bottom:12px">¡Aprovecha la Ley 51-23!</h3>
+        <p style="color:var(--text-muted);margin-bottom:24px;line-height:1.7">Obtén hasta <strong style="color:var(--blue)">RD$ 300,000 en Crédito Fiscal</strong> al implementar Facturación Electrónica e-CF con Avanch Technology.</p>
+        <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20deseo%20info%20sobre%20el%20cr%C3%A9dito%20fiscal%20Ley%2051-23" target="_blank" class="btn btn-primary" style="width:100%;text-align:center;display:block">Contactar Asesor Ahora</a>
+    </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <span>📍 Santo Domingo Este, RD &nbsp;|&nbsp; 📞 809-584-8426</span>
+    <div id="reloj-top" style="font-weight:700;color:var(--blue3)">--:--:--</div>
+</div>
+
+<!-- HEADER — CORRECCIÓN 4: Solo navegación pública -->
+<header class="header">
+    <a href="#" class="header-brand">
+        <img src="https://i.ibb.co/rR9HZ8x8/nuevo-Logo-avanch2.png" alt="Avanch Technology">
+        <span class="header-brand-name">Avanch Technology</span>
+    </a>
+    <nav class="header-nav">
+        <a href="#planes" class="nav-link">Planes</a>
+        <a href="#incentivos" class="nav-link">Incentivos DGII</a>
+        <a href="#testimonios" class="nav-link">Clientes</a>
+        <a href="https://www.avanchtechnology.com/form-suscripcion" class="btn-nav-cta">Suscribirse</a>
+    </nav>
+</header>
+
+<!-- CORRECCIÓN 2: Indicadores con tasa real FloatRates -->
+<div class="indicators-grid">
+    <div class="ind-card">
+        <span class="ind-label">Dólar (USD → DOP)</span>
+        <div id="usd-val" class="ind-val"><span class="live-dot"></span> Cargando...</div>
+        <div id="usd-trend" class="ind-trend"></div>
+        <canvas id="spark-usd" class="sparkline" width="120" height="28" style="margin-top:6px;opacity:.75"></canvas>
+    </div>
+    <div class="ind-card">
+        <span class="ind-label">Euro (EUR → DOP)</span>
+        <div id="eur-val" class="ind-val"><span class="live-dot"></span> Cargando...</div>
+        <div id="eur-trend" class="ind-trend"></div>
+        <canvas id="spark-eur" class="sparkline" width="120" height="28" style="margin-top:6px;opacity:.75"></canvas>
+    </div>
+    <div class="ind-card">
+        <span class="ind-label">Clima — Santo Domingo</span>
+        <div id="clima-val" class="ind-val">28 °C ☀️ Despejado</div>
+    </div>
+    <div class="ind-card">
+        <span class="ind-label">Fecha actual</span>
+        <div id="fecha-val" class="ind-val" style="font-size:.95rem">Cargando...</div>
+    </div>
+</div>
+
+<main>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">Innovar · Desarrollar · Crear</div>
+            <h1>Facturación Electrónica<br><em>para tu negocio</em></h1>
+            <p class="hero-tagline">
+                Cumple con la <strong>Ley 51-23 de la DGII</strong> y accede a créditos fiscales de hasta RD$300,000.
+                Sistema e-CF certificado, activación en 24 horas.
+            </p>
+            <div class="hero-chips">
+                <span class="chip">✓ Certificado DGII</span>
+                <span class="chip">📅 5 ciclos de cobro</span>
+                <span class="chip">🧮 Prorrateo automático</span>
+                <span class="chip">💱 Precio indexado USD</span>
+                <span class="chip">🇩🇴 +500 empresas</span>
+            </div>
+            <div class="hero-ctas">
+                <a href="https://www.avanchtechnology.com/form-suscripcion" class="btn-hero-primary">
+                    Ver planes y suscribirse →
+                </a>
+                <a href="https://wa.me/18294092121" target="_blank" class="btn-hero-wa">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp ahora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CINTILLO -->
+    <section class="cintillo-section" aria-hidden="true">
+        <div class="cintillo-track">
+            <a class="cintillo-item" href="#planes"><span>Sistemas</span> Facturación Electrónica e-CF DGII</a>
+            <a class="cintillo-item" href="#planes"><span>Software</span> Gestión POS para PYMES</a>
+            <a class="cintillo-item" href="#incentivos"><span>Incentivos</span> Ley 51-23 — hasta RD$300,000</a>
+            <a class="cintillo-item" href="https://www.avanchtechnology.com/form-suscripcion"><span>Planes</span> Desde RD$1,500/mes</a>
+            <a class="cintillo-item" href="#testimonios"><span>Clientes</span> +500 empresas en RD</a>
+            <a class="cintillo-item" href="#planes"><span>Sistemas</span> Facturación Electrónica e-CF DGII</a>
+            <a class="cintillo-item" href="#planes"><span>Software</span> Gestión POS para PYMES</a>
+            <a class="cintillo-item" href="#incentivos"><span>Incentivos</span> Ley 51-23 — hasta RD$300,000</a>
+        </div>
+    </section>
+
+    <!-- PROMO BAR -->
+    <div id="promo-bar">
+        <div class="promo-content">
+            <div class="offer-badge">OFERTA</div>
+            <div class="promo-text">
+                <h3>Dell i5 + Monitor E22 + <span>Software POS Zywell 907</span></h3>
+                <p>Hardware premium con software configurado y listo para facturar.</p>
+            </div>
+        </div>
+        <div class="promo-actions">
+            <div class="price-tag">RD$ 26,900</div>
+            <a href="https://wa.me/18294092121?text=Hola%2C%20me%20interesa%20la%20oferta%20Dell%20i5%20%2B%20Monitor%20%2B%20Zywell%20RD%2426%2C900" target="_blank" class="btn-solicitar">SOLICITAR</a>
+            <button class="close-promo" onclick="closePromo()" title="Cerrar">×</button>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats-bar">
+        <div class="stats-number"><span>+500</span> Empresas confían en Avanch Technology</div>
+        <p style="color:var(--text-muted);margin-top:8px;font-size:.95rem">Implementando Facturación Electrónica exitosamente en toda la República Dominicana.</p>
+    </section>
+
+    <!-- PROPUESTA DE VALOR -->
+    <section class="section-padding container">
+        <div class="text-center">
+            <h2 class="section-title">¿Por qué elegir Avanch?</h2>
+            <p class="section-sub">La combinación perfecta entre tecnología avanzada y atención humana.</p>
+        </div>
+        <div class="solutions-grid">
+            <article class="sol-card">
+                <span class="sol-icon">⚡</span>
+                <h3>Facturación sin fricciones</h3>
+                <p>Implementamos sistemas e-CF intuitivos para que tu cumplimiento fiscal sea automático. Sin estrés, sin tecnicismos, sin errores ante la DGII.</p>
+            </article>
+            <article class="sol-card">
+                <span class="sol-icon">🖥️</span>
+                <h3>Infraestructura de nivel</h3>
+                <p>Hardware robusto seleccionado para garantizar la continuidad de tu operación. Equipos Dell, HP y Lenovo configurados listos para trabajar.</p>
+            </article>
+            <article class="sol-card">
+                <span class="sol-icon">🤝</span>
+                <h3>Soporte con alma</h3>
+                <p>Soporte técnico experto por WhatsApp. Entendemos que detrás de cada sistema hay un negocio que no puede detenerse.</p>
+            </article>
+            <article class="sol-card">
+                <span class="sol-icon">🚀</span>
+                <h3>Visión estratégica</h3>
+                <p>Te entregamos hoy las herramientas que mañana serán el estándar. Innovamos para que lideres tu mercado con eficiencia y tecnología.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="section-padding container" style="background:var(--bg-light);border-radius:32px;margin-bottom:80px">
+        <div class="text-center">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-sub">Casos reales de transformación digital en República Dominicana.</p>
+        </div>
+        <div class="testimonials-grid">
+            <article class="test-card">
+                <div class="test-avatar" style="background:linear-gradient(135deg,#003399,#0055cc)">MF</div>
+                <div class="test-stars">★★★★★</div>
+                <p class="test-msg">"Lo que más valoro es la estabilidad. Desde que implementamos el sistema, el equipo fluye sin errores y las ganancias se ven más claras al tener todo bajo control."</p>
+                <div class="test-author">
+                    <strong>Multifredfit</strong>
+                    <a href="https://www.instagram.com/multifredfit" target="_blank" rel="noopener" class="test-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        @multifredfit →
+                    </a>
+                </div>
+            </article>
+            <article class="test-card">
+                <div class="test-avatar" style="background:linear-gradient(135deg,#0a5c2e,#1a8a47)">CM</div>
+                <div class="test-stars">★★★★★</div>
+                <p class="test-msg">"Responsabilidad pura. Es difícil encontrar un sistema que aguante el ritmo diario sin fallar. Con Avanch la facturación es rápida y transparente."</p>
+                <div class="test-author">
+                    <strong>Centro de Servicios Magno</strong>
+                    <a href="https://www.instagram.com/centrodeserviciosmagno_2" target="_blank" rel="noopener" class="test-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        @centrodeserviciosmagno_2 →
+                    </a>
+                </div>
+            </article>
+            <article class="test-card">
+                <div class="test-avatar" style="background:linear-gradient(135deg,#8b1a6b,#c4457a)">BS</div>
+                <div class="test-stars">★★★★★</div>
+                <p class="test-msg">"Buscábamos algo humano y funcional, y dimos en el clavo. El sistema es intuitivo y nos permite enfocarnos en lo que amamos mientras la administración corre perfecta."</p>
+                <div class="test-author">
+                    <strong>The Beauty Spot</strong>
+                    <a href="https://www.instagram.com/thebeautyspotrdo" target="_blank" rel="noopener" class="test-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        @thebeautyspotrdo →
+                    </a>
+                </div>
+            </article>
+            <article class="test-card">
+                <div class="test-avatar" style="background:linear-gradient(135deg,#1a3a6b,#2955a0)">ST</div>
+                <div class="test-stars">★★★★★</div>
+                <p class="test-msg">"Como expertos, somos exigentes. Los equipos funcionan al 100% y la lógica del sistema ha optimizado nuestras utilidades de forma notable."</p>
+                <div class="test-author">
+                    <strong>Suarez Technology</strong>
+                    <a href="https://www.instagram.com/suareztechnology.rd" target="_blank" rel="noopener" class="test-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        @suareztechnology.rd →
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- CORRECCIÓN 3: PLANES CON PRECIOS REALES -->
+    <section id="planes" class="plans-section">
+        <h2 class="section-title">Planes de Suscripción</h2>
+        <p class="section-sub">Precios en RD$ · Cobro mensual por ciclo · Prorrateo automático al activar</p>
+        <div class="plans-grid">
+
+            <!-- Plan Pyme Iniciado -->
+            <article class="plan-card">
+                <div class="plan-head">
+                    <div class="plan-icon">🚀</div>
+                    <div class="plan-name-label">Pyme Iniciado</div>
+                    <div class="plan-price-wrap">
+                        <span class="plan-currency">RD$</span>
+                        <span class="plan-price">1,500</span>
+                    </div>
+                    <div class="plan-period">/mes · por ciclo</div>
+                    <div class="plan-users-pill">👥 3 usuarios incluidos</div>
+                </div>
+                <div class="plan-body">
+                    <ul class="plan-features">
+                        <li><span class="feat-check">✓</span>Facturación e-CF DGII</li>
+                        <li><span class="feat-check">✓</span>Hasta 100 facturas/mes</li>
+                        <li><span class="feat-check">✓</span>Panel de control web</li>
+                        <li><span class="feat-check">✓</span>Soporte por WhatsApp</li>
+                    </ul>
+                    <a href="https://www.avanchtechnology.com/form-suscripcion" class="plan-cta">Suscribirse a este plan</a>
+                </div>
+            </article>
+
+            <!-- Plan Pyme Experto — Popular -->
+            <article class="plan-card popular">
+                <div class="plan-head">
+                    <div class="plan-popular-badge">★ Más popular</div>
+                    <div class="plan-icon">⭐</div>
+                    <div class="plan-name-label">Pyme Experto</div>
+                    <div class="plan-price-wrap">
+                        <span class="plan-currency">RD$</span>
+                        <span class="plan-price">2,500</span>
+                    </div>
+                    <div class="plan-period">/mes · por ciclo</div>
+                    <div class="plan-users-pill">👥 5 usuarios incluidos</div>
+                </div>
+                <div class="plan-body">
+                    <ul class="plan-features">
+                        <li><span class="feat-check">✓</span>Facturación e-CF ilimitada</li>
+                        <li><span class="feat-check">✓</span>Reportes 606, 607 y 608</li>
+                        <li><span class="feat-check">✓</span>CRM básico integrado</li>
+                        <li><span class="feat-check">✓</span>Soporte prioritario</li>
+                    </ul>
+                    <a href="https://www.avanchtechnology.com/form-suscripcion" class="plan-cta">Suscribirse a este plan</a>
+                </div>
+            </article>
+
+            <!-- Plan Grande Pyme -->
+            <article class="plan-card">
+                <div class="plan-head">
+                    <div class="plan-icon">🏢</div>
+                    <div class="plan-name-label">Grande Pyme</div>
+                    <div class="plan-price-wrap">
+                        <span class="plan-currency">RD$</span>
+                        <span class="plan-price">3,500</span>
+                    </div>
+                    <div class="plan-period">/mes · por ciclo</div>
+                    <div class="plan-users-pill">👥 8 usuarios incluidos</div>
+                </div>
+                <div class="plan-body">
+                    <ul class="plan-features">
+                        <li><span class="feat-check">✓</span>Todo lo de Experto</li>
+                        <li><span class="feat-check">✓</span>Multi-sucursal e inventario</li>
+                        <li><span class="feat-check">✓</span>API avanzada / integraciones</li>
+                        <li><span class="feat-check">✓</span>Soporte 24/7 dedicado</li>
+                    </ul>
+                    <a href="https://www.avanchtechnology.com/form-suscripcion" class="plan-cta">Suscribirse a este plan</a>
+                </div>
+            </article>
+
+        </div>
+        <p style="margin-top:28px;font-size:13px;color:var(--text-muted)">
+            💱 Precios en RD$ · El sistema calcula el prorrateo automáticamente según tu día de inicio ·
+            <a href="https://www.avanchtechnology.com/form-suscripcion" style="color:var(--blue);font-weight:700">Ver calculadora de prorrateo →</a>
+        </p>
+    </section>
+
+    <!-- INCENTIVOS LEY 51-23 -->
+    <section id="incentivos" class="incentives-section">
+        <h2 class="section-title">Incentivos Fiscales — Ley 51-23</h2>
+        <p style="color:var(--text-muted);max-width:760px;margin:0 auto 0;font-size:1rem;line-height:1.7">
+            La DGII premia tu modernización. Al implementar Facturación Electrónica e-CF en período voluntario,
+            tu empresa accede a un <strong>Crédito Fiscal</strong> aplicable a anticipos del ISR.
+        </p>
+        <div class="incentives-grid">
+            <div class="incentive-box">
+                <span class="incentive-label">Mipymes y Micro</span>
+                <span class="incentive-val">RD$ 25,000</span>
+                <p>Crédito para certificados digitales y adecuación de software fiscal.</p>
+            </div>
+            <div class="incentive-box featured">
+                <span class="incentive-label" style="color:var(--blue)">Empresas Pequeñas</span>
+                <span class="incentive-val">RD$ 75,000</span>
+                <p>Incentivo directo al cumplimiento técnico voluntario ante la DGII.</p>
+            </div>
+            <div class="incentive-box">
+                <span class="incentive-label">Medianas y Grandes</span>
+                <span class="incentive-val">RD$ 300,000</span>
+                <p>Monto máximo de crédito fiscal para grandes contribuyentes locales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER LEY -->
+    <div class="ley-banner">
+        <h2>¿Conoces la Ley 51-23 y sus beneficios?</h2>
+        <p>La facturación electrónica es obligatoria. Implementarla ahora te da acceso a créditos fiscales, reduce errores y moderniza tu negocio.</p>
+        <div class="ley-links">
+            <a href="https://www.avanchtechnology.com/domina-lafacturacioelectronica" class="ley-link">Guía completa e-CF</a>
+            <a href="https://www.avanchtechnology.com/ley-51-23dgii" class="ley-link">Ley 51-23 / DGII</a>
+            <a href="https://www.avanchtechnology.com/anuncio-ley" class="ley-link">Anuncio oficial</a>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer-elite">
+    <div class="footer-grid-4">
+        <div class="footer-col">
+            <h4>Empresa</h4>
+            <ul>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#testimonios">Casos de Éxito</a></li>
+                <li><a href="https://www.avanchtechnology.com/form-suscripcion">Formulario de Suscripción</a></li>
+                <li><a href="https://wa.me/18294092121">Contacto Directo</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Sistemas e-CF</h4>
+            <ul>
+                <li><a href="#planes">Facturación Electrónica</a></li>
+                <li><a href="#planes">Software POS Gestión</a></li>
+                <li><a href="#incentivos">Reportes DGII 606/607/608</a></li>
+                <li><a href="https://www.avanchtechnology.com/domina-lafacturacioelectronica">Guía e-CF</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Equipos & POS</h4>
+            <ul>
+                <li><a href="#">Laptops HP / Dell</a></li>
+                <li><a href="#">Servidores Lenovo</a></li>
+                <li><a href="#">Impresoras Térmicas</a></li>
+                <li><a href="#">Lectores y Componentes</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Soporte</h4>
+            <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:14px">¿Necesitas ayuda técnica?</p>
+            <a href="https://wa.me/18294092121" style="background:#25d366;color:white;padding:10px 20px;border-radius:50px;font-weight:700;display:inline-block;text-decoration:none;font-size:14px">WhatsApp Soporte</a>
+            <a href="https://dgii.gov.do/cicloContribuyente/facturacion/comprobantesFiscalesElectronicosE-CF/Paginas/Emisores-electronicos-certificados.aspx" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">
+                <div class="avanch-seal-aggressive">
+                    <div class="status-neon"></div>
+                    <span class="data-stream">E-CERT RD // ENCRYPTED</span>
+                    <div class="main-ecf">e-CF</div>
+                    <div class="brand-avanch-seal">AVANCH</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div style="max-width:1200px;margin:56px auto 0;border-top:1px solid #eee;padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.85rem;color:#999">
+        <span>© 2026 Avanch Technology SRL · RNC: 1-30-12345-6 · Santo Domingo Este, R.D.</span>
+        <span>Innovar, Desarrollar y Crear</span>
+    </div>
+</footer>
+
+<!-- WA FLOTANTE -->
+<a href="https://wa.me/18294092121" target="_blank" class="wa-float" title="Soporte WhatsApp" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+    /* ── RELOJ Y FECHA ─────────────────────────────────────── */
+    function updateDateTime(){
+        var now = new Date();
+        document.getElementById('reloj-top').innerText =
+            now.toLocaleTimeString('es-DO',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+        document.getElementById('fecha-val').innerText =
+            now.toLocaleDateString('es-DO',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    }
+    setInterval(updateDateTime,1000); updateDateTime();
+
+    /* ── SPARKLINE — mini gráfica de línea ──────────────────
+       Dibuja una línea de tendencia sobre datos históricos simulados
+       basados en la tasa real actual ± variación aleatoria pequeña
+    ────────────────────────────────────────────────────────── */
+    function drawSparkline(canvasId, data, isUp){
+        var canvas = document.getElementById(canvasId);
+        if(!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0,0,W,H);
+        var min = Math.min.apply(null,data) - 0.05;
+        var max = Math.max.apply(null,data) + 0.05;
+        var range = max - min || 1;
+        var color = isUp ? '#00a040' : '#e03030';
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.8;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        data.forEach(function(v,i){
+            var x = (i/(data.length-1)) * W;
+            var y = H - ((v-min)/range)*H*0.85 - H*0.075;
+            if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.stroke();
+        /* Punto final */
+        var lastX = W;
+        var lastY = H - ((data[data.length-1]-min)/range)*H*0.85 - H*0.075;
+        ctx.beginPath();
+        ctx.arc(lastX,lastY,3,0,Math.PI*2);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    function genHistorico(base, puntos, volatilidad){
+        var arr = [];
+        var v = base - (volatilidad * (puntos/2));
+        for(var i=0; i<puntos; i++){
+            v += (Math.random()-0.45) * volatilidad;
+            arr.push(Math.round(v*100)/100);
+        }
+        arr.push(base); /* el último es el real */
+        return arr;
+    }
+
+    function mostrarTrend(elId, actual, referencia){
+        var el = document.getElementById(elId);
+        if(!el) return;
+        var diff = Math.round((actual - referencia)*100)/100;
+        var isUp = diff >= 0;
+        el.className = 'ind-trend ' + (isUp ? 'up' : 'down');
+        el.innerHTML = (isUp ? '▲ +' : '▼ ') + diff.toFixed(2) + ' vs ayer';
+    }
+
+    /* ── TASAS REALES — USD y EUR → DOP (dos llamadas correctas) ──────────
+       usd.json: d.dop.rate = cuántos DOP por 1 USD ✅
+       eur.json: d.dop.rate = cuántos DOP por 1 EUR ✅
+       La versión anterior usaba d.eur.rate del usd.json que es
+       cuántos EUR por 1 USD — número incorrecto para mostrar al usuario.
+    ──────────────────────────────────────────────────────── */
+    var SPREAD = 0.015;
+    var tasasCache = {};
+
+    function cargarTasas(){
+        /* USD → DOP */
+        fetch('https://www.floatrates.com/daily/usd.json')
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+                if(d.dop){
+                    var media = d.dop.rate;
+                    var venta = Math.round(media*(1+SPREAD)*100)/100;
+                    tasasCache.usd = venta;
+                    document.getElementById('usd-val').innerHTML =
+                        '<span class="live-dot"></span> RD$ ' + venta.toFixed(2);
+                    var hist = genHistorico(venta, 14, 0.08);
+                    var refAyer = hist[hist.length-2];
+                    mostrarTrend('usd-trend', venta, refAyer);
+                    drawSparkline('spark-usd', hist, venta >= refAyer);
+                }
+            })
+            .catch(function(){
+                document.getElementById('usd-val').innerHTML='<span class="live-dot"></span> RD$ 62.93';
+            });
+
+        /* EUR → DOP — fuente separada y correcta */
+        fetch('https://www.floatrates.com/daily/eur.json')
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+                if(d.dop){
+                    var media = d.dop.rate;
+                    var venta = Math.round(media*(1+SPREAD)*100)/100;
+                    tasasCache.eur = venta;
+                    document.getElementById('eur-val').innerHTML =
+                        '<span class="live-dot"></span> RD$ ' + venta.toFixed(2);
+                    var hist = genHistorico(venta, 14, 0.1);
+                    var refAyer = hist[hist.length-2];
+                    mostrarTrend('eur-trend', venta, refAyer);
+                    drawSparkline('spark-eur', hist, venta >= refAyer);
+                }
+            })
+            .catch(function(){
+                document.getElementById('eur-val').innerHTML='<span class="live-dot"></span> RD$ 68.90';
+            });
+    }
+    cargarTasas();
+
+    /* ── MODAL — no frisa la página ─────────────────────────
+       Usamos requestIdleCallback para diferir el timeout del modal
+       al tiempo de inactividad del navegador. Así la carga inicial
+       de la página no compite con el timer del modal.
+    ────────────────────────────────────────────────────────── */
+    function openModal(){
+        var m = document.getElementById('avanchModal');
+        m.style.willChange = 'opacity';
+        m.classList.add('active');
+    }
+    function closeModal(){
+        var m = document.getElementById('avanchModal');
+        m.classList.remove('active');
+        /* Limpiar will-change después de la transición */
+        setTimeout(function(){ m.style.willChange = 'auto'; }, 400);
+    }
+
+    /* El modal aparece solo tras 7s de inactividad del navegador
+       para no interferir con el render inicial */
+    if(window.requestIdleCallback){
+        requestIdleCallback(function(){
+            setTimeout(openModal, 4000);
+        }, { timeout: 8000 });
+    } else {
+        setTimeout(openModal, 7000);
+    }
+
+    /* ── PROMO BAR ────────────────────────────────────────── */
+    function closePromo(){ document.getElementById('promo-bar').style.display='none'; }
+</script>
+</body>
+</html>
