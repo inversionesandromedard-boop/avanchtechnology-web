@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Avanch Technology — Ecosistema tecnológico inteligente. Facturación electrónica, inversión financiera, dashboard 360° y desarrollo de aplicaciones a medida." />
+  <meta property="og:title" content="Avanch Technology" />
+  <meta property="og:description" content="Tecnología que trabaja para ti. Facturación, inversión, automatización y desarrollo — todo en un ecosistema." />
+  <meta property="og:url" content="https://www.avanchtechnology.com" />
+  <meta property="og:image" content="https://www.avanchtechnology.com/assets/og-image.png" />
+  <title>Avanch Technology — Ecosistema Tecnológico Inteligente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#08080f;--surface:#0f0f1a;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.11);
+      --text:#eeedf8;--muted:#7c7a9a;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+      --factura:#003399;--factura-light:#4477ff;--invest:#5b5bff;--invest-light:#8b8bff;
+      --app:#06d6a0;--app-light:#4eedc4;--studio:#f4a261;--studio-light:#f7c59f;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(91,91,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,91,255,0.03) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);background:rgba(8,8,15,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--invest),#8b5cf6);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#fff}
+    .nav-name{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--text);letter-spacing:-0.3px}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:7px;transition:color .2s,background .2s}
+    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+    .nav-cta{background:var(--invest)!important;color:#fff!important;font-weight:500!important;padding:7px 16px!important;border-radius:8px!important}
+    .nav-cta:hover{background:#4a4aee!important;transform:translateY(-1px)}
+    @media(max-width:600px){.nav-links a:not(.nav-cta){display:none}}
+    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px clamp(1.5rem,6vw,5rem) 80px;overflow:hidden}
+    .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+    .orb1{width:500px;height:500px;background:rgba(91,91,255,0.12);top:10%;left:50%;transform:translateX(-50%)}
+    .orb2{width:300px;height:300px;background:rgba(6,214,160,0.07);bottom:20%;right:10%}
+    .orb3{width:250px;height:250px;background:rgba(0,51,153,0.1);bottom:20%;left:10%}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(91,91,255,0.1);border:1px solid rgba(91,91,255,0.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:500;color:#9d9dff;margin-bottom:2rem;animation:fadeUp .7s ease both}
+    .eyebrow-dot{width:6px;height:6px;background:var(--app);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .hero h1{font-family:var(--font-display);font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:var(--text);max-width:860px;animation:fadeUp .7s .08s ease both}
+    .word-invest{color:var(--invest-light)}.word-app{color:var(--app-light)}.word-factura{color:var(--factura-light)}
+    .hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--muted);max-width:520px;margin:1.5rem auto 0;font-weight:300;line-height:1.75;animation:fadeUp .7s .16s ease both}
+    .hero-actions{display:flex;gap:10px;margin-top:2.5rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .24s ease both}
+    .btn-primary{background:var(--invest);color:#fff;padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(91,91,255,0.3)}
+    .btn-primary:hover{background:#4a4aee;transform:translateY(-2px);box-shadow:0 0 40px rgba(91,91,255,0.5)}
+    .btn-ghost{background:transparent;color:var(--text);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:400;text-decoration:none;border:1px solid var(--border2);transition:border-color .2s,background .2s,transform .15s}
+    .btn-ghost:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+    .products{position:relative;z-index:1;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);max-width:1200px;margin:0 auto}
+    .products-header{text-align:center;margin-bottom:4rem}
+    .section-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--invest);margin-bottom:1rem;display:block}
+    .section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--text)}
+    .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media(max-width:700px){.products-grid{grid-template-columns:1fr}}
+    .product-card{position:relative;border-radius:20px;padding:2.5rem;border:1px solid var(--border);background:var(--surface);overflow:hidden;text-decoration:none;display:block;transition:transform .25s,border-color .25s,box-shadow .25s}
+    .product-card::before{content:'';position:absolute;inset:0;opacity:1;transition:opacity .3s}
+    .product-card:hover{transform:translateY(-4px)}
+    .card-factura{border-color:rgba(0,51,153,0.3)}.card-factura::before{background:linear-gradient(135deg,rgba(0,51,153,0.1),transparent)}.card-factura:hover{border-color:rgba(68,119,255,0.5);box-shadow:0 20px 60px rgba(0,51,153,0.2)}
+    .card-invest{border-color:rgba(91,91,255,0.3)}.card-invest::before{background:linear-gradient(135deg,rgba(91,91,255,0.1),transparent)}.card-invest:hover{border-color:rgba(91,91,255,0.5);box-shadow:0 20px 60px rgba(91,91,255,0.2)}
+    .card-app{border-color:rgba(6,214,160,0.2)}.card-app::before{background:linear-gradient(135deg,rgba(6,214,160,0.08),transparent)}.card-app:hover{border-color:rgba(6,214,160,0.4);box-shadow:0 20px 60px rgba(6,214,160,0.15)}
+    .card-studio{border-color:rgba(244,162,97,0.2)}.card-studio::before{background:linear-gradient(135deg,rgba(244,162,97,0.08),transparent)}.card-studio:hover{border-color:rgba(244,162,97,0.4);box-shadow:0 20px 60px rgba(244,162,97,0.15)}
+    .card-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:1.25rem}
+    .tag-factura{background:rgba(0,51,153,0.2);color:var(--factura-light)}.tag-invest{background:rgba(91,91,255,0.2);color:var(--invest-light)}.tag-app{background:rgba(6,214,160,0.15);color:var(--app-light)}.tag-studio{background:rgba(244,162,97,0.15);color:var(--studio-light)}
+    .card-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:1.5rem}
+    .icon-factura{background:rgba(0,51,153,0.2)}.icon-invest{background:rgba(91,91,255,0.2)}.icon-app{background:rgba(6,214,160,0.12)}.icon-studio{background:rgba(244,162,97,0.12)}
+    .card-title{font-family:var(--font-display);font-size:1.35rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:.5rem}
+    .card-desc{font-size:.9rem;color:var(--muted);line-height:1.65;font-weight:300;margin-bottom:1.5rem}
+    .card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.75rem}
+    .feat-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid var(--border)}
+    .card-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;text-decoration:none;transition:gap .2s}
+    .card-cta:hover{gap:10px}
+    .cta-factura{color:var(--factura-light)}.cta-invest{color:var(--invest-light)}.cta-app{color:var(--app-light)}.cta-studio{color:var(--studio-light)}
+    .card-status{position:absolute;top:1.5rem;right:1.5rem;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+    .status-live{background:rgba(6,214,160,0.15);color:var(--app-light)}.status-dev{background:rgba(91,91,255,0.15);color:var(--invest-light)}.status-soon{background:rgba(244,162,97,0.15);color:var(--studio-light)}
+    .values-section{position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(4rem,8vw,6rem) clamp(1.5rem,6vw,5rem)}
+    .values-inner{max-width:1100px;margin:0 auto}
+    .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3.5rem}
+    .value-item{text-align:center}
+    .value-num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,var(--invest-light),var(--app-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+    .value-label{font-size:.85rem;color:var(--muted);font-weight:300;line-height:1.5}
+    .about-section{position:relative;z-index:1;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);max-width:1100px;margin:0 auto}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:3rem}}
+    .about-text h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:1.25rem}
+    .about-text p{font-size:.95rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
+    .pillars{display:flex;flex-direction:column;gap:1rem}
+    .pillar{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:border-color .25s}
+    .pillar:hover{border-color:var(--border2)}
+    .pillar-icon{width:40px;height:40px;border-radius:10px;background:rgba(91,91,255,0.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .pillar h4{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+    .pillar p{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300}
+    .cta-section{position:relative;z-index:1;text-align:center;padding:clamp(5rem,10vw,8rem) clamp(1.5rem,6vw,5rem);overflow:hidden}
+    .cta-glow{position:absolute;width:700px;height:400px;background:radial-gradient(ellipse,rgba(91,91,255,0.12),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+    .cta-section h2{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,4rem);font-weight:800;letter-spacing:-0.04em;line-height:1.05;color:var(--text);max-width:650px;margin:0 auto 1.5rem;position:relative;z-index:1}
+    .cta-section p{font-size:1rem;color:var(--muted);max-width:440px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7;position:relative;z-index:1}
+    .cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+    footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+    .footer-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--invest),#8b5cf6);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:12px;color:#fff}
+    .footer-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--muted)}
+    .footer-legal{font-size:11px;color:var(--muted);opacity:.5}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;opacity:.6}
+    .footer-links a:hover{color:var(--text);opacity:1}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">AT</div>
+      <span class="nav-name">Avanch Technology</span>
+    </a>
+    <div class="nav-links">
+      <a href="#productos">Productos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="https://wa.me/18294092121" target="_blank">Contacto</a>
+      <a href="https://factura.avanchtechnology.com" class="nav-cta">Facturación e-CF</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-orb orb3"></div>
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Ecosistema tecnológico · Santo Domingo, RD</div>
+    <h1>Tecnología que<br /><span class="word-invest">trabaja</span><span class="word-app"> para</span><span class="word-factura"> ti.</span></h1>
+    <p class="hero-sub">Facturación electrónica, inversión inteligente, control financiero 360° y desarrollo de aplicaciones — todo bajo un mismo ecosistema diseñado para crecer contigo.</p>
+    <div class="hero-actions">
+      <a href="#productos" class="btn-primary">Ver todos los productos</a>
+      <a href="https://wa.me/18294092121" target="_blank" class="btn-ghost">Hablar con el equipo</a>
+    </div>
+  </div>
+
+  <section id="productos" class="products">
+    <div class="products-header reveal">
+      <span class="section-eyebrow">Nuestros productos</span>
+      <h2 class="section-title">Un ecosistema.<br />Cuatro soluciones.</h2>
+    </div>
+    <div class="products-grid">
+      <a href="https://factura.avanchtechnology.com" class="product-card card-factura reveal">
+        <span class="card-status status-live">Activo</span>
+        <span class="card-tag tag-factura">Facturación electrónica</span>
+        <div class="card-icon icon-factura">🧾</div>
+        <div class="card-title">Avanch Factura</div>
+        <p class="card-desc">Sistema de facturación electrónica e-CF homologado por la DGII. Cumple la Ley 51-23 y accede a créditos fiscales de hasta RD$300,000.</p>
+        <div class="card-features">
+          <span class="feat-pill">e-CF DGII</span><span class="feat-pill">Ley 51-23</span>
+          <span class="feat-pill">Reportes 606/607/608</span><span class="feat-pill">Desde RD$1,500/mes</span>
+        </div>
+        <span class="card-cta cta-factura">Implementar ahora →</span>
+      </a>
+      <a href="#" class="product-card card-invest reveal">
+        <span class="card-status status-dev">En desarrollo</span>
+        <span class="card-tag tag-invest">Motor financiero</span>
+        <div class="card-icon icon-invest">📈</div>
+        <div class="card-title">Avanch Invest</div>
+        <p class="card-desc">Motor de inversión inteligente con IA. Cada centavo que entra es analizado y redistribuido para maximizar rendimientos de forma automática.</p>
+        <div class="card-features">
+          <span class="feat-pill">IA financiera</span><span class="feat-pill">Rendimientos automáticos</span>
+          <span class="feat-pill">Transparencia total</span><span class="feat-pill">B2B2C</span>
+        </div>
+        <span class="card-cta cta-invest">Acceso anticipado →</span>
+      </a>
+      <a href="#" class="product-card card-app reveal">
+        <span class="card-status status-dev">En desarrollo</span>
+        <span class="card-tag tag-app">Control financiero</span>
+        <div class="card-icon icon-app">🏦</div>
+        <div class="card-title">Avanch App</div>
+        <p class="card-desc">Dashboard financiero 360°. Panel unificado con todos tus movimientos, proyecciones y métricas en tiempo real — desde cualquier dispositivo.</p>
+        <div class="card-features">
+          <span class="feat-pill">Tiempo real</span><span class="feat-pill">Multi-empresa</span>
+          <span class="feat-pill">Reportes automáticos</span><span class="feat-pill">iOS & Android</span>
+        </div>
+        <span class="card-cta cta-app">Notificarme →</span>
+      </a>
+      <a href="#" class="product-card card-studio reveal">
+        <span class="card-status status-soon">Próximamente</span>
+        <span class="card-tag tag-studio">Desarrollo de apps</span>
+        <div class="card-icon icon-studio">⚡</div>
+        <div class="card-title">Avanch Studio</div>
+        <p class="card-desc">Desarrollo de aplicaciones a medida para empresas. Soluciones digitales construidas con tecnología open source ética y escalable.</p>
+        <div class="card-features">
+          <span class="feat-pill">Apps a medida</span><span class="feat-pill">Open source</span>
+          <span class="feat-pill">Web & Mobile</span><span class="feat-pill">B2B</span>
+        </div>
+        <span class="card-cta cta-studio">Conocer más →</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="values-section">
+    <div class="values-inner">
+      <div class="products-header reveal" style="margin-bottom:0">
+        <span class="section-eyebrow">Por qué Avanch</span>
+        <h2 class="section-title">Números que hablan.</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-item reveal"><div class="value-num">4</div><div class="value-label">Productos en el ecosistema</div></div>
+        <div class="value-item reveal"><div class="value-num">360°</div><div class="value-label">Control financiero unificado</div></div>
+        <div class="value-item reveal"><div class="value-num">RD$300K</div><div class="value-label">Crédito fiscal disponible</div></div>
+        <div class="value-item reveal"><div class="value-num">24h</div><div class="value-label">Tiempo de activación e-CF</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="nosotros" class="about-section">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="section-eyebrow">Quiénes somos</span>
+        <h2>Construido en RD.<br />Pensado para crecer.</h2>
+        <p>Avanch Technology nace en Santo Domingo con una visión clara: crear tecnología financiera honesta, transparente y autosostenible para empresas y personas dominicanas.</p>
+        <p>Cada producto está diseñado para funcionar solo y mejor en conjunto — un ecosistema que crece contigo desde el primer centavo hasta la escala regional.</p>
+        <div style="margin-top:2rem"><a href="https://wa.me/18294092121" target="_blank" class="btn-primary" style="display:inline-flex">Hablar con el equipo →</a></div>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar"><div class="pillar-icon">🤝</div><div><h4>Honestidad radical</h4><p>Cada cifra es pública, auditable y verificable. Sin letra pequeña.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">⚖️</div><div><h4>Responsabilidad</h4><p>Cada decisión tiene un responsable y un registro permanente.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">🔄</div><div><h4>Reinversión constante</h4><p>El crecimiento está codificado en el modelo. No depende de nadie.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">🛡️</div><div><h4>Cumplimiento legal</h4><p>Cada línea de código alineada con el marco regulatorio vigente.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="cta-glow"></div>
+    <h2 class="reveal">¿Listo para empezar?</h2>
+    <p class="reveal">El primer paso es la facturación electrónica — obligatoria en RD y con créditos fiscales disponibles ahora.</p>
+    <div class="cta-actions reveal">
+      <a href="https://factura.avanchtechnology.com" class="btn-primary">Implementar facturación e-CF</a>
+      <a href="https://wa.me/18294092121" target="_blank" class="btn-ghost">Hablar por WhatsApp</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo">
+      <div class="footer-mark">AT</div>
+      <span class="footer-name">Avanch Technology</span>
+    </a>
+    <div class="footer-links">
+      <a href="https://factura.avanchtechnology.com">Factura</a>
+      <a href="#">Invest</a><a href="#">App</a><a href="#">Studio</a>
+      <a href="https://wa.me/18294092121">WhatsApp</a>
+    </div>
+    <div class="footer-legal">© 2026 Inversiones Avanch Technology S.R.L. · RNC en proceso de registro</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
