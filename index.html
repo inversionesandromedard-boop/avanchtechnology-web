@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía completa de Facturación Electrónica e-CF en República Dominicana. Todo lo que necesitas saber sobre la Ley 51-23, DGII y cómo implementar tu sistema hoy.">
+  <meta name="keywords" content="Facturación Electrónica, e-CF, DGII, Ley 51-23, República Dominicana, crédito fiscal">
+  <meta property="og:title" content="Facturación Electrónica e-CF en RD | Avanch Technology">
+  <meta property="og:description" content="Cumple la Ley 51-23 y accede a créditos fiscales de hasta RD$300,000. Sistema e-CF certificado DGII.">
+  <meta property="og:url" content="https://factura.avanchtechnology.com">
+  <meta property="og:image" content="https://factura.avanchtechnology.com/assets/og-image.png">
+  <meta property="og:type" content="website">
+  <title>Facturación Electrónica e-CF en RD | Avanch Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root{--blue:#003399;--blue2:#0044cc;--blue3:#e8eeff;--blue4:#f0f4ff;--dark:#020b24;--txt:#1a1a2e;--muted:#6b7280;--white:#fff;--bg:#f4f5f9;--green:#00c853;--gold:#ffc107}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Outfit',sans-serif;color:var(--txt);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),#00c8ff);z-index:9999;transition:width .1s linear;width:0%}
+
+    /* NAV */
+    nav{position:fixed;top:3px;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .nav-brand img{height:32px}
+    .nav-brand span{font-weight:800;font-size:1.1rem;color:var(--blue)}
+    .nav-links{display:flex;gap:6px;align-items:center}
+    .nav-links a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:8px;transition:all .2s}
+    .nav-links a:hover{color:var(--blue);background:var(--blue3)}
+    .nav-cta{background:var(--blue)!important;color:#fff!important;border-radius:50px!important;padding:9px 20px!important}
+    .nav-cta:hover{background:var(--blue2)!important;transform:translateY(-1px)}
+    .nav-back{font-size:11px;color:var(--muted)!important;border:1px solid #eee!important;border-radius:20px!important}
+
+    /* TICKER */
+    .ticker{background:var(--dark);padding:8px 0;overflow:hidden;margin-top:75px}
+    .ticker-inner{display:flex;gap:3rem;animation:ticker 30s linear infinite;white-space:nowrap;width:max-content}
+    .ticker-item{font-size:12px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:8px}
+    .ticker-item .val{color:#00c8ff;font-weight:700}
+    .ticker-item .lbl{color:rgba(255,255,255,.5)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* TOC */
+    #toc{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:8px}
+    .toc-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,51,153,.2);cursor:pointer;transition:all .3s;position:relative}
+    .toc-dot.active{background:var(--blue);transform:scale(1.4)}
+    .toc-dot:hover::after{content:attr(data-label);position:absolute;right:18px;top:50%;transform:translateY(-50%);background:var(--dark);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;background:linear-gradient(145deg,#020b24 0%,#001a5c 40%,#003399 70%,#0044cc 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px;position:relative;overflow:hidden}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px}
+    .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,68,204,.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+    .hero-content{position:relative;z-index:2;max-width:780px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:50px;margin-bottom:28px;backdrop-filter:blur(4px)}
+    .hero-badge-dot{width:6px;height:6px;background:#00c853;border-radius:50%;animation:pulse 2s infinite}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,6vw,4rem);color:#fff;line-height:1.1;margin-bottom:20px}
+    .hero h1 em{font-style:italic;color:rgba(255,255,255,.6)}
+    .hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,.72);line-height:1.7;max-width:600px;margin:0 auto 40px}
+    .hero-sub strong{color:#fff;font-weight:700}
+    .hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+    .hstat{text-align:center}
+    .hstat-n{font-size:2rem;font-weight:900;color:#fff;line-height:1}
+    .hstat-l{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+    .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--blue);font-weight:800;font-size:14px;padding:16px 32px;border-radius:50px;text-decoration:none;box-shadow:0 6px 24px rgba(0,0,0,.2);transition:all .22s}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-weight:700;font-size:14px;padding:16px 32px;border-radius:50px;text-decoration:none;border:1px solid rgba(255,255,255,.25);transition:all .22s}
+    .btn-outline:hover{background:rgba(255,255,255,.2);transform:translateY(-3px)}
+    .scroll-hint{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:11px;letter-spacing:1px}
+    .scroll-arrow{width:24px;height:24px;border-right:2px solid rgba(255,255,255,.3);border-bottom:2px solid rgba(255,255,255,.3);transform:rotate(45deg);animation:bounce 2s infinite}
+
+    /* SECTIONS */
+    section{padding:96px 5%;position:relative}
+    .container{max-width:1100px;margin:0 auto}
+    .section-tag{display:inline-block;background:var(--blue3);color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+    .section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--dark);margin-bottom:14px;line-height:1.15}
+    .section-sub{color:var(--muted);font-size:1.05rem;max-width:640px;line-height:1.7;margin-bottom:56px}
+
+    /* QUE ES */
+    #que-es{background:var(--white)}
+    .qe-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .qe-card-main{background:linear-gradient(145deg,#001a5c,#003399);border-radius:24px;padding:36px;color:#fff;box-shadow:0 24px 60px rgba(0,26,92,.25)}
+    .qe-card-main h3{font-family:'DM Serif Display',serif;font-size:1.6rem;margin-bottom:16px}
+    .qe-card-main p{color:rgba(255,255,255,.7);font-size:14px;line-height:1.7}
+    .qe-card-float{position:absolute;background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.1);border:1px solid #eee;display:flex;align-items:center;gap:12px}
+    .qe-card-float.top-right{top:-20px;right:-20px}
+    .qe-card-float.bottom-left{bottom:-20px;left:-20px}
+    .qe-visual{position:relative}
+    .qef-icon{width:40px;height:40px;border-radius:12px;background:var(--blue3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .qef-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+    .qef-val{font-size:18px;font-weight:800;color:var(--blue)}
+    .qe-points{display:flex;flex-direction:column;gap:20px}
+    .qe-point{display:flex;gap:16px;align-items:flex-start}
+    .qe-point-icon{width:44px;height:44px;border-radius:14px;background:var(--blue3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .qe-point h4{font-size:15px;font-weight:800;color:var(--dark);margin-bottom:4px}
+    .qe-point p{font-size:13px;color:var(--muted);line-height:1.6}
+
+    /* LEY */
+    #ley{background:var(--bg)}
+    .ley-timeline{position:relative;padding-left:32px}
+    .ley-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--blue),#0055cc)}
+    .ley-step{position:relative;margin-bottom:40px}
+    .ley-step::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 3px var(--blue3)}
+    .ley-step h4{font-size:15px;font-weight:800;color:var(--dark);margin-bottom:6px}
+    .ley-step p{font-size:13px;color:var(--muted);line-height:1.7}
+    .lc-card{background:#fff;border-radius:18px;padding:24px;text-align:center;border:2px solid var(--blue3);transition:all .3s}
+    .lc-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,51,153,.1)}
+    .lc-card.featured{background:linear-gradient(145deg,#001a5c,var(--blue));border-color:transparent}
+    .lc-tipo{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px}
+    .lc-card.featured .lc-tipo{color:rgba(255,255,255,.6)}
+    .lc-monto{font-size:1.6rem;font-weight:900;color:var(--blue)}
+    .lc-card.featured .lc-monto{color:#fff;font-size:1.8rem}
+    .lc-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+    .lc-card.featured .lc-desc{color:rgba(255,255,255,.6)}
+
+    /* DOCS */
+    #documentos{background:var(--white)}
+    .docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .doc-card{border-radius:20px;overflow:hidden;border:1px solid #eee;transition:all .3s}
+    .doc-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,51,153,.1);border-color:var(--blue3)}
+    .doc-head{padding:24px;background:linear-gradient(135deg,#001a5c,#003399);color:#fff}
+    .doc-code{font-size:28px;font-weight:900;line-height:1;margin-bottom:6px}
+    .doc-name{font-size:12px;color:rgba(255,255,255,.7);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+    .doc-body{padding:20px;background:#fff}
+    .doc-body p{font-size:13px;color:var(--muted);line-height:1.6}
+    .doc-tag{display:inline-block;margin-top:12px;background:var(--blue3);color:var(--blue);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+    /* PROCESO */
+    #proceso{background:var(--bg)}
+    .proceso-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+    .proceso-steps::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--blue),#0055cc);z-index:0}
+    .ps{text-align:center;position:relative;z-index:1}
+    .ps-num{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#001a5c,var(--blue));color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 24px rgba(0,51,153,.25);border:4px solid #fff}
+    .ps h4{font-size:13px;font-weight:800;color:var(--dark);margin-bottom:6px}
+    .ps p{font-size:11px;color:var(--muted);line-height:1.5;padding:0 8px}
+
+    /* TESTIMONIOS CARRUSEL */
+    #testimonios{background:var(--white)}
+    .carousel-wrap{overflow:hidden;position:relative}
+    .carousel-track{display:flex;gap:24px;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    .test-card{min-width:320px;flex-shrink:0;background:#fff;border-radius:20px;padding:28px;border:1px solid #eee;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .test-stars{color:#ffc107;font-size:16px;margin-bottom:12px;letter-spacing:2px}
+    .test-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;font-style:italic}
+    .test-author{display:flex;align-items:center;gap:12px}
+    .test-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#0055cc);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0}
+    .test-name{font-size:14px;font-weight:800;color:var(--dark)}
+    .test-handle{font-size:12px;color:var(--blue)}
+    .carousel-controls{display:flex;justify-content:center;gap:12px;margin-top:32px}
+    .carousel-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--blue3);background:#fff;color:var(--blue);font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+    .carousel-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .carousel-dots{display:flex;gap:8px;align-items:center}
+    .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--blue3);cursor:pointer;transition:all .3s}
+    .carousel-dot.active{background:var(--blue);width:24px;border-radius:4px}
+
+    /* PLANES */
+    #planes{background:var(--bg)}
+    .planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .plan-card{background:#fff;border-radius:24px;padding:32px;border:2px solid var(--blue3);transition:all .3s;position:relative}
+    .plan-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,51,153,.1)}
+    .plan-card.featured{border-color:var(--blue);box-shadow:0 12px 40px rgba(0,51,153,.15)}
+    .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:11px;font-weight:800;padding:5px 16px;border-radius:20px;white-space:nowrap}
+    .plan-icon{font-size:2rem;margin-bottom:16px}
+    .plan-name{font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:8px}
+    .plan-price{margin-bottom:8px}
+    .plan-currency{font-size:14px;font-weight:700;color:var(--blue);vertical-align:top;margin-top:8px;display:inline-block}
+    .plan-amount{font-size:3rem;font-weight:900;color:var(--blue);line-height:1}
+    .plan-period{font-size:13px;color:var(--muted)}
+    .plan-users{font-size:12px;color:var(--muted);margin-bottom:20px}
+    .plan-features{list-style:none;margin-bottom:28px}
+    .plan-features li{font-size:13px;color:var(--txt);padding:6px 0;border-bottom:1px solid #f0f0f5;display:flex;align-items:center;gap:8px}
+    .plan-features li:last-child{border-bottom:none}
+    .plan-features li::before{content:"✓";color:var(--green);font-weight:900}
+    .plan-cta{display:block;text-align:center;background:var(--blue);color:#fff;font-weight:800;font-size:14px;padding:14px;border-radius:12px;text-decoration:none;transition:all .2s}
+    .plan-cta:hover{background:var(--blue2);transform:translateY(-2px)}
+    .plan-card.featured .plan-cta{background:linear-gradient(135deg,#001a5c,var(--blue))}
+    .prorate-info{background:#fff;border:1.5px solid var(--blue3);border-radius:16px;padding:20px 24px;margin-top:32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .prorate-info span{font-size:28px}
+    .prorate-info p{font-size:13px;color:var(--muted);line-height:1.6;flex:1}
+    .prorate-info strong{color:var(--dark)}
+
+    /* FAQ */
+    #faq{background:var(--white)}
+    .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+    .faq-item{border-radius:16px;border:1.5px solid #eee;overflow:hidden;transition:all .3s}
+    .faq-item.open{border-color:var(--blue);box-shadow:0 6px 24px rgba(0,51,153,.08)}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;cursor:pointer;font-weight:700;font-size:15px;color:var(--dark);background:#fff;user-select:none}
+    .faq-q:hover{background:var(--blue4)}
+    .faq-icon{width:28px;height:28px;border-radius:50%;background:var(--blue3);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .3s}
+    .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--blue);color:#fff}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s}
+    .faq-item.open .faq-a{max-height:300px;padding:0 24px 22px}
+    .faq-a p{font-size:14px;color:var(--muted);line-height:1.7}
+
+    /* COMPARATIVA */
+    #comparativa{background:var(--bg)}
+    .comp-table{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06);border:1px solid #eee}
+    .comp-head{display:grid;grid-template-columns:2fr 1fr 1fr;background:linear-gradient(135deg,#001a5c,#003399)}
+    .comp-head div{padding:20px 24px;color:#fff;font-weight:800;font-size:13px}
+    .comp-head div:not(:first-child){text-align:center}
+    .comp-head .highlight-col{background:rgba(255,255,255,.15);position:relative}
+    .comp-best{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:#1a1a00;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:3px 12px;border-radius:0 0 8px 8px}
+    .comp-row{display:grid;grid-template-columns:2fr 1fr 1fr;border-bottom:1px solid #f0f0f5}
+    .comp-row:last-child{border-bottom:none}
+    .comp-row div{padding:16px 24px;font-size:13px;display:flex;align-items:center}
+    .comp-row div:not(:first-child){justify-content:center}
+    .comp-row .feature{color:var(--muted);font-weight:500}
+    .comp-row .highlight-col{background:#f8f9ff}
+    .check{color:#00a040;font-size:18px;font-weight:900}
+    .cross{color:#ddd;font-size:18px}
+    .comp-price{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--blue4)}
+    .comp-price div{padding:20px 24px;font-weight:800}
+    .comp-price .highlight-col{background:var(--blue3);color:var(--blue);font-size:1.1rem}
+
+    /* CTA FINAL */
+    #cta-final{background:linear-gradient(145deg,#020b24,#001a5c,#003399);padding:100px 5%;text-align:center;position:relative;overflow:hidden}
+    .cta-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.04)}
+    .cta-orb1{width:400px;height:400px;top:-100px;right:-100px}
+    .cta-orb2{width:300px;height:300px;bottom:-80px;left:-60px}
+    .cta-content{position:relative;z-index:1;max-width:680px;margin:0 auto}
+    .cta-content h2{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:16px}
+    .cta-content p{color:rgba(255,255,255,.7);font-size:1.05rem;line-height:1.7;margin-bottom:40px}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;font-weight:800;font-size:14px;padding:16px 32px;border-radius:50px;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);transition:all .22s}
+    .btn-wa:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.5)}
+
+    /* FOOTER */
+    footer{background:#020b24;padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    footer .brand{display:flex;align-items:center;gap:12px}
+    footer img{height:28px;filter:brightness(0) invert(1);opacity:.7}
+    footer span{color:rgba(255,255,255,.4);font-size:12px}
+    .footer-links{display:flex;gap:20px}
+    .footer-links a{color:rgba(255,255,255,.4);font-size:12px;text-decoration:none;transition:.2s}
+    .footer-links a:hover{color:#fff}
+
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:28px;right:24px;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 26px rgba(37,211,102,.42);text-decoration:none;z-index:999;transition:all .2s}
+    .wa-float:hover{transform:scale(1.1)}
+
+    /* INCENTIVOS */
+    #incentivos{background:var(--white)}
+    .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .inc-card{background:var(--bg);border-radius:18px;padding:28px;text-align:center;border:1px solid #eee;transition:all .3s}
+    .inc-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,51,153,.1)}
+    .inc-tipo{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+    .inc-monto{font-size:2rem;font-weight:900;color:var(--blue);margin-bottom:8px}
+    .inc-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+    /* ANIMATIONS */
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .qe-grid,.docs-grid,.planes-grid,.inc-grid{grid-template-columns:1fr}
+      .proceso-steps{grid-template-columns:1fr 1fr;gap:24px}
+      .proceso-steps::before{display:none}
+      .comp-head,.comp-row,.comp-price{grid-template-columns:1.5fr 1fr 1fr}
+      #toc{display:none}
+      .nav-links a:not(.nav-cta):not(.nav-back){display:none}
+      .hero-stats{gap:20px}
+      .test-card{min-width:280px}
+    }
+    @media(max-width:480px){
+      .docs-grid{grid-template-columns:1fr}
+      .comp-head div,.comp-row div,.comp-price div{padding:12px 14px}
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.avanchtechnology.com" class="nav-brand">
+    <img src="./assets/nuevo-Logo-avanch2.png" alt="Avanch Technology">
+    <span>Avanch Technology</span>
+  </a>
+  <div class="nav-links">
+    <a href="https://www.avanchtechnology.com" class="nav-back">← Inicio</a>
+    <a href="#planes">Planes</a>
+    <a href="#incentivos">Incentivos DGII</a>
+    <a href="#testimonios">Clientes</a>
+    <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="nav-cta">Suscribirse</a>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker-track">
+    <span class="ticker-item"><span class="lbl">Dólar USD/DOP</span><span class="val" id="usd-val">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Euro EUR/DOP</span><span class="val" id="eur-val">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Clima SDQ</span><span class="val" id="clima-val">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Fecha</span><span class="val" id="fecha-val">Cargando...</span></span>
+    <span class="ticker-item">✦ Facturación electrónica e-CF certificada DGII</span>
+    <span class="ticker-item">✦ Ley 51-23 · Crédito fiscal hasta RD$300,000</span>
+    <span class="ticker-item">✦ Activación en 24 horas</span>
+    <span class="ticker-item"><span class="lbl">Dólar USD/DOP</span><span class="val" id="usd-val2">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Euro EUR/DOP</span><span class="val" id="eur-val2">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Clima SDQ</span><span class="val" id="clima-val2">Cargando...</span></span>
+    <span class="ticker-item"><span class="lbl">Fecha</span><span class="val" id="fecha-val2">Cargando...</span></span>
+    <span class="ticker-item">✦ Facturación electrónica e-CF certificada DGII</span>
+    <span class="ticker-item">✦ Ley 51-23 · Crédito fiscal hasta RD$300,000</span>
+    <span class="ticker-item">✦ Activación en 24 horas</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div id="toc">
+  <div class="toc-dot active" data-section="hero" data-label="Inicio" onclick="scrollTo('#hero')"></div>
+  <div class="toc-dot" data-section="que-es" data-label="Qué es e-CF" onclick="scrollTo('#que-es')"></div>
+  <div class="toc-dot" data-section="ley" data-label="Ley 51-23" onclick="scrollTo('#ley')"></div>
+  <div class="toc-dot" data-section="documentos" data-label="Documentos" onclick="scrollTo('#documentos')"></div>
+  <div class="toc-dot" data-section="proceso" data-label="Proceso" onclick="scrollTo('#proceso')"></div>
+  <div class="toc-dot" data-section="planes" data-label="Planes" onclick="scrollTo('#planes')"></div>
+  <div class="toc-dot" data-section="testimonios" data-label="Clientes" onclick="scrollTo('#testimonios')"></div>
+  <div class="toc-dot" data-section="faq" data-label="FAQ" onclick="scrollTo('#faq')"></div>
+  <div class="toc-dot" data-section="comparativa" data-label="Comparativa" onclick="scrollTo('#comparativa')"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Guía Oficial — Actualizada 2026</div>
+    <h1>Facturación Electrónica<br><em>en República Dominicana</em></h1>
+    <p class="hero-sub">Todo lo que necesitas saber sobre el sistema <strong>e-CF de la DGII</strong>, la Ley 51-23 y cómo tu empresa puede implementarlo hoy y acceder a créditos fiscales de hasta <strong>RD$300,000.</strong></p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">51-23</div><div class="hstat-l">Ley vigente</div></div>
+      <div class="hstat"><div class="hstat-n">RD$300K</div><div class="hstat-l">Crédito fiscal máx</div></div>
+      <div class="hstat"><div class="hstat-n">24h</div><div class="hstat-l">Activación</div></div>
+      <div class="hstat"><div class="hstat-n">e-CF</div><div class="hstat-l">Estándar DGII</div></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#planes" class="btn-primary">Ver planes →</a>
+      <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="btn-outline">Implementar ahora</a>
+    </div>
+    <div class="scroll-hint"><span>DESPLAZA PARA LEER</span><div class="scroll-arrow"></div></div>
+  </div>
+</section>
+
+<!-- QUE ES -->
+<section id="que-es">
+  <div class="container">
+    <div class="qe-grid reveal">
+      <div class="qe-visual">
+        <div class="qe-card-main">
+          <h3>El Comprobante Fiscal Electrónico</h3>
+          <p>El e-CF es el documento tributario digital que reemplaza los comprobantes fiscales en papel. Tiene la misma validez legal pero se genera, firma digitalmente y transmite a la DGII en tiempo real mediante XML.</p>
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+            <span style="background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px">✓ Válido ante DGII</span>
+            <span style="background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px">✓ Firma digital</span>
+            <span style="background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px">✓ Transmisión XML</span>
+          </div>
+        </div>
+        <div class="qe-card-float top-right">
+          <div class="qef-icon">📋</div>
+          <div><div class="qef-label">Documentos soportados</div><div class="qef-val">14 tipos</div></div>
+        </div>
+        <div class="qe-card-float bottom-left">
+          <div class="qef-icon">⚡</div>
+          <div><div class="qef-label">Transmisión</div><div class="qef-val">Tiempo real</div></div>
+        </div>
+      </div>
+      <div class="qe-points">
+        <div class="section-tag">Qué es</div>
+        <h2 class="section-title">El nuevo estándar de facturación en RD</h2>
+        <div class="qe-point"><div class="qe-point-icon">🔐</div><div><h4>Firma Digital Certificada</h4><p>Cada documento lleva una firma criptográfica que garantiza su autenticidad e integridad.</p></div></div>
+        <div class="qe-point"><div class="qe-point-icon">📡</div><div><h4>Transmisión Automática a DGII</h4><p>El sistema envía cada comprobante directamente al portal de la DGII en tiempo real.</p></div></div>
+        <div class="qe-point"><div class="qe-point-icon">💾</div><div><h4>Almacenamiento Legal 10 Años</h4><p>El Código Tributario exige conservar los documentos por 10 años. El sistema los almacena digitalmente.</p></div></div>
+        <div class="qe-point"><div class="qe-point-icon">📊</div><div><h4>Reportes 606, 607 y 608 Automáticos</h4><p>Genera automáticamente los reportes requeridos por la DGII cada mes.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEY -->
+<section id="ley">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Ley 51-23</div>
+      <h2 class="section-title">El calendario de implementación obligatoria</h2>
+      <p class="section-sub">La Ley 51-23 establece la facturación electrónica como obligatoria en República Dominicana.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+        <div class="ley-timeline">
+          <div class="ley-step"><h4>2023 — Promulgación de la Ley 51-23</h4><p>El Congreso Nacional aprueba la ley que establece el marco legal para la facturación electrónica en RD.</p></div>
+          <div class="ley-step"><h4>2024 — Período Voluntario con Incentivos</h4><p>Las empresas que implementan voluntariamente reciben créditos fiscales aplicables al ISR.</p></div>
+          <div class="ley-step"><h4>2025-2026 — Calendario por Sector</h4><p>La DGII implementa el calendario de obligatoriedad por categoría de contribuyente.</p></div>
+          <div class="ley-step"><h4>Obligatorio para todos — Próximamente</h4><p>Todas las empresas en RD deberán emitir facturas electrónicas bajo sanciones de la DGII.</p></div>
+        </div>
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:20px">Créditos Fiscales por Implementar Ahora</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+            <div class="lc-card"><div class="lc-tipo">Microempresas</div><div class="lc-monto">RD$25,000</div><div class="lc-desc">No calificados y micro contribuyentes</div></div>
+            <div class="lc-card"><div class="lc-tipo">Pequeños</div><div class="lc-monto">RD$75,000</div><div class="lc-desc">Pequeños contribuyentes DGII</div></div>
+            <div class="lc-card"><div class="lc-tipo">Medianos</div><div class="lc-monto">RD$200,000</div><div class="lc-desc">Medianos contribuyentes clasificados</div></div>
+            <div class="lc-card featured"><div class="lc-tipo">Grandes MiPymes</div><div class="lc-monto">RD$300,000</div><div class="lc-desc">Máximo crédito fiscal disponible</div></div>
+          </div>
+          <div style="background:#fff8e1;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px;font-size:13px;color:#7c5500;line-height:1.6"><strong>Importante:</strong> Los créditos fiscales solo aplican durante el período de voluntariedad.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTOS -->
+<section id="documentos">
+  <div class="container reveal">
+    <div class="section-tag">Documentos e-CF</div>
+    <h2 class="section-title">Los 14 tipos de comprobantes electrónicos</h2>
+    <p class="section-sub">El sistema e-CF soporta todos los documentos fiscales que tu empresa necesita.</p>
+    <div class="docs-grid">
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">31</div><div class="doc-name">Factura de Crédito Fiscal</div></div><div class="doc-body"><p>Para ventas a contribuyentes con RNC. Permite al comprador deducir el ITBIS pagado.</p><span class="doc-tag">Empresa a Empresa</span></div></div>
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">32</div><div class="doc-name">Factura de Consumo</div></div><div class="doc-body"><p>Para ventas al consumidor final. El tipo más común en retail y servicios al público.</p><span class="doc-tag">Empresa a Consumidor</span></div></div>
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">33</div><div class="doc-name">Nota de Débito</div></div><div class="doc-body"><p>Para aumentar el valor de una factura electrónica ya emitida.</p><span class="doc-tag">Ajuste positivo</span></div></div>
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">34</div><div class="doc-name">Nota de Crédito</div></div><div class="doc-body"><p>Para reducir o anular el valor de una factura electrónica. Cubre devoluciones y descuentos.</p><span class="doc-tag">Ajuste negativo</span></div></div>
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">41</div><div class="doc-name">Compras</div></div><div class="doc-body"><p>Para registrar las compras de bienes y servicios. Esencial para el reporte 607 de la DGII.</p><span class="doc-tag">Registro de compras</span></div></div>
+      <div class="doc-card"><div class="doc-head"><div class="doc-code">43</div><div class="doc-name">Gastos Menores</div></div><div class="doc-body"><p>Para gastos de hasta RD$250,000 sin comprobante fiscal formal.</p><span class="doc-tag">Gastos operativos</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="container reveal">
+    <div class="section-tag">Cómo implementar</div>
+    <h2 class="section-title">El proceso de certificación paso a paso</h2>
+    <p class="section-sub">Con Avanch Technology el proceso es rápido y acompañado. Nos encargamos de todo.</p>
+    <div class="proceso-steps">
+      <div class="ps"><div class="ps-num">1</div><h4>Solicitud y RNC</h4><p>Completamos el formulario FI-GDF-016 ante la DGII para iniciar la certificación.</p></div>
+      <div class="ps"><div class="ps-num">2</div><h4>Certificado Digital</h4><p>Gestionamos la adquisición de tu certificado digital y firma electrónica.</p></div>
+      <div class="ps"><div class="ps-num">3</div><h4>Pruebas e-CF</h4><p>Enviamos el set de pruebas XML al portal de certificación de la DGII.</p></div>
+      <div class="ps"><div class="ps-num">4</div><h4>Homologación</h4><p>La DGII valida y aprueba el sistema. Se obtiene la URL de producción.</p></div>
+      <div class="ps"><div class="ps-num">5</div><h4>Producción</h4><p>Tu empresa queda certificada y emite facturas electrónicas válidas ante la DGII.</p></div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f0f4ff,#e8f5e9);border:1.5px solid #c3d4ff;border-radius:18px;padding:28px 32px;margin-top:48px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="font-size:36px">⏱️</div>
+      <div style="flex:1"><h4 style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:6px">Tiempo estimado: 5 a 15 días hábiles</h4><p style="font-size:13px;color:var(--muted);line-height:1.6">Acompañamos cada paso para minimizar tiempos y errores en el proceso de certificación con la DGII.</p></div>
+      <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" style="background:var(--blue);color:#fff;font-weight:800;font-size:13px;padding:13px 24px;border-radius:12px;text-decoration:none;white-space:nowrap">Iniciar ahora →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="container reveal">
+    <div class="section-tag">Planes de suscripción</div>
+    <h2 class="section-title">Precios claros, sin sorpresas</h2>
+    <p class="section-sub">Precios en RD$ · Cobro mensual por ciclo · Prorrateo automático al activar</p>
+    <div class="planes-grid">
+      <div class="plan-card">
+        <div class="plan-icon">🚀</div>
+        <div class="plan-name">Pyme Iniciado</div>
+        <div class="plan-price"><span class="plan-currency">RD$</span><span class="plan-amount">1,500</span></div>
+        <div class="plan-period">/mes · por ciclo</div>
+        <div class="plan-users">👥 3 usuarios incluidos</div>
+        <ul class="plan-features">
+          <li>Facturación e-CF DGII</li>
+          <li>Hasta 100 facturas/mes</li>
+          <li>Panel de control web</li>
+          <li>Soporte por WhatsApp</li>
+        </ul>
+        <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="plan-cta">Suscribirse a este plan</a>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">★ Más popular</span>
+        <div class="plan-icon">⭐</div>
+        <div class="plan-name">Pyme Experto</div>
+        <div class="plan-price"><span class="plan-currency">RD$</span><span class="plan-amount">2,500</span></div>
+        <div class="plan-period">/mes · por ciclo</div>
+        <div class="plan-users">👥 5 usuarios incluidos</div>
+        <ul class="plan-features">
+          <li>Facturación e-CF ilimitada</li>
+          <li>Reportes 606, 607 y 608</li>
+          <li>CRM básico integrado</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="plan-cta">Suscribirse a este plan</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">🏢</div>
+        <div class="plan-name">Grande Pyme</div>
+        <div class="plan-price"><span class="plan-currency">RD$</span><span class="plan-amount">3,500</span></div>
+        <div class="plan-period">/mes · por ciclo</div>
+        <div class="plan-users">👥 8 usuarios incluidos</div>
+        <ul class="plan-features">
+          <li>Todo lo de Experto</li>
+          <li>Multi-sucursal e inventario</li>
+          <li>API avanzada / integraciones</li>
+          <li>Soporte 24/7 dedicado</li>
+        </ul>
+        <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="plan-cta">Suscribirse a este plan</a>
+      </div>
+    </div>
+    <div class="prorate-info">
+      <span>💱</span>
+      <p><strong>Prorrateo automático:</strong> El sistema calcula el monto exacto según tu día de inicio. Pagas solo los días del mes que uses. Sin cargos ocultos ni cobros completos desde el primer día.</p>
+      <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" style="background:var(--blue);color:#fff;font-weight:800;font-size:12px;padding:10px 20px;border-radius:10px;text-decoration:none;white-space:nowrap">Ver calculadora →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS CARRUSEL -->
+<section id="testimonios">
+  <div class="container reveal">
+    <div class="section-tag">Nuestros clientes</div>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub">Casos reales de transformación digital en República Dominicana.</p>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carousel">
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Lo que más valoro es la estabilidad. Desde que implementamos el sistema, el equipo fluye sin errores y las ganancias se ven más claras al tener todo bajo control."</p>
+          <div class="test-author">
+            <div class="test-avatar">MF</div>
+            <div><div class="test-name">Multifredfit</div><a href="https://www.instagram.com/multifredfit" class="test-handle" target="_blank">@multifredfit →</a></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Responsabilidad pura. Es difícil encontrar un sistema que aguante el ritmo diario sin fallar. Con Avanch la facturación es rápida y transparente."</p>
+          <div class="test-author">
+            <div class="test-avatar">CM</div>
+            <div><div class="test-name">Centro de Servicios Magno</div><a href="https://www.instagram.com/centrodeserviciosmagno_2" class="test-handle" target="_blank">@centrodeserviciosmagno_2 →</a></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Buscábamos algo humano y funcional, y dimos en el clavo. El sistema es intuitivo y nos permite enfocarnos en lo que amamos mientras la administración corre perfecta."</p>
+          <div class="test-author">
+            <div class="test-avatar">BS</div>
+            <div><div class="test-name">The Beauty Spot</div><a href="https://www.instagram.com/thebeautyspotrdo" class="test-handle" target="_blank">@thebeautyspotrdo →</a></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Como expertos, somos exigentes. Los equipos funcionan al 100% y la lógica del sistema ha optimizado nuestras utilidades de forma notable."</p>
+          <div class="test-author">
+            <div class="test-avatar">ST</div>
+            <div><div class="test-name">Suarez Technology</div><a href="https://www.instagram.com/suareztechnology.rd" class="test-handle" target="_blank">@suareztechnology.rd →</a></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"La implementación fue rápida y el equipo de Avanch nos acompañó en cada paso. Ahora nuestras facturas electrónicas llegan a la DGII sin ningún problema."</p>
+          <div class="test-author">
+            <div class="test-avatar">PN</div>
+            <div><div class="test-name">Cliente Satisfecho</div><div class="test-handle">Santo Domingo, RD</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" onclick="moveCarousel(-1)">‹</button>
+      <div class="carousel-dots" id="dots"></div>
+      <button class="carousel-btn" onclick="moveCarousel(1)">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- INCENTIVOS -->
+<section id="incentivos">
+  <div class="container reveal">
+    <div class="section-tag">Incentivos Fiscales — Ley 51-23</div>
+    <h2 class="section-title">La DGII premia tu modernización</h2>
+    <p class="section-sub">Al implementar Facturación Electrónica e-CF en período voluntario, tu empresa accede a un Crédito Fiscal aplicable a anticipos del ISR.</p>
+    <div class="inc-grid">
+      <div class="inc-card"><div class="inc-tipo">Mipymes y Micro</div><div class="inc-monto">RD$25,000</div><div class="inc-desc">Crédito para certificados digitales y adecuación de software fiscal.</div></div>
+      <div class="inc-card"><div class="inc-tipo">Empresas Pequeñas</div><div class="inc-monto">RD$75,000</div><div class="inc-desc">Incentivo directo al cumplimiento técnico voluntario ante la DGII.</div></div>
+      <div class="inc-card" style="border-color:var(--blue);background:var(--blue3)"><div class="inc-tipo">Medianas y Grandes</div><div class="inc-monto" style="font-size:2.5rem">RD$300,000</div><div class="inc-desc">Monto máximo de crédito fiscal para grandes contribuyentes locales.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container reveal">
+    <div class="section-tag">Preguntas frecuentes</div>
+    <h2 class="section-title">Todo lo que necesitas saber</h2>
+    <div class="faq-list">
+      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)">¿Es obligatorio implementar la facturación electrónica en RD?<span class="faq-icon">+</span></div><div class="faq-a"><p>Sí. La Ley 51-23 establece la facturación electrónica como obligatoria para todos los contribuyentes en República Dominicana. Lo recomendable es implementarla ahora en el período voluntario para acceder a los créditos fiscales disponibles.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Qué es un certificado digital y dónde lo obtengo?<span class="faq-icon">+</span></div><div class="faq-a"><p>El certificado digital es un archivo electrónico que identifica a tu empresa y permite firmar documentos digitalmente con validez legal. En RD se obtiene a través de proveedores autorizados por el INDOTEL. Avanch Technology te orienta en todo el proceso.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cuánto tiempo toma el proceso de certificación con la DGII?<span class="faq-icon">+</span></div><div class="faq-a"><p>El proceso completo toma entre 5 y 15 días hábiles. Con Avanch Technology acompañamos cada paso del proceso para reducir tiempos y evitar errores.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo seguir emitiendo facturas en papel mientras me certifico?<span class="faq-icon">+</span></div><div class="faq-a"><p>Sí, durante el proceso de certificación puedes continuar emitiendo comprobantes fiscales físicos. La transición es gradual y acompañada por nuestro equipo.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el crédito fiscal de RD$300,000?<span class="faq-icon">+</span></div><div class="faq-a"><p>El crédito fiscal se aplica directamente a los anticipos del ISR de tu empresa. El monto depende de la clasificación de tu contribuyente: desde RD$25,000 para microempresas hasta RD$300,000 para grandes MiPymes.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cuánto cuesta implementar el sistema con Avanch Technology?<span class="faq-icon">+</span></div><div class="faq-a"><p>Ofrecemos planes desde RD$1,500 al mes con implementación incluida. El pago mensual cubre el uso continuo de la plataforma, almacenamiento de documentos y soporte técnico.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section id="comparativa">
+  <div class="container reveal">
+    <div class="section-tag">Por qué Avanch</div>
+    <h2 class="section-title">Avanch vs la competencia</h2>
+    <div class="comp-table">
+      <div class="comp-head">
+        <div>Característica</div>
+        <div>Competencia típica</div>
+        <div class="highlight-col"><span class="comp-best">Recomendado</span>Avanch Technology</div>
+      </div>
+      <div class="comp-row"><div class="feature">Precio en pesos dominicanos</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Acompañamiento completo DGII</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Soporte por WhatsApp</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Panel de control propio</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Reportes 606/607/608 automáticos</div><div><span class="check">✓</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Prorrateo automático</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-row"><div class="feature">Pago mensual sin sorpresas</div><div><span class="cross">✗</span></div><div class="highlight-col"><span class="check">✓</span></div></div>
+      <div class="comp-price"><div style="color:var(--muted);font-weight:600">Precio mensual</div><div style="color:var(--muted)">US$55/mes + extras</div><div class="highlight-col">Desde RD$1,500/mes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-orb cta-orb1"></div>
+  <div class="cta-orb cta-orb2"></div>
+  <div class="cta-content reveal">
+    <h2>Implementa hoy y accede a tu crédito fiscal</h2>
+    <p>No esperes a que sea obligatorio. Cada día que pasa es un día menos para aprovechar los créditos fiscales de la Ley 51-23. Nuestro equipo está listo para acompañarte.</p>
+    <div class="cta-btns">
+      <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form" class="btn-primary">Ver planes y suscribirse →</a>
+      <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20deseo%20implementar%20facturación%20electrónica" target="_blank" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablar con un asesor
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">
+    <img src="./assets/nuevo-Logo-avanch2.png" alt="Avanch Technology">
+    <span>© 2026 Inversiones Avanch Technology S.R.L. · RNC en proceso de registro · Santo Domingo Este, RD</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.avanchtechnology.com">Inicio</a>
+    <a href="https://wa.me/18294092121">WhatsApp</a>
+    <a href="https://script.google.com/macros/s/AKfycbzshj33g9JT7YHZSX8dOAXZN4OCbkOO6Jj1puv54jiqKbog3N6-F5CvGxtE-al4U1jw/exec?view=form">Suscribirse</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/18294092121" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',function(){
+  var h=document.documentElement;
+  var pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  updateToc();revealElements();
+});
+
+// Scroll
+function scrollTo(id){var el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+// TOC
+var sections=['hero','que-es','ley','documentos','proceso','planes','testimonios','faq','comparativa'];
+function updateToc(){
+  var scroll=window.scrollY+200;
+  sections.forEach(function(id,i){
+    var el=document.getElementById(id);if(!el)return;
+    var dot=document.querySelectorAll('.toc-dot')[i];if(!dot)return;
+    if(el.offsetTop<=scroll&&el.offsetTop+el.offsetHeight>scroll){
+      document.querySelectorAll('.toc-dot').forEach(function(d){d.classList.remove('active');});
+      dot.classList.add('active');
+    }
+  });
+}
+
+// Reveal
+function revealElements(){
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if(el.getBoundingClientRect().top<window.innerHeight-80)el.classList.add('visible');
+  });
+}
+revealElements();
+
+// FAQ
+function toggleFaq(btn){
+  var item=btn.parentElement;
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+  if(!isOpen)item.classList.add('open');
+}
+
+// CARRUSEL
+var currentSlide=0;
+var track=document.getElementById('carousel');
+var cards=track.querySelectorAll('.test-card');
+var total=cards.length;
+var dotsContainer=document.getElementById('dots');
+
+cards.forEach(function(_,i){
+  var d=document.createElement('div');
+  d.className='carousel-dot'+(i===0?' active':'');
+  d.onclick=function(){goToSlide(i);};
+  dotsContainer.appendChild(d);
+});
+
+function goToSlide(n){
+  currentSlide=Math.max(0,Math.min(n,total-1));
+  var cardW=cards[0].offsetWidth+24;
+  track.style.transform='translateX(-'+(currentSlide*cardW)+'px)';
+  document.querySelectorAll('.carousel-dot').forEach(function(d,i){d.classList.toggle('active',i===currentSlide);});
+}
+
+function moveCarousel(dir){goToSlide(currentSlide+dir);}
+
+// Auto-play carrusel
+setInterval(function(){goToSlide((currentSlide+1)%total);},4000);
+
+// WIDGETS
+// Fecha
+function updateFecha(){
+  var now=new Date();
+  var opts={weekday:'short',day:'numeric',month:'short'};
+  var f=now.toLocaleDateString('es-DO',opts);
+  document.getElementById('fecha-val').textContent=f;
+  document.getElementById('fecha-val2').textContent=f;
+}
+updateFecha();
+
+// Tipo de cambio USD/EUR
+fetch('https://open.er-api.com/v6/latest/USD')
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.rates&&d.rates.DOP){
+      var usd=d.rates.DOP.toFixed(2);
+      document.getElementById('usd-val').textContent='RD$'+usd;
+      document.getElementById('usd-val2').textContent='RD$'+usd;
+    }
+  }).catch(function(){
+    document.getElementById('usd-val').textContent='No disponible';
+    document.getElementById('usd-val2').textContent='No disponible';
+  });
+
+fetch('https://open.er-api.com/v6/latest/EUR')
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.rates&&d.rates.DOP){
+      var eur=d.rates.DOP.toFixed(2);
+      document.getElementById('eur-val').textContent='RD$'+eur;
+      document.getElementById('eur-val2').textContent='RD$'+eur;
+    }
+  }).catch(function(){
+    document.getElementById('eur-val').textContent='No disponible';
+    document.getElementById('eur-val2').textContent='No disponible';
+  });
+
+// Clima Santo Domingo
+fetch('https://wttr.in/Santo+Domingo?format=j1')
+  .then(function(r){return r.json();})
+  .then(function(d){
+    var temp=d.current_condition[0].temp_C;
+    var desc=d.current_condition[0].weatherDesc[0].value;
+    var clima=temp+'°C · '+desc;
+    document.getElementById('clima-val').textContent=clima;
+    document.getElementById('clima-val2').textContent=clima;
+  }).catch(function(){
+    document.getElementById('clima-val').textContent='28°C ☀️';
+    document.getElementById('clima-val2').textContent='28°C ☀️';
+  });
+</script>
+</body>
+</html>
