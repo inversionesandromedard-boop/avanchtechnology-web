@@ -1,266 +1,577 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Avanch Technology — Ecosistema tecnológico inteligente. Facturación electrónica, inversión financiera, dashboard 360° y desarrollo de aplicaciones a medida." />
-  <meta property="og:title" content="Avanch Technology" />
-  <meta property="og:description" content="Tecnología que trabaja para ti. Facturación, inversión, automatización y desarrollo — todo en un ecosistema." />
-  <meta property="og:url" content="https://www.avanchtechnology.com" />
-  <meta property="og:image" content="https://www.avanchtechnology.com/assets/og-image.png" />
-  <title>Avanch Technology — Ecosistema Tecnológico Inteligente</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Suscripción | Avanch Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#08080f;--surface:#0f0f1a;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.11);
-      --text:#eeedf8;--muted:#7c7a9a;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
-      --factura:#003399;--factura-light:#4477ff;--invest:#5b5bff;--invest-light:#8b8bff;
-      --app:#06d6a0;--app-light:#4eedc4;--studio:#f4a261;--studio-light:#f7c59f;
+    :root{--azul:#003399;--azul2:#0044cc;--bg:#f2f3f7;--card:#fff;--txt:#1a1a2e;--muted:#8a8fa8;--border:#e4e6ef;--verde:#00c853;--naranja:#ff6d00;--rojo:#ff3b30;--oro:#ffd600}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+    .page{max-width:800px;margin:0 auto;padding:40px 20px 90px}
+    .hero{background:linear-gradient(145deg,#001f6b,#003399,#0055cc);border-radius:28px;padding:44px 40px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,31,107,.3)}
+    .hero img{height:44px;filter:brightness(0) invert(1);display:block;margin-bottom:24px}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:#fff;margin-bottom:12px}
+    .hero p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:24px}
+    .hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+    .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px}
+    .btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;font-weight:800;font-size:13px;padding:12px 24px;border-radius:50px;text-decoration:none}
+    .sec{display:flex;align-items:center;gap:12px;margin:24px 0 16px}
+    .sec-n{width:34px;height:34px;border-radius:10px;background:#003399;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .sec-t h3{font-size:16px;font-weight:800}
+    .sec-t p{font-size:11px;color:var(--muted)}
+    .planes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
+    .pc{border-radius:20px;overflow:hidden;cursor:pointer;transition:all .2s;border:2px solid transparent;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .pc:hover{transform:translateY(-4px)}
+    .pc.sel{border-color:#003399;box-shadow:0 12px 36px rgba(0,51,153,.2)}
+    .ph{padding:22px 18px 18px;position:relative;overflow:hidden}
+    .pc:nth-child(1) .ph{background:linear-gradient(145deg,#001a5c,#003399)}
+    .pc:nth-child(2) .ph{background:linear-gradient(145deg,#003399,#0055e0)}
+    .pc:nth-child(3) .ph{background:linear-gradient(145deg,#0044bb,#0066ff)}
+    .pop{position:absolute;top:10px;right:0;background:#ffd600;color:#1a1a2e;font-size:8px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:3px 12px 3px 8px;border-radius:0 0 0 10px}
+    .pico{font-size:20px;margin-bottom:10px}
+    .pnom{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.6);margin-bottom:5px}
+    .pprecio{font-size:32px;font-weight:900;color:#fff;line-height:1}
+    .pmon{font-size:14px;font-weight:700;color:rgba(255,255,255,.8);margin-right:2px}
+    .pper{font-size:11px;color:rgba(255,255,255,.5)}
+    .pusu{margin-top:8px;display:inline-flex;align-items:center;background:rgba(255,255,255,.12);border-radius:20px;padding:4px 10px;font-size:11px;color:rgba(255,255,255,.85);font-weight:600}
+    .pb{background:#fff;padding:16px 18px 18px}
+    .pf{list-style:none;margin-bottom:14px}
+    .pf li{font-size:12px;color:#555;padding:5px 0;border-bottom:1px solid #f5f5f7;display:flex;gap:8px;align-items:center}
+    .pf li:last-child{border-bottom:none}
+    .fc{width:18px;height:18px;border-radius:5px;background:#e8eeff;color:#003399;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0}
+    .psb{width:100%;padding:10px;border-radius:10px;border:2px solid #003399;background:transparent;color:#003399;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
+    .psb:hover,.pc.sel .psb{background:#003399;color:#fff}
+    .card{background:#fff;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid var(--border);padding:24px;margin-bottom:18px}
+    .ci{background:linear-gradient(135deg,#f0f4ff,#e8f5e9);border:1.5px solid #c3d4ff;border-radius:14px;padding:20px}
+    .ct{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#003399;margin-bottom:14px}
+    .cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+    .ig{display:flex;flex-direction:column;gap:5px}
+    .il{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+    .inp{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;width:100%;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;color:var(--txt)}
+    .inp:focus{border-color:#003399}
+    .inp.error{border-color:#ff3b30;background:#fff5f5}
+    .rnc-msg{font-size:10px;margin-top:3px;font-weight:600;min-height:14px}
+    .rnc-msg.ok{color:#00a040}
+    .rnc-msg.er{color:#ff3b30}
+    .cbtn{border:2px solid var(--border);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:800;cursor:pointer;background:#fff;transition:all .15s;font-family:inherit;color:var(--txt)}
+    .cbtn.act{background:#003399;color:#fff;border-color:#003399}
+    .crow{display:flex;gap:7px;flex-wrap:wrap}
+    .rb{background:#fff;border-radius:12px;padding:16px;border:1px solid var(--border);margin-top:14px}
+    .rr{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid #f0f2f8}
+    .rr:last-child{border-bottom:none}
+    .rl{color:var(--muted);font-size:12px}
+    .rv{font-weight:700}
+    .rv.az{color:#003399;font-size:15px}
+    .rv.vr{color:#00a040}
+    .rv.or{color:#ff6d00}
+    .concepto{background:#fff8f0;border:1.5px solid #ffd8a8;border-radius:14px;padding:16px;margin-top:14px;display:flex;gap:12px}
+    .ci2{font-size:22px;flex-shrink:0}
+    .ct2{font-size:13px;font-weight:800;color:#b84800;margin-bottom:4px}
+    .cd{font-size:12px;color:#7c4a03;line-height:1.6}
+    .cf{background:rgba(0,0,0,.04);border-radius:7px;padding:7px 10px;font-size:11px;font-weight:600;color:#5a3000;margin-top:6px;font-family:monospace}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .ff{display:flex;flex-direction:column;gap:5px}
+    .ff.full{grid-column:1/-1}
+    .fl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+    .fr{color:var(--rojo);margin-left:2px}
+    .rc{background:linear-gradient(145deg,#001f6b,#003399);border-radius:16px;padding:20px;margin-top:18px}
+    .rh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);margin-bottom:12px}
+    .rrow{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .rrow:last-child{border-bottom:none}
+    .rla{color:rgba(255,255,255,.65)}
+    .rva{font-weight:700;color:#fff}
+    .rm{padding-top:12px;margin-top:4px;border-top:1px solid rgba(255,255,255,.15)}
+    .rm .rva{font-size:20px;font-weight:900}
+    .re{color:rgba(255,255,255,.45);text-align:center;padding:16px 0;font-size:12px}
+    .bg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .bc{border:1.5px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;background:#fff}
+    .bi{width:40px;height:40px;border-radius:11px;background:#003399;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 8px}
+    .bc strong{display:block;font-size:12px;font-weight:700;margin-bottom:3px}
+    .bc p{font-size:10px;color:var(--muted);line-height:1.4}
+    .benv{width:100%;padding:16px;border-radius:14px;border:none;background:linear-gradient(135deg,#001f6b,#003399);color:#fff;font-size:14px;font-weight:800;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;box-shadow:0 6px 20px rgba(0,51,153,.25)}
+    .benv:hover{transform:translateY(-2px)}
+    .benv:disabled{background:#c7c7cc;cursor:not-allowed;transform:none}
+    .blegal{font-size:10px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
+    .fb{background:linear-gradient(145deg,#001a5c,#003399);border-radius:22px;padding:32px;text-align:center;margin-top:8px}
+    .fb h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff;margin-bottom:8px}
+    .fb p{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:20px}
+    .fb-brand{margin-top:18px;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase}
+    .waf{position:fixed;bottom:24px;right:20px;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.45);text-decoration:none;z-index:999}
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(14px);background:#1a1a2e;color:#fff;padding:12px 22px;border-radius:50px;font-size:12px;font-weight:600;opacity:0;transition:all .3s;z-index:9999;white-space:nowrap;pointer-events:none}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    #toast.ok{background:#00c853}
+    #toast.er{background:#ff3b30}
+    @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .hero{animation:up .5s ease both}
+    .blq1{animation:up .4s .1s ease both}
+    .blq2{animation:up .4s .2s ease both}
+    .blq3{animation:up .4s .3s ease both}
+    @media(max-width:600px){
+      .page{padding:16px 12px 70px}
+      .hero{padding:28px 20px}
+      .planes{grid-template-columns:1fr}
+      .bg{grid-template-columns:1fr}
+      .fg{grid-template-columns:1fr}
+      .cg{grid-template-columns:1fr}
+      .card{padding:18px}
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(91,91,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,91,255,0.03) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);background:rgba(8,8,15,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .nav-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--invest),#8b5cf6);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#fff}
-    .nav-name{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--text);letter-spacing:-0.3px}
-    .nav-links{display:flex;align-items:center;gap:4px}
-    .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:7px;transition:color .2s,background .2s}
-    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
-    .nav-cta{background:var(--invest)!important;color:#fff!important;font-weight:500!important;padding:7px 16px!important;border-radius:8px!important}
-    .nav-cta:hover{background:#4a4aee!important;transform:translateY(-1px)}
-    @media(max-width:600px){.nav-links a:not(.nav-cta){display:none}}
-    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px clamp(1.5rem,6vw,5rem) 80px;overflow:hidden}
-    .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-    .orb1{width:500px;height:500px;background:rgba(91,91,255,0.12);top:10%;left:50%;transform:translateX(-50%)}
-    .orb2{width:300px;height:300px;background:rgba(6,214,160,0.07);bottom:20%;right:10%}
-    .orb3{width:250px;height:250px;background:rgba(0,51,153,0.1);bottom:20%;left:10%}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(91,91,255,0.1);border:1px solid rgba(91,91,255,0.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:500;color:#9d9dff;margin-bottom:2rem;animation:fadeUp .7s ease both}
-    .eyebrow-dot{width:6px;height:6px;background:var(--app);border-radius:50%;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .hero h1{font-family:var(--font-display);font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:1.0;letter-spacing:-0.04em;color:var(--text);max-width:860px;animation:fadeUp .7s .08s ease both}
-    .word-invest{color:var(--invest-light)}.word-app{color:var(--app-light)}.word-factura{color:var(--factura-light)}
-    .hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--muted);max-width:520px;margin:1.5rem auto 0;font-weight:300;line-height:1.75;animation:fadeUp .7s .16s ease both}
-    .hero-actions{display:flex;gap:10px;margin-top:2.5rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .24s ease both}
-    .btn-primary{background:var(--invest);color:#fff;padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(91,91,255,0.3)}
-    .btn-primary:hover{background:#4a4aee;transform:translateY(-2px);box-shadow:0 0 40px rgba(91,91,255,0.5)}
-    .btn-ghost{background:transparent;color:var(--text);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:400;text-decoration:none;border:1px solid var(--border2);transition:border-color .2s,background .2s,transform .15s}
-    .btn-ghost:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
-    .products{position:relative;z-index:1;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);max-width:1200px;margin:0 auto}
-    .products-header{text-align:center;margin-bottom:4rem}
-    .section-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--invest);margin-bottom:1rem;display:block}
-    .section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--text)}
-    .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    @media(max-width:700px){.products-grid{grid-template-columns:1fr}}
-    .product-card{position:relative;border-radius:20px;padding:2.5rem;border:1px solid var(--border);background:var(--surface);overflow:hidden;text-decoration:none;display:block;transition:transform .25s,border-color .25s,box-shadow .25s}
-    .product-card::before{content:'';position:absolute;inset:0;opacity:1;transition:opacity .3s}
-    .product-card:hover{transform:translateY(-4px)}
-    .card-factura{border-color:rgba(0,51,153,0.3)}.card-factura::before{background:linear-gradient(135deg,rgba(0,51,153,0.1),transparent)}.card-factura:hover{border-color:rgba(68,119,255,0.5);box-shadow:0 20px 60px rgba(0,51,153,0.2)}
-    .card-invest{border-color:rgba(91,91,255,0.3)}.card-invest::before{background:linear-gradient(135deg,rgba(91,91,255,0.1),transparent)}.card-invest:hover{border-color:rgba(91,91,255,0.5);box-shadow:0 20px 60px rgba(91,91,255,0.2)}
-    .card-app{border-color:rgba(6,214,160,0.2)}.card-app::before{background:linear-gradient(135deg,rgba(6,214,160,0.08),transparent)}.card-app:hover{border-color:rgba(6,214,160,0.4);box-shadow:0 20px 60px rgba(6,214,160,0.15)}
-    .card-studio{border-color:rgba(244,162,97,0.2)}.card-studio::before{background:linear-gradient(135deg,rgba(244,162,97,0.08),transparent)}.card-studio:hover{border-color:rgba(244,162,97,0.4);box-shadow:0 20px 60px rgba(244,162,97,0.15)}
-    .card-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:1.25rem}
-    .tag-factura{background:rgba(0,51,153,0.2);color:var(--factura-light)}.tag-invest{background:rgba(91,91,255,0.2);color:var(--invest-light)}.tag-app{background:rgba(6,214,160,0.15);color:var(--app-light)}.tag-studio{background:rgba(244,162,97,0.15);color:var(--studio-light)}
-    .card-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:1.5rem}
-    .icon-factura{background:rgba(0,51,153,0.2)}.icon-invest{background:rgba(91,91,255,0.2)}.icon-app{background:rgba(6,214,160,0.12)}.icon-studio{background:rgba(244,162,97,0.12)}
-    .card-title{font-family:var(--font-display);font-size:1.35rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:.5rem}
-    .card-desc{font-size:.9rem;color:var(--muted);line-height:1.65;font-weight:300;margin-bottom:1.5rem}
-    .card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.75rem}
-    .feat-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid var(--border)}
-    .card-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;text-decoration:none;transition:gap .2s}
-    .card-cta:hover{gap:10px}
-    .cta-factura{color:var(--factura-light)}.cta-invest{color:var(--invest-light)}.cta-app{color:var(--app-light)}.cta-studio{color:var(--studio-light)}
-    .card-status{position:absolute;top:1.5rem;right:1.5rem;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
-    .status-live{background:rgba(6,214,160,0.15);color:var(--app-light)}.status-dev{background:rgba(91,91,255,0.15);color:var(--invest-light)}.status-soon{background:rgba(244,162,97,0.15);color:var(--studio-light)}
-    .values-section{position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(4rem,8vw,6rem) clamp(1.5rem,6vw,5rem)}
-    .values-inner{max-width:1100px;margin:0 auto}
-    .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3.5rem}
-    .value-item{text-align:center}
-    .value-num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;letter-spacing:-0.04em;background:linear-gradient(135deg,var(--invest-light),var(--app-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
-    .value-label{font-size:.85rem;color:var(--muted);font-weight:300;line-height:1.5}
-    .about-section{position:relative;z-index:1;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,6vw,5rem);max-width:1100px;margin:0 auto}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-    @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:3rem}}
-    .about-text h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--text);margin-bottom:1.25rem}
-    .about-text p{font-size:.95rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
-    .pillars{display:flex;flex-direction:column;gap:1rem}
-    .pillar{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:border-color .25s}
-    .pillar:hover{border-color:var(--border2)}
-    .pillar-icon{width:40px;height:40px;border-radius:10px;background:rgba(91,91,255,0.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-    .pillar h4{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
-    .pillar p{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300}
-    .cta-section{position:relative;z-index:1;text-align:center;padding:clamp(5rem,10vw,8rem) clamp(1.5rem,6vw,5rem);overflow:hidden}
-    .cta-glow{position:absolute;width:700px;height:400px;background:radial-gradient(ellipse,rgba(91,91,255,0.12),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-    .cta-section h2{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,4rem);font-weight:800;letter-spacing:-0.04em;line-height:1.05;color:var(--text);max-width:650px;margin:0 auto 1.5rem;position:relative;z-index:1}
-    .cta-section p{font-size:1rem;color:var(--muted);max-width:440px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7;position:relative;z-index:1}
-    .cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-    footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-    .footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-    .footer-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--invest),#8b5cf6);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:12px;color:#fff}
-    .footer-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--muted)}
-    .footer-legal{font-size:11px;color:var(--muted);opacity:.5}
-    .footer-links{display:flex;gap:1.5rem}
-    .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;opacity:.6}
-    .footer-links a:hover{color:var(--text);opacity:1}
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:none}
   </style>
 </head>
 <body>
-  <nav>
-    <a href="/" class="nav-logo">
-      <div class="nav-mark">AT</div>
-      <span class="nav-name">Avanch Technology</span>
-    </a>
-    <div class="nav-links">
-      <a href="#productos">Productos</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="https://wa.me/18294092121" target="_blank">Contacto</a>
-      <a href="https://factura.avanchtechnology.com" class="nav-cta">Facturación e-CF</a>
-    </div>
-  </nav>
+<div id="toast"></div>
+<div class="page">
 
-  <div class="hero">
-    <div class="hero-orb orb1"></div>
-    <div class="hero-orb orb2"></div>
-    <div class="hero-orb orb3"></div>
-    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Ecosistema tecnológico · Santo Domingo, RD</div>
-    <h1>Tecnología que<br /><span class="word-invest">trabaja</span><span class="word-app"> para</span><span class="word-factura"> ti.</span></h1>
-    <p class="hero-sub">Facturación electrónica, inversión inteligente, control financiero 360° y desarrollo de aplicaciones — todo bajo un mismo ecosistema diseñado para crecer contigo.</p>
-    <div class="hero-actions">
-      <a href="#productos" class="btn-primary">Ver todos los productos</a>
-      <a href="https://wa.me/18294092121" target="_blank" class="btn-ghost">Hablar con el equipo</a>
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HERO                                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="hero">
+  <img src="https://i.ibb.co/rR9HZ8x8/nuevo-Logo-avanch2.png" alt="Avanch Technology">
+  <h1>Activa tu sistema hoy mismo</h1>
+  <p>Elige tu plan, visualiza tu primer cobro con prorrateo en tiempo real y envía tu solicitud en minutos.</p>
+  <div class="hero-chips">
+    <span class="chip">Precios en RD$</span>
+    <span class="chip">5 ciclos disponibles</span>
+    <span class="chip">Prorrateo automático</span>
+    <span class="chip">Santo Domingo, R.D.</span>
+  </div>
+  <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20deseo%20suscribirme" target="_blank" class="btn-wa">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Consultar por WhatsApp
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PASO 1: SELECCIÓN DE PLAN                      -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="blq1">
+  <div class="sec"><div class="sec-n">1</div><div class="sec-t"><h3>Seleccione su Plan</h3><p>Precios en pesos dominicanos - Cobro mensual por ciclo</p></div></div>
+  <div class="planes">
+    <div class="pc" id="pc0" onclick="elegirPlan(0)">
+      <div class="ph"><div class="pico">🚀</div><div class="pnom">Pyme Iniciado</div><div style="display:flex;align-items:baseline;gap:3px"><span class="pmon">RD$</span><span class="pprecio">1,500</span></div><div class="pper">/mes por ciclo</div><div class="pusu">3 usuarios</div></div>
+      <div class="pb"><ul class="pf"><li><span class="fc">✓</span>Facturación eCF DGII</li><li><span class="fc">✓</span>100 facturas/mes</li><li><span class="fc">✓</span>Panel de control</li><li><span class="fc">✓</span>Soporte WhatsApp</li></ul><button class="psb" id="psb0">Seleccionar plan</button></div>
+    </div>
+    <div class="pc" id="pc1" onclick="elegirPlan(1)">
+      <div class="ph"><div class="pop">Popular</div><div class="pico">⭐</div><div class="pnom">Pyme Experto</div><div style="display:flex;align-items:baseline;gap:3px"><span class="pmon">RD$</span><span class="pprecio">2,500</span></div><div class="pper">/mes por ciclo</div><div class="pusu">5 usuarios</div></div>
+      <div class="pb"><ul class="pf"><li><span class="fc">✓</span>Facturación eCF ilimitada</li><li><span class="fc">✓</span>Reportes y analítica</li><li><span class="fc">✓</span>CRM básico</li><li><span class="fc">✓</span>Soporte prioritario</li></ul><button class="psb" id="psb1">Seleccionar plan</button></div>
+    </div>
+    <div class="pc" id="pc2" onclick="elegirPlan(2)">
+      <div class="ph"><div class="pico">🏢</div><div class="pnom">Grande Pyme</div><div style="display:flex;align-items:baseline;gap:3px"><span class="pmon">RD$</span><span class="pprecio">3,500</span></div><div class="pper">/mes por ciclo</div><div class="pusu">8 usuarios</div></div>
+      <div class="pb"><ul class="pf"><li><span class="fc">✓</span>Todo lo de Experto</li><li><span class="fc">✓</span>Usuarios ilimitados</li><li><span class="fc">✓</span>API e integraciones</li><li><span class="fc">✓</span>Soporte 24/7</li></ul><button class="psb" id="psb2">Seleccionar plan</button></div>
     </div>
   </div>
+</div>
 
-  <section id="productos" class="products">
-    <div class="products-header reveal">
-      <span class="section-eyebrow">Nuestros productos</span>
-      <h2 class="section-title">Un ecosistema.<br />Cuatro soluciones.</h2>
-    </div>
-    <div class="products-grid">
-      <a href="https://factura.avanchtechnology.com" class="product-card card-factura reveal">
-        <span class="card-status status-live">Activo</span>
-        <span class="card-tag tag-factura">Facturación electrónica</span>
-        <div class="card-icon icon-factura">🧾</div>
-        <div class="card-title">Avanch Factura</div>
-        <p class="card-desc">Sistema de facturación electrónica e-CF homologado por la DGII. Cumple la Ley 51-23 y accede a créditos fiscales de hasta RD$300,000.</p>
-        <div class="card-features">
-          <span class="feat-pill">e-CF DGII</span><span class="feat-pill">Ley 51-23</span>
-          <span class="feat-pill">Reportes 606/607/608</span><span class="feat-pill">Desde RD$1,500/mes</span>
-        </div>
-        <span class="card-cta cta-factura">Implementar ahora →</span>
-      </a>
-      <a href="#" class="product-card card-invest reveal">
-        <span class="card-status status-dev">En desarrollo</span>
-        <span class="card-tag tag-invest">Motor financiero</span>
-        <div class="card-icon icon-invest">📈</div>
-        <div class="card-title">Avanch Invest</div>
-        <p class="card-desc">Motor de inversión inteligente con IA. Cada centavo que entra es analizado y redistribuido para maximizar rendimientos de forma automática.</p>
-        <div class="card-features">
-          <span class="feat-pill">IA financiera</span><span class="feat-pill">Rendimientos automáticos</span>
-          <span class="feat-pill">Transparencia total</span><span class="feat-pill">B2B2C</span>
-        </div>
-        <span class="card-cta cta-invest">Acceso anticipado →</span>
-      </a>
-      <a href="#" class="product-card card-app reveal">
-        <span class="card-status status-dev">En desarrollo</span>
-        <span class="card-tag tag-app">Control financiero</span>
-        <div class="card-icon icon-app">🏦</div>
-        <div class="card-title">Avanch App</div>
-        <p class="card-desc">Dashboard financiero 360°. Panel unificado con todos tus movimientos, proyecciones y métricas en tiempo real — desde cualquier dispositivo.</p>
-        <div class="card-features">
-          <span class="feat-pill">Tiempo real</span><span class="feat-pill">Multi-empresa</span>
-          <span class="feat-pill">Reportes automáticos</span><span class="feat-pill">iOS & Android</span>
-        </div>
-        <span class="card-cta cta-app">Notificarme →</span>
-      </a>
-      <a href="#" class="product-card card-studio reveal">
-        <span class="card-status status-soon">Próximamente</span>
-        <span class="card-tag tag-studio">Desarrollo de apps</span>
-        <div class="card-icon icon-studio">⚡</div>
-        <div class="card-title">Avanch Studio</div>
-        <p class="card-desc">Desarrollo de aplicaciones a medida para empresas. Soluciones digitales construidas con tecnología open source ética y escalable.</p>
-        <div class="card-features">
-          <span class="feat-pill">Apps a medida</span><span class="feat-pill">Open source</span>
-          <span class="feat-pill">Web & Mobile</span><span class="feat-pill">B2B</span>
-        </div>
-        <span class="card-cta cta-studio">Conocer más →</span>
-      </a>
-    </div>
-  </section>
-
-  <div class="values-section">
-    <div class="values-inner">
-      <div class="products-header reveal" style="margin-bottom:0">
-        <span class="section-eyebrow">Por qué Avanch</span>
-        <h2 class="section-title">Números que hablan.</h2>
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PASO 2: CALCULADORA DE PRORRATEO               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="blq2" style="margin-top:20px">
+  <div class="sec"><div class="sec-n">2</div><div class="sec-t"><h3>Calcule su Primer Cobro</h3><p>El sistema asigna el ciclo más cercano automáticamente</p></div></div>
+  <div class="card">
+    <div class="ci">
+      <div class="ct">🧮 Calculadora de Prorrateo</div>
+      <div class="cg">
+        <div class="ig"><div class="il">Día que inicia el servicio</div><input type="number" id="fdia" class="inp" placeholder="Ej: 7" min="1" max="31" oninput="calcProrrateo()"></div>
+        <div class="ig"><div class="il">Ciclo asignado</div><div class="crow"><button class="cbtn" id="cb3">3</button><button class="cbtn" id="cb5">5</button><button class="cbtn" id="cb10">10</button><button class="cbtn" id="cb20">20</button><button class="cbtn" id="cb25">25</button></div></div>
       </div>
-      <div class="values-grid">
-        <div class="value-item reveal"><div class="value-num">4</div><div class="value-label">Productos en el ecosistema</div></div>
-        <div class="value-item reveal"><div class="value-num">360°</div><div class="value-label">Control financiero unificado</div></div>
-        <div class="value-item reveal"><div class="value-num">RD$300K</div><div class="value-label">Crédito fiscal disponible</div></div>
-        <div class="value-item reveal"><div class="value-num">24h</div><div class="value-label">Tiempo de activación e-CF</div></div>
+      <div class="rb" id="resultado" style="display:none">
+        <div class="rr"><span class="rl">Día de ingreso</span><span class="rv" id="rdia">-</span></div>
+        <div class="rr"><span class="rl">Ciclo asignado</span><span class="rv az" id="rciclo">-</span></div>
+        <div class="rr"><span class="rl">Días a prorratear</span><span class="rv or" id="rdias">-</span></div>
+        <div class="rr"><span class="rl">Primer cobro</span><span class="rv or" id="rpro">-</span></div>
+        <div class="rr"><span class="rl">Fecha primer ciclo completo</span><span class="rv vr" id="rfecha">-</span></div>
+        <div class="rr"><span class="rl">Mensualidad desde entonces</span><span class="rv az" id="rmen">-</span></div>
       </div>
     </div>
+    <div class="concepto">
+      <div class="ci2">📐</div>
+      <div><div class="ct2">¿Qué es el Prorrateo?</div><div class="cd">Cobro proporcional por los días entre la activación y el próximo ciclo. Paga exactamente por los días que usa el sistema.</div><div class="cf">Primer cobro = (Mensualidad / 30) × Días hasta el próximo ciclo</div></div>
+    </div>
+    <div style="background:#f0f4ff;border-left:4px solid #003399;border-radius:0 10px 10px 0;padding:12px 16px;font-size:12px;color:#1a1a2e;line-height:1.6;margin-top:12px"><strong style="color:#003399">Ciclos disponibles:</strong> 3, 5, 10, 20 y 25 de cada mes.</div>
   </div>
+</div>
 
-  <section id="nosotros" class="about-section">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <span class="section-eyebrow">Quiénes somos</span>
-        <h2>Construido en RD.<br />Pensado para crecer.</h2>
-        <p>Avanch Technology nace en Santo Domingo con una visión clara: crear tecnología financiera honesta, transparente y autosostenible para empresas y personas dominicanas.</p>
-        <p>Cada producto está diseñado para funcionar solo y mejor en conjunto — un ecosistema que crece contigo desde el primer centavo hasta la escala regional.</p>
-        <div style="margin-top:2rem"><a href="https://wa.me/18294092121" target="_blank" class="btn-primary" style="display:inline-flex">Hablar con el equipo →</a></div>
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PASO 3: FORMULARIO DE REGISTRO                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="blq3" style="margin-top:4px">
+  <div class="sec"><div class="sec-n">3</div><div class="sec-t"><h3>Complete su Registro</h3><p>Datos requeridos para configurar su cuenta</p></div></div>
+  <div class="card">
+    <div class="fg">
+      <div class="ff">
+        <label class="fl">RNC <span class="fr">*</span></label>
+        <input type="text" id="frnc" class="inp" placeholder="Ej: 101123456 o 00101123456" maxlength="11" oninput="validarRNC()">
+        <div class="rnc-msg" id="rncMsg"></div>
       </div>
-      <div class="pillars reveal">
-        <div class="pillar"><div class="pillar-icon">🤝</div><div><h4>Honestidad radical</h4><p>Cada cifra es pública, auditable y verificable. Sin letra pequeña.</p></div></div>
-        <div class="pillar"><div class="pillar-icon">⚖️</div><div><h4>Responsabilidad</h4><p>Cada decisión tiene un responsable y un registro permanente.</p></div></div>
-        <div class="pillar"><div class="pillar-icon">🔄</div><div><h4>Reinversión constante</h4><p>El crecimiento está codificado en el modelo. No depende de nadie.</p></div></div>
-        <div class="pillar"><div class="pillar-icon">🛡️</div><div><h4>Cumplimiento legal</h4><p>Cada línea de código alineada con el marco regulatorio vigente.</p></div></div>
+      <div class="ff"><label class="fl">Nombre Legal <span class="fr">*</span></label><input type="text" id="flegal" class="inp" placeholder="Nombre ante la DGII"></div>
+      <div class="ff"><label class="fl">Nombre Comercial <span class="fr">*</span></label><input type="text" id="fnombre" class="inp" placeholder="Marca de su negocio"></div>
+      <div class="ff"><label class="fl">Representante <span class="fr">*</span></label><input type="text" id="frep" class="inp" placeholder="Persona responsable"></div>
+      <div class="ff full"><label class="fl">Dirección <span class="fr">*</span></label><input type="text" id="fdir" class="inp" placeholder="Calle, número, sector, ciudad"></div>
+      <div class="ff"><label class="fl">WhatsApp <span class="fr">*</span></label><input type="tel" id="ftel" class="inp" placeholder="Ej: 8091234567"></div>
+      <div class="ff"><label class="fl">Plan seleccionado</label><input type="text" id="fplan" class="inp" placeholder="Elija un plan arriba" readonly style="background:#f9f9fb;cursor:not-allowed;color:#8a8fa8"></div>
+    </div>
+    <div class="rc" id="resumen"><div class="re">Complete los pasos 1 y 2 para ver el resumen</div></div>
+    <div style="margin-top:22px"><div class="il" style="margin-bottom:10px">Métodos de pago aceptados</div>
+      <div class="bg">
+        <div class="bc"><div class="bi">🏦</div><strong>Banreservas</strong><p>Depósito o transferencia</p></div>
+        <div class="bc"><div class="bi">🏦</div><strong>BHD</strong><p>Transferencia digital</p></div>
+        <div class="bc"><div class="bi">🏦</div><strong>Banco Popular</strong><p>Referencia de pago</p></div>
       </div>
     </div>
-  </section>
-
-  <div class="cta-section">
-    <div class="cta-glow"></div>
-    <h2 class="reveal">¿Listo para empezar?</h2>
-    <p class="reveal">El primer paso es la facturación electrónica — obligatoria en RD y con créditos fiscales disponibles ahora.</p>
-    <div class="cta-actions reveal">
-      <a href="https://factura.avanchtechnology.com" class="btn-primary">Implementar facturación e-CF</a>
-      <a href="https://wa.me/18294092121" target="_blank" class="btn-ghost">Hablar por WhatsApp</a>
-    </div>
+    <button class="benv" onclick="enviar()" id="btnenv">📩 Enviar Solicitud de Suscripción</button>
+    <p class="blegal">Al enviar acepta los Términos del Servicio - Avanch Technology SRL - Santo Domingo Este, R.D.</p>
   </div>
+</div>
 
-  <footer>
-    <a href="/" class="footer-logo">
-      <div class="footer-mark">AT</div>
-      <span class="footer-name">Avanch Technology</span>
-    </a>
-    <div class="footer-links">
-      <a href="https://factura.avanchtechnology.com">Factura</a>
-      <a href="#">Invest</a><a href="#">App</a><a href="#">Studio</a>
-      <a href="https://wa.me/18294092121">WhatsApp</a>
-    </div>
-    <div class="footer-legal">© 2026 Inversiones Avanch Technology S.R.L. · RNC en proceso de registro</div>
-  </footer>
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FOOTER                                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="fb">
+  <h3>¿Tiene alguna consulta?</h3>
+  <p>Nuestro equipo está disponible para orientarle.</p>
+  <a href="https://wa.me/18294092121?text=Hola%20Avanch%2C%20necesito%20ayuda" target="_blank" class="btn-wa" style="display:inline-flex">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Contactar por WhatsApp
+  </a>
+  <div class="fb-brand">Avanch Technology SRL - 829-409-2121</div>
+</div>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          observer.unobserve(e.target);
+</div>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/18294092121" target="_blank" class="waf">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SUPABASE SDK (CDN)                             -->
+<!-- ═══════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- JAVASCRIPT PRINCIPAL                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<script>
+/* ================================================
+   CONFIGURACIÓN SUPABASE
+   ================================================
+   ⚠️ IMPORTANTE: Reemplaza TU_ANON_KEY_AQUI con
+   tu anon key real de Supabase.
+   La encuentras en: Supabase Dashboard →
+   Settings → API → anon public key
+   ================================================ */
+var SUPABASE_URL = 'https://synhrkepwbmbndirwuot.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5bmhya2Vwd2JtYm5kaXJ3dW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzU1ODIsImV4cCI6MjA4OTgxMTU4Mn0.gQiNQfFin_i5Jkke6v5xRBoOd7pTVy7WiDIGqj7KCiA';
+
+var supabaseClient = null;
+try {
+  supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch(e) {
+  console.warn('Supabase no disponible:', e);
+}
+
+/* ================================================
+   DATOS DE PLANES Y CICLOS
+   ================================================ */
+var PLANES = [
+  { nombre: 'Plan Pyme Iniciado', monto: 1500, usuarios: 3 },
+  { nombre: 'Plan Pyme Experto',  monto: 2500, usuarios: 5 },
+  { nombre: 'Plan Grande Pyme',   monto: 3500, usuarios: 8 }
+];
+var CICLOS = [3, 5, 10, 20, 25];
+var planActual = -1;
+var calc = null;
+var rncValido = false;
+
+/* ================================================
+   FIX #1: BOTONES DE CICLO CON DOMContentLoaded
+   ================================================ */
+document.addEventListener('DOMContentLoaded', function() {
+  CICLOS.forEach(function(c) {
+    var btn = document.getElementById('cb' + c);
+    if (btn) {
+      btn.onclick = function() {
+        document.getElementById('fdia').value = c;
+        calcProrrateo();
+      };
+    }
+  });
+});
+
+/* ================================================
+   FIX #2: SELECCIONAR PLAN + AUTO-DÍA DE HOY
+   ================================================ */
+function elegirPlan(i) {
+  planActual = i;
+
+  for (var j = 0; j < 3; j++) {
+    document.getElementById('pc' + j).classList.toggle('sel', j === i);
+    document.getElementById('psb' + j).innerText = j === i ? 'Plan seleccionado' : 'Seleccionar plan';
+  }
+
+  document.getElementById('fplan').value =
+    PLANES[i].nombre + ' - RD$ ' + PLANES[i].monto.toLocaleString('es-DO') + '/mes';
+
+  // ✅ FIX #2: Si no hay día ingresado, usar el día de hoy
+  var inputDia = document.getElementById('fdia');
+  if (!inputDia.value) {
+    inputDia.value = new Date().getDate();
+  }
+
+  calcProrrateo();
+  mostrarResumen();
+}
+
+/* ================================================
+   CÁLCULO DE PRORRATEO
+   ================================================ */
+function calcProrrateo() {
+  var dia = parseInt(document.getElementById('fdia').value);
+
+  // Reset visual ciclos
+  CICLOS.forEach(function(c) {
+    var e = document.getElementById('cb' + c);
+    if (e) e.classList.remove('act');
+  });
+
+  calc = null;
+  document.getElementById('resultado').style.display = 'none';
+
+  if (!dia || dia < 1 || dia > 31 || planActual < 0) {
+    mostrarResumen();
+    return;
+  }
+
+  var monto = PLANES[planActual].monto;
+  var ca = null;
+  var cruzaMes = false;
+
+  for (var i = 0; i < CICLOS.length; i++) {
+    if (CICLOS[i] >= dia) {
+      ca = CICLOS[i];
+      break;
+    }
+  }
+  if (!ca) {
+    ca = CICLOS[0];
+    cruzaMes = true;
+  }
+
+  var dias = cruzaMes ? (30 - dia) + ca : ca - dia;
+  var pro = dias === 0 ? 0 : Math.round((monto / 30) * dias * 100) / 100;
+
+  // Fecha del próximo ciclo
+  var hoy = new Date();
+  var a = hoy.getFullYear();
+  var m = hoy.getMonth();
+
+  if (cruzaMes) m++;
+  if (m > 11) { m = 0; a++; }
+
+  var mn = ['enero','febrero','marzo','abril','mayo','junio',
+            'julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var fprox = ca + ' de ' + mn[m] + ' de ' + a;
+
+  calc = { ciclo: ca, dias: dias, pro: pro, monto: monto, fprox: fprox };
+
+  // UI - marcar ciclo activo
+  var elC = document.getElementById('cb' + ca);
+  if (elC) elC.classList.add('act');
+
+  document.getElementById('rdia').innerText = 'Día ' + dia;
+  document.getElementById('rciclo').innerText = 'Día ' + ca + ' de cada mes';
+  document.getElementById('rdias').innerText = dias + ' días';
+  document.getElementById('rpro').innerText =
+    dias === 0
+      ? 'RD$ 0.00 - entra directo'
+      : 'RD$ ' + pro.toLocaleString('es-DO', { minimumFractionDigits: 2 });
+  document.getElementById('rfecha').innerText = fprox;
+  document.getElementById('rmen').innerText =
+    'RD$ ' + monto.toLocaleString('es-DO', { minimumFractionDigits: 2 });
+  document.getElementById('resultado').style.display = 'block';
+
+  mostrarResumen();
+}
+
+/* ================================================
+   RESUMEN DE SUSCRIPCIÓN
+   ================================================ */
+function mostrarResumen() {
+  var box = document.getElementById('resumen');
+  if (!box) return;
+
+  if (planActual < 0 || !calc) {
+    box.innerHTML = '<div class="re">Complete los pasos 1 y 2 para ver el resumen</div>';
+    return;
+  }
+
+  var p = PLANES[planActual];
+
+  box.innerHTML =
+    '<div class="rh">Resumen de su Suscripción</div>' +
+    '<div class="rrow"><span class="rla">Plan</span><span class="rva">' + p.nombre + '</span></div>' +
+    '<div class="rrow"><span class="rla">Usuarios</span><span class="rva">' + p.usuarios + ' usuarios</span></div>' +
+    '<div class="rrow"><span class="rla">Ciclo de cobro</span><span class="rva">Día ' + calc.ciclo + ' de cada mes</span></div>' +
+    '<div class="rrow"><span class="rla">Días prorrateados</span><span class="rva">' + calc.dias + ' días</span></div>' +
+    '<div class="rrow"><span class="rla">Primer ciclo completo</span><span class="rva">' + calc.fprox + '</span></div>' +
+    '<div class="rrow"><span class="rla">Mensualidad recurrente</span><span class="rva">RD$ ' + p.monto.toLocaleString('es-DO', { minimumFractionDigits: 2 }) + '</span></div>' +
+    '<div class="rrow rm"><span class="rla">Primer cobro (prorrateo)</span><span class="rva">RD$ ' + (calc.pro > 0 ? calc.pro.toLocaleString('es-DO', { minimumFractionDigits: 2 }) : '0.00') + '</span></div>';
+}
+
+/* ================================================
+   FIX #4: VALIDACIÓN DE RNC (DGII)
+   ================================================
+   - 9 dígitos: Persona jurídica (empresa)
+   - 11 dígitos: Persona física (cédula)
+   - Solo números, sin guiones ni espacios
+   ================================================ */
+function validarRNC() {
+  var input = document.getElementById('frnc');
+  var msg = document.getElementById('rncMsg');
+
+  // Limpiar: solo dejar números
+  var valor = input.value.replace(/[^0-9]/g, '');
+  input.value = valor;
+
+  rncValido = false;
+  msg.className = 'rnc-msg';
+
+  if (valor.length === 0) {
+    msg.innerText = '';
+    input.classList.remove('error');
+    return;
+  }
+
+  if (valor.length === 9) {
+    rncValido = true;
+    msg.innerText = '✓ RNC válido — Persona jurídica (empresa)';
+    msg.className = 'rnc-msg ok';
+    input.classList.remove('error');
+  } else if (valor.length === 11) {
+    rncValido = true;
+    msg.innerText = '✓ Cédula válida — Persona física';
+    msg.className = 'rnc-msg ok';
+    input.classList.remove('error');
+  } else if (valor.length < 9) {
+    msg.innerText = 'Mínimo 9 dígitos para RNC';
+    msg.className = 'rnc-msg er';
+    input.classList.add('error');
+  } else if (valor.length === 10) {
+    msg.innerText = 'RNC tiene 9 dígitos, cédula tiene 11';
+    msg.className = 'rnc-msg er';
+    input.classList.add('error');
+  }
+}
+
+/* ================================================
+   FIX #3: ENVIAR → WhatsApp + Supabase
+   ================================================ */
+function enviar() {
+  var rnc    = document.getElementById('frnc').value.trim();
+  var legal  = document.getElementById('flegal').value.trim();
+  var nombre = document.getElementById('fnombre').value.trim();
+  var rep    = document.getElementById('frep').value.trim();
+  var dir    = document.getElementById('fdir').value.trim();
+  var tel    = document.getElementById('ftel').value.trim();
+  var dia    = document.getElementById('fdia').value || '';
+
+  // Validaciones
+  if (!nombre || !tel || !rnc || !legal || !rep || !dir) {
+    toast('Complete todos los campos requeridos.', 'er');
+    return;
+  }
+  if (!rncValido) {
+    toast('RNC/Cédula inválido. Use 9 dígitos (empresa) u 11 (persona).', 'er');
+    document.getElementById('frnc').focus();
+    return;
+  }
+  if (planActual < 0) {
+    toast('Seleccione un plan en el Paso 1.', 'er');
+    return;
+  }
+  if (!calc) {
+    toast('Ingrese el día de inicio en el Paso 2.', 'er');
+    return;
+  }
+
+  var p = PLANES[planActual];
+  var pmsg = calc.pro > 0
+    ? 'RD$ ' + calc.pro.toLocaleString('es-DO', { minimumFractionDigits: 2 })
+    : 'RD$ 0.00';
+
+  // ── WhatsApp: enviar mensaje con todos los datos ──
+  var msg =
+    '*SOLICITUD DE SUSCRIPCIÓN*%0A' +
+    '*AVANCH TECHNOLOGY*%0A' +
+    '------------------------%0A' +
+    '*Plan:* ' + encodeURIComponent(p.nombre) + '%0A' +
+    '*Mensualidad:* RD$ ' + p.monto.toLocaleString('es-DO') + '%0A' +
+    '*Ciclo:* Día ' + calc.ciclo + ' de cada mes%0A' +
+    '*Días prorrateados:* ' + calc.dias + '%0A' +
+    '*Primer cobro:* ' + encodeURIComponent(pmsg) + '%0A' +
+    '*Primer ciclo:* ' + encodeURIComponent(calc.fprox) + '%0A' +
+    '------------------------%0A' +
+    '*RNC:* ' + encodeURIComponent(rnc) + '%0A' +
+    '*Nombre Legal:* ' + encodeURIComponent(legal) + '%0A' +
+    '*Nombre Comercial:* ' + encodeURIComponent(nombre) + '%0A' +
+    '*Representante:* ' + encodeURIComponent(rep) + '%0A' +
+    '*Dirección:* ' + encodeURIComponent(dir) + '%0A' +
+    '*WhatsApp:* ' + encodeURIComponent(tel) + '%0A' +
+    '*Día inicio:* ' + dia;
+
+  window.open('https://wa.me/18294092121?text=' + msg, '_blank');
+
+  // ── Supabase: guardar lead en la tabla leads_facturacion ──
+  var leadData = {
+    rnc: rnc,
+    nombre_legal: legal,
+    nombre_comercial: nombre,
+    representante: rep,
+    direccion: dir,
+    whatsapp: tel,
+    plan: p.nombre,
+    monto_mensual: p.monto,
+    usuarios: p.usuarios,
+    dia_inicio: parseInt(dia),
+    ciclo_asignado: calc.ciclo,
+    dias_prorrateados: calc.dias,
+    primer_cobro: calc.pro,
+    fecha_primer_ciclo: calc.fprox,
+    estado: 'pendiente'
+  };
+
+  if (supabaseClient) {
+    supabaseClient
+      .from('leads_facturacion')
+      .insert([leadData])
+      .then(function(response) {
+        if (response.error) {
+          console.error('Error guardando lead:', response.error);
+        } else {
+          console.log('Lead guardado en Supabase correctamente');
         }
       });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+  }
+
+  // ── UI: deshabilitar botón ──
+  var btn = document.getElementById('btnenv');
+  btn.disabled = true;
+  btn.innerText = '✅ Solicitud Enviada';
+  btn.style.background = '#00c853';
+
+  toast('Solicitud enviada correctamente.', 'ok');
+}
+
+/* ================================================
+   TOAST (NOTIFICACIONES)
+   ================================================ */
+function toast(msg, tipo) {
+  var el = document.getElementById('toast');
+  el.innerText = msg;
+  el.className = 'show ' + (tipo || '');
+  setTimeout(function() { el.className = ''; }, 3500);
+}
+</script>
 </body>
 </html>
